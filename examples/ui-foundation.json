@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de",
+    "revision": "HEAD"
+  },
+  "package": {
+    "name": "karyo-ui-foundation-dev",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Shared Karyo theme and painting development files",
+    "section": "libdevel",
+    "depends": [
+      "qt6-base-dev (>= 6.4)"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "development"
+  }
+}

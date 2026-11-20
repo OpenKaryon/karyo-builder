@@ -4,9 +4,22 @@ Karyo Builder is the planned configuration-driven build tool for Karyo Linux
 and Karyo Workstation. It will build native packages, prepare a package
 repository and produce installation images from versioned configuration.
 
-**Status: planning only.** This repository currently documents the intended
-architecture and implementation roadmap. The commands and YAML below are
-design examples, not a released CLI or a validated configuration schema.
+**Status: first package stage implemented.** The CLI exports a Git revision,
+builds/tests one native CMake component in an isolated Debian 13 container and
+produces a development DEB with logs, input hashes and a build manifest.
+See [the package-stage contract](docs/PACKAGE_STAGE.md) and
+[reviewed migration inventory](docs/MIGRATION.md).
+
+The image YAML and full-build commands below remain design examples.
+APT repository preparation and ISO stages are subsequent work.
+
+```sh
+docker build -t karyo-builder:trixie environments/debian13
+python -m karyo_builder package examples/ui-foundation.json --output out
+```
+
+Own executable code is GPL-3.0-or-later. Working prototype code is reused after
+review and adapted to the product boundaries described in CONTRIBUTING.md.
 
 ## Project boundaries
 
@@ -183,6 +196,5 @@ focused implementation commits, typically at least 100-200 changed lines, with
 an upper budget of 2,000-3,000 hand-maintained code lines. Generated files and
 JSON may exceed that budget and should be separated where practical.
 
-Select and document the code license before importing executable build tools.
-This initial documentation commit does not claim that a project-wide code
-license or runtime implementation has already been established.
+The code license is GPL-3.0-or-later (see LICENSE). Preserve each dependency's
+own licensing and attribution when adding subsequent components.

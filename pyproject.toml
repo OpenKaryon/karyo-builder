@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "karyo-builder"
+version = "0.1.0"
+description = "Isolated package builds for Karyo"
+requires-python = ">=3.12"
+license = "GPL-3.0-or-later"
+
+[project.scripts]
+karyo-builder = "karyo_builder.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["karyo_builder*"]
