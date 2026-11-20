@@ -7,12 +7,27 @@ from pathlib import Path
 import shlex
 import subprocess
 
-from dependencies import discover
+if __package__:
+    from .dependencies import discover
+else:
+    from dependencies import discover
 
 
 def run(args, **kwargs):
     print("+ " + shlex.join(map(str, args)), flush=True)
     return subprocess.run(list(map(str, args)), check=True, **kwargs)
+
+
+def write_conffiles(payload, control_dir):
+    paths = sorted(
+        "/" + path.relative_to(payload).as_posix()
+        for path in (payload / "etc").rglob("*")
+        if path.is_file() and not path.is_symlink()
+    )
+    if any("\n" in path or "\r" in path for path in paths):
+        raise ValueError("Debian conffile paths must not contain line breaks")
+    if paths:
+        (control_dir / "conffiles").write_text("\n".join(paths) + "\n", encoding="utf-8")
 
 
 def main():
@@ -36,7 +51,8 @@ def main():
     payload = build / "debian" / metadata["name"]
     run(["cmake", "-S", source, "-B", build, "-G", "Ninja",
          "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX=/usr",
-         "-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu", "-DBUILD_TESTING=ON"])
+         "-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu",
+         "-DCMAKE_INSTALL_SYSCONFDIR=/etc", "-DBUILD_TESTING=ON"])
     run(["cmake", "--build", build, "--parallel", args.jobs])
     run(["ctest", "--test-dir", build, "--no-tests=error", "--output-on-failure"])
     install_env = dict(os.environ, DESTDIR=str(payload))
@@ -47,6 +63,7 @@ def main():
     if control_dir.exists():
         raise RuntimeError("The CMake component must not supply Debian control files")
     control_dir.mkdir()
+    write_conffiles(payload, control_dir)
     dependencies = list(dict.fromkeys(metadata["depends"] + discover(payload, build, metadata["name"])))
     Path("/output/dependencies.json").write_text(
         json.dumps(dependencies, indent=2) + "\n", encoding="utf-8")
