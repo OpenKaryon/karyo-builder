@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Package-stage runner, invoked only inside the selected Debian container."""
+"""Package-stage runner, invoked only inside the selected Debian-family container."""
 import argparse
 import json
 import os
@@ -30,15 +30,29 @@ def write_conffiles(payload, control_dir):
         (control_dir / "conffiles").write_text("\n".join(paths) + "\n", encoding="utf-8")
 
 
+def validate_target(text):
+    """Reject a different base before configuring native packages."""
+    release = {}
+    for line in text.splitlines():
+        if not line.strip() or line.lstrip().startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        words = shlex.split(value)
+        release[key] = words[0] if len(words) == 1 else ""
+    identity = (release.get("ID"), release.get("VERSION_ID"), release.get("VERSION_CODENAME"))
+    if identity not in {("debian", "13", "trixie"), ("ubuntu", "26.04", "resolute")}:
+        raise RuntimeError("Package stage requires Debian 13 (trixie) or Ubuntu 26.04 (resolute)")
+    return {key: release[key] for key in ("ID", "VERSION_ID", "VERSION_CODENAME")}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--jobs", type=int, required=True)
     args = parser.parse_args()
     recipe = json.loads(Path("/input/recipe.json").read_text(encoding="utf-8"))
     metadata = recipe["package"]
-    distribution = Path("/etc/os-release").read_text()
-    if 'VERSION_CODENAME=trixie' not in distribution:
-        raise RuntimeError("This package stage requires Debian 13 (trixie)")
+    distribution = validate_target(Path("/etc/os-release").read_text())
+    Path("/output/distribution.json").write_text(json.dumps(distribution, indent=2) + "\n", encoding="utf-8")
     architecture = subprocess.check_output(["dpkg", "--print-architecture"], text=True).strip()
     if architecture != metadata["architecture"]:
         raise RuntimeError("Package and container architectures differ")

@@ -16,6 +16,8 @@ APT repository preparation and ISO stages are subsequent work.
 
 ```sh
 docker build -t karyo-builder:trixie environments/debian13
+# Optional standalone-DE compatibility target:
+docker build -t karyo-builder:ubuntu2604 environments/ubuntu2604
 python -m venv .venv
 # Activate .venv, then install this checkout.
 python -m pip install -e .
@@ -206,3 +208,12 @@ JSON may exceed that budget and should be separated where practical.
 
 The code license is GPL-3.0-or-later (see LICENSE). Preserve each dependency's
 own licensing and attribution when adding subsequent components.
+
+## Standalone DE compatibility builds
+
+The native package stage accepts Debian 13 (trixie) and Ubuntu 26.04 LTS
+(resolute), verified from the complete os-release identity before configuration.
+Use --image karyo-builder:ubuntu2604 for the Ubuntu environment; keep outputs
+separate because dependency versions and native ABIs follow the selected base.
+The manifest records that identity as well as the immutable Docker image ID.
+Karyo Linux ISO recipes remain Debian-based; this does not create an Ubuntu ISO.

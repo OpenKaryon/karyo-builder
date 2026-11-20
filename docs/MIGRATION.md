@@ -8,10 +8,10 @@ that source tree. This map assigns responsibility to reviewed components.
 | --- | --- | --- | --- |
 | `distro/desktop/shared/libopenkaryon-ui` | karyo-de | Split theme/painting foundation first. Retain user settings while using Karyo public names. Desktop entries/icons, common widgets and style are now extracted. Review platform integration separately. | Separate development packages, widget tests and external CMake consumers. Implemented. |
 | `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | Runtime plugin loads in a separate Qt client on clean Debian. Platform theme/portal migration remains pending. |
-| `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Shell migrated with independent libraries, tray/Start/service tests and real headless labwc startup. Hardware/display-manager acceptance remains pending. |
-| `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | PAM/Wayland lock migrated without greetd; real wrong/correct password scenario passes. Actual display-manager and suspend checks remain pending. |
-| `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | Files selection/service, archive passwords/cancellation and app regressions. Pending. |
-| `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Clean Debian install/upgrade/remove and unchanged host identity/display manager. Pending. |
+| `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Shell migrated with independent libraries, tray/Start/service tests and real headless labwc startup. Real LightDM/Xfce coexistence is accepted on Debian; Ubuntu VM acceptance is in progress. |
+| `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | PAM/Wayland lock migrated without greetd; real wrong/correct password scenario passes. Real display-manager and logind sleep/resume checks pass on the Debian VM; physical devices remain separate. |
+| `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | Terminal, Camera, Photos and Calculator are independently migrated with native Debian/Ubuntu regressions. Files, protected archives and other applications remain pending; see DE docs/MIGRATION-REVIEW.md. |
+| `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Independent runtime components pass clean Debian VM install/upgrade/remove, actual Xfce coexistence and unchanged host identity/display manager. Remaining apps are added separately. |
 | `distro/distro/packages/openkaryon-defaults`, browser/boot/installer packages | karyo-linux | Own OS branding, Calamares, distribution/browser defaults and first-run selections. | Installed-system and image assertions. Pending. |
 | Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Home/Work isolation, clipboard/DnD and Wine/Darling tests. Pending. |
 | `distro/tools/build-packages.sh` | karyo-builder | Reuse configure/build/test/stage/dpkg workflow with committed source, one component, isolated output and provenance. | Package stage and external runtime dependency discovery implemented. Shared-library metadata remains a later extension. |
@@ -30,8 +30,8 @@ compatible with the prototype. No system services or privileged helpers are intr
 The donor bundled all shared widgets statically into applications. The first
 public foundation exposes a small installed static target with headers and
 CMake dependency metadata. This proves packaging and downstream consumption.
-The session is now independently runnable; real login-manager acceptance and
-a stable shared-library ABI remain later work.
+The session is independently runnable and actual Debian login-manager acceptance
+passes. A stable shared-library ABI remains later work.
 
 Initial configuration reload was corrected during migration: following settings
 now applies the current accent immediately. Other retained functions preserve
@@ -55,3 +55,17 @@ The first session milestone is clean Debian installation, session selection,
 upgrade, removal and coexistence. Builder proceeds through package, repository,
 standard image and Workstation image, recording inputs and acceptance.
 The private pipeline remains the working reference during this migration.
+
+## Application packaging during local review
+
+examples/terminal.json, camera.json, photos.json and calculator.json select
+independent runtime components from current DE HEAD. They declare Wayland/icon
+plugins and applicable non-ELF data requirements (including the native Debian/Ubuntu
+QTermWidget data package alternatives); native ELF dependencies follow
+the selected build base. The real terminal package has been built separately on
+Debian 13 and Ubuntu 26.04. The remaining application packages are undergoing
+VM acceptance; source-level regressions already run on both native bases.
+
+The local review phase intentionally creates commits without pushing. See the
+DE review checklist for pending components and the distinction between native,
+virtual-device and physical-hardware acceptance.
