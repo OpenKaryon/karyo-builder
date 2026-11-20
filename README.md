@@ -15,7 +15,10 @@ APT repository preparation and ISO stages are subsequent work.
 
 ```sh
 docker build -t karyo-builder:trixie environments/debian13
-python -m karyo_builder package examples/ui-foundation.json --output out
+python -m venv .venv
+# Activate .venv, then install this checkout.
+python -m pip install -e .
+karyo-builder package examples/ui-foundation.json --output out
 ```
 
 Package builds use the source repository\'s current `HEAD` by default. A release

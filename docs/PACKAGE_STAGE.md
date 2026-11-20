@@ -9,7 +9,10 @@ Build the supported environment explicitly with:
 
 ```sh
 docker build -t karyo-builder:trixie environments/debian13
-python -m karyo_builder package examples/ui-foundation.json --output out
+python -m venv .venv
+# Activate .venv, then install this checkout.
+python -m pip install -e .
+karyo-builder package examples/ui-foundation.json --output out
 ```
 
 The example expects sibling checkouts `karyo-builder` and `karyo-de`.

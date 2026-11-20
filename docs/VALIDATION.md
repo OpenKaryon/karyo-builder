@@ -17,6 +17,7 @@ Builder package stage. The full DE session and ISO pipeline are later milestones
 ## Reproduction
 
 ```sh
+python -m pip install -e .
 python -m unittest discover -s tests -v
 docker build -t karyo-builder:trixie environments/debian13
 python -m karyo_builder package examples/ui-foundation.json --output out

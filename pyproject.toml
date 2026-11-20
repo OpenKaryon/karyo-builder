@@ -13,4 +13,5 @@ license = "GPL-3.0-or-later"
 karyo-builder = "karyo_builder.cli:main"
 
 [tool.setuptools.packages.find]
+where = ["src"]
 include = ["karyo_builder*"]
