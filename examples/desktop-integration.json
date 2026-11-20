@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-desktop-integration-dev",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Desktop-entry and icon integration development files",
+    "section": "libdevel",
+    "depends": [
+      "karyo-ui-foundation-dev (= 0.1.0-1)",
+      "qt6-svg-dev (>= 6.4)"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "desktop-development"
+  }
+}

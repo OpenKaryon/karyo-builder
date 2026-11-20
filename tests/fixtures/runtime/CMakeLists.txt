@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.21)
+project(KaryoRuntimeFixture LANGUAGES CXX)
+include(CTest)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Core)
+add_executable(runtime-fixture main.cpp)
+target_link_libraries(runtime-fixture PRIVATE Qt6::Core)
+install(TARGETS runtime-fixture RUNTIME DESTINATION bin COMPONENT runtime)
+add_test(NAME runtime-fixture COMMAND runtime-fixture)

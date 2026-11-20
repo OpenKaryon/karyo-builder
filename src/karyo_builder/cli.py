@@ -72,6 +72,8 @@ def package(args):
                 json.dumps(recipe, indent=2) + "\n", encoding="utf-8")
             runner = Path(__file__).with_name("container.py")
             shutil.copyfile(runner, input_dir / "container.py")
+            dependency_runner = runner.with_name("dependencies.py")
+            shutil.copyfile(dependency_runner, input_dir / "dependencies.py")
             invocation = [
                 "docker", "run", "--rm", "--network=none", "--cpus", str(args.jobs),
                 "--memory=4g", "--pids-limit=512", "--cap-drop=ALL",
@@ -102,6 +104,8 @@ def package(args):
                 "recipe": {"sha256": sha256(recipe_path), "resolved": recipe},
                 "environment": {"image_id": image_id, "packages": environment},
                 "runner_sha256": sha256(runner),
+                "dependency_runner_sha256": sha256(dependency_runner),
+                "dependencies": json.loads((staged / "dependencies.json").read_text(encoding="utf-8")),
                 "artifact": {"file": filename, "sha256": sha256(artifact),
                              "bytes": artifact.stat().st_size},
                 "validation": {"ctest": "passed", "dpkg_deb": "passed"},

@@ -7,6 +7,8 @@ from pathlib import Path
 import shlex
 import subprocess
 
+from dependencies import discover
+
 
 def run(args, **kwargs):
     print("+ " + shlex.join(map(str, args)), flush=True)
@@ -41,6 +43,9 @@ def main():
     run(["cmake", "--install", build, "--component", recipe["build"]["component"]], env=install_env)
     if not payload.exists() or not any(path.is_file() for path in payload.rglob("*")):
         raise RuntimeError("The selected install component produced no files")
+    dependencies = list(dict.fromkeys(metadata["depends"] + discover(payload, build, metadata["name"])))
+    Path("/output/dependencies.json").write_text(
+        json.dumps(dependencies, indent=2) + "\n", encoding="utf-8")
     control_dir = payload / "DEBIAN"
     if control_dir.exists():
         raise RuntimeError("The CMake component must not supply Debian control files")
@@ -51,8 +56,8 @@ def main():
         "Priority: optional", f'Maintainer: {metadata["maintainer"]}',
         f'Description: {metadata["description"]}',
     ]
-    if metadata["depends"]:
-        control.append("Depends: " + ", ".join(metadata["depends"]))
+    if dependencies:
+        control.append("Depends: " + ", ".join(dependencies))
     (control_dir / "control").write_text("\n".join(control) + "\n", encoding="utf-8")
     control_dir.chmod(0o755)
     (control_dir / "control").chmod(0o644)

@@ -6,7 +6,8 @@ repository and produce installation images from versioned configuration.
 
 **Status: first package stage implemented.** The CLI exports a Git revision,
 builds/tests one native CMake component in an isolated Debian 13 container and
-produces a development DEB with logs, input hashes and a build manifest.
+produces a DEB with logs, input hashes and a build manifest. Runtime ELF
+dependencies are calculated with Debian's dpkg-shlibdeps.
 See [the package-stage contract](docs/PACKAGE_STAGE.md) and
 [reviewed migration inventory](docs/MIGRATION.md).
 

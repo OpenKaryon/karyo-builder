@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../.."
+  },
+  "package": {
+    "name": "karyo-builder-runtime-check",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Native dependency-discovery acceptance fixture",
+    "section": "devel",
+    "depends": []
+  },
+  "build": {
+    "directory": "tests/fixtures/runtime",
+    "component": "runtime"
+  }
+}

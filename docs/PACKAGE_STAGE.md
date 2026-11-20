@@ -40,14 +40,18 @@ container-local root for packaging, without privileged mode or Linux capabilitie
 
 CMake configures Release with tests enabled and an install prefix of /usr.
 CTest must pass and must discover tests before the selected component is
-installed into staging. Metadata declared in the recipe is used directly;
-this first stage targets development files with explicit dependencies.
-Runtime ELF packages still require shlibs/substvars integration.
+installed into staging. The recipe declares additional dependencies. Installed native ELF executables
+and libraries are checked for the amd64 ABI and stripped; dpkg-shlibdeps adds
+runtime dependencies using the container's installed symbols/shlibs metadata.
+A missing dependency aborts the build and keeps its diagnostic log.
+Static archives and ordinary data do not acquire runtime dependencies.
+New shared-library packages still need their own shlibs/symbols policy before
+they can serve as dependencies of other packages.
 
 Each successful invocation publishes a new result directory containing the
 Debian archive, SHA256SUMS, build.log and manifest.json. The manifest records
 the resolved source revision, source archive hash/time, recipe hash and
-resolved inputs, runner hash, Docker image ID, installed environment packages
+resolved inputs, runner hashes, resolved dependencies, Docker image ID, installed environment packages
 and artifact hash/size. Directory names are unique, allowing concurrent builds
 and preserving previous results. Failure retains a hidden .failed directory
 with its logs and never publishes a successful result directory.
@@ -55,10 +59,13 @@ with its logs and never publishes a successful result directory.
 The environment Dockerfile initially resolves Debian packages from mutable
 repositories. The recorded image ID/inventory describes a specific build.
 Fresh environment rebuilds and .deb bytes are not claimed to be reproducible.
-Pinned snapshots, repository preparation, runtime dependency discovery,
+Pinned snapshots, repository preparation, shared-library metadata,
 image recipes, signing and release publication remain subsequent stages.
 
 Run host contract checks with `python -m unittest discover -s tests`.
 The UI foundation recipe must also pass a real container package build.
 Inspect/install that package in a disposable Debian environment and compile
 the separate DE consumer to verify the exported CMake contract.
+
+The runtime acceptance recipe is `tests/fixtures/runtime.json`. It builds a small
+Qt Core executable from Builder's own HEAD and verifies automatic dependencies.
