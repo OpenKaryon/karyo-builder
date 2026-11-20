@@ -80,10 +80,12 @@ These artifacts are local ignored outputs.
 
 ## Remaining acceptance and migration
 
-Actual display-manager login/coexistence, physical suspend/resume, multiple
-physical outputs and accelerated GPU paths still need VM/hardware acceptance.
-The lock sleep-delay integration builds, but a headless container does not
-exercise real logind suspend. No release-readiness claim is made for those paths.
+Real LightDM/Xfce coexistence, repeated Karyo logins, PAM locking, guest logind
+suspend/resume, polkit, tray, interactive file selection, a live Chromium/PipeWire
+stream and package upgrade/removal are now accepted in a fresh Debian VM.
+See [the VM report](VALIDATION_DEBIAN_VM.md) for the launcher defect found and
+fixed, actual evidence and fixture limitations. Physical sleep devices, multiple
+physical outputs and accelerated GPU paths remain hardware gates.
 
 Stock labwc runs the session. The retained custom layout-cycle protocol needs
 the reviewed compositor extension; its click control is disabled when the

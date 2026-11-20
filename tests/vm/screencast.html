@@ -1,0 +1,22 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<meta charset="utf-8"><title>Karyo screen share acceptance</title>
+<body style="background:#193f42;color:white;font:24px sans-serif"><h1>Karyo screen share acceptance</h1>
+<button id="start" onclick="capture()">Share this desktop</button><pre id="result">Not started</pre>
+<video id="preview" autoplay muted style="width:640px"></video>
+<script>
+async function capture() {
+ try {
+  window.stream=await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
+  preview.srcObject=stream; await preview.play();
+  await new Promise(resolve=>setTimeout(resolve,1800));
+  const c=document.createElement('canvas');c.width=preview.videoWidth;c.height=preview.videoHeight;
+  c.getContext('2d').drawImage(preview,0,0);
+  const data=c.getContext('2d').getImageData(0,0,c.width,c.height).data;
+  const colors=new Set(); for(let i=0;i<data.length;i+=400)colors.add(data.slice(i,i+3).join(','));
+  window.qaResult={width:c.width,height:c.height,colors:colors.size,readyState:stream.getVideoTracks()[0].readyState,
+   settings:stream.getVideoTracks()[0].getSettings()};
+  window.qaFrame=c.toDataURL('image/png');result.textContent=JSON.stringify(qaResult,null,2);
+ }catch(e){window.qaResult={error:e.name,message:e.message};result.textContent=JSON.stringify(qaResult);}
+}
+</script>
