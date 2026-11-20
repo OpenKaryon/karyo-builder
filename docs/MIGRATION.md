@@ -8,8 +8,8 @@ that source tree. This map assigns responsibility to reviewed components.
 | --- | --- | --- | --- |
 | `distro/desktop/shared/libopenkaryon-ui` | karyo-de | Split theme/painting foundation first. Retain user settings while using Karyo public names. Desktop entries/icons, common widgets and style are now extracted. Review platform integration separately. | Separate development packages, widget tests and external CMake consumers. Implemented. |
 | `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | Runtime plugin loads in a separate Qt client on clean Debian. Platform theme/portal migration remains pending. |
-| `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Isolated Wayland shell, tray and desktop-entry checks. Pending migration. |
-| `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | Lock and existing display-manager coexistence tests. Pending. |
+| `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Shell migrated with independent libraries, tray/Start/service tests and real headless labwc startup. Hardware/display-manager acceptance remains pending. |
+| `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | PAM/Wayland lock migrated without greetd; real wrong/correct password scenario passes. Actual display-manager and suspend checks remain pending. |
 | `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | Files selection/service, archive passwords/cancellation and app regressions. Pending. |
 | `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Clean Debian install/upgrade/remove and unchanged host identity/display manager. Pending. |
 | `distro/distro/packages/openkaryon-defaults`, browser/boot/installer packages | karyo-linux | Own OS branding, Calamares, distribution/browser defaults and first-run selections. | Installed-system and image assertions. Pending. |
@@ -30,7 +30,8 @@ compatible with the prototype. No system services or privileged helpers are intr
 The donor bundled all shared widgets statically into applications. The first
 public foundation exposes a small installed static target with headers and
 CMake dependency metadata. This proves packaging and downstream consumption.
-The complete DE session and a stable shared-library ABI remain later work.
+The session is now independently runnable; real login-manager acceptance and
+a stable shared-library ABI remain later work.
 
 Initial configuration reload was corrected during migration: following settings
 now applies the current accent immediately. Other retained functions preserve
@@ -38,17 +39,17 @@ the donor behavior. No fonts/icons are embedded in this slice.
 
 ## Next boundaries
 
-Shared widgets and the Qt style now have independent packages. The session
-launcher and labwc configuration are packaged as karyo-session-entry, with
-preflight checks and bounded shell restarts. This preparation intentionally
-requires the future karyo-shell and karyo-lock executables before session
-selection. See VALIDATION_WIDGETS_SESSION.md for acceptance scope.
+Shared widgets and the Qt style have independent packages. The shell and
+PAM/Wayland lock are now migrated; karyo-session assembles their runtime packages
+with the compatible karyo-session-entry configuration package. XDG autostart
+uses dex once per compositor session, and Karyo-specific portal preferences
+leave other desktops' selection intact.
 
-Migrate shell/notification/tray/polkit and its file-operation/catalog dependencies,
-then separate required PAM/Wayland lock from optional greeter packaging,
-OS defaults and optional integrations. Compare the installed portal
-provider with image configuration before removing LXQt components.
-The patched labwc/wlroots pair remains a concrete dependency to package/test.
+See VALIDATION_SESSION.md for installed runtime acceptance and the retained
+hardware/login-manager gates. Package the reviewed compositor extension and
+optional system integrations separately. The patched labwc/wlroots pair still
+needs dedicated package/version compatibility checks; stock labwc runs the
+session, with layout-cycle extension controls unavailable.
 
 The first session milestone is clean Debian installation, session selection,
 upgrade, removal and coexistence. Builder proceeds through package, repository,

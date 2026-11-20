@@ -82,3 +82,10 @@ introduced shared-library packages need their own symbols/shlibs policy.
 APT repository preparation, selectable Debian session, existing display-manager
 coexistence and the two ISO editions need subsequent acceptance.
 Forge remains an external package input maintained by its separate agent.
+
+## Standalone session follow-up
+
+The shell, PAM/Wayland lock and runtime bundle are now implemented and tested.
+See [VALIDATION_SESSION.md](VALIDATION_SESSION.md) for package, clean runtime,
+configuration upgrade and actual headless compositor acceptance, plus retained
+hardware/display-manager gates.
