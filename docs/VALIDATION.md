@@ -75,7 +75,9 @@ retaining Python for orchestration. Broader scale needs separate measurements.
 
 ## Next slice
 
-Continue reviewed shared widgets and platform/session boundaries. Newly
+Shared widgets, Qt style and session entry preparation have since passed the
+checks recorded in [VALIDATION_WIDGETS_SESSION.md](VALIDATION_WIDGETS_SESSION.md).
+Continue the shell/lock and platform/session boundaries. Newly
 introduced shared-library packages need their own symbols/shlibs policy.
 APT repository preparation, selectable Debian session, existing display-manager
 coexistence and the two ISO editions need subsequent acceptance.

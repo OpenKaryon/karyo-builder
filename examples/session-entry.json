@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-session-entry",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Karyo Wayland entry and preflight launcher",
+    "section": "x11",
+    "depends": [
+      "labwc (>= 0.8.3)",
+      "dbus-user-session",
+      "qt6-wayland",
+      "karyo-style (= 0.1.0-1)"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "session-runtime"
+  }
+}

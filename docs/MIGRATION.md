@@ -6,8 +6,8 @@ that source tree. This map assigns responsibility to reviewed components.
 
 | Donor | Target | Boundary or adaptation | Validation and first result |
 | --- | --- | --- | --- |
-| `distro/desktop/shared/libopenkaryon-ui` | karyo-de | Split theme/painting foundation first. Retain user settings while using Karyo public names. Desktop entries/icons are now extracted. Review subsequent widgets and platform integration separately. | Native development package, theme/painter tests and external CMake consumer. First slice implemented. |
-| `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | Load the plugin in a separate Qt client before replacing platform integration. Pending. |
+| `distro/desktop/shared/libopenkaryon-ui` | karyo-de | Split theme/painting foundation first. Retain user settings while using Karyo public names. Desktop entries/icons, common widgets and style are now extracted. Review platform integration separately. | Separate development packages, widget tests and external CMake consumers. Implemented. |
+| `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | Runtime plugin loads in a separate Qt client on clean Debian. Platform theme/portal migration remains pending. |
 | `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Isolated Wayland shell, tray and desktop-entry checks. Pending migration. |
 | `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | Lock and existing display-manager coexistence tests. Pending. |
 | `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | Files selection/service, archive passwords/cancellation and app regressions. Pending. |
@@ -38,8 +38,15 @@ the donor behavior. No fonts/icons are embedded in this slice.
 
 ## Next boundaries
 
-Extend reviewed shared widgets/resources, then separate session/lock packaging
-from OS defaults and optional integrations. Compare the installed portal
+Shared widgets and the Qt style now have independent packages. The session
+launcher and labwc configuration are packaged as karyo-session-entry, with
+preflight checks and bounded shell restarts. This preparation intentionally
+requires the future karyo-shell and karyo-lock executables before session
+selection. See VALIDATION_WIDGETS_SESSION.md for acceptance scope.
+
+Migrate shell/notification/tray/polkit and its file-operation/catalog dependencies,
+then separate required PAM/Wayland lock from optional greeter packaging,
+OS defaults and optional integrations. Compare the installed portal
 provider with image configuration before removing LXQt components.
 The patched labwc/wlroots pair remains a concrete dependency to package/test.
 

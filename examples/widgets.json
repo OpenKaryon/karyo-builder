@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-widgets-dev",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Shared Karyo widgets and window controls",
+    "section": "libdevel",
+    "depends": [
+      "karyo-desktop-integration-dev (= 0.1.0-1)"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "widgets-development"
+  }
+}
