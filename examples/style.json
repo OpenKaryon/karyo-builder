@@ -10,7 +10,9 @@
     "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
     "description": "Karyo style plugin for Qt 6 applications",
     "section": "x11",
-    "depends": []
+    "depends": [
+      "qt6-svg-plugins"
+    ]
   },
   "build": {
     "directory": ".",

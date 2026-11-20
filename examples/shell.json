@@ -12,7 +12,8 @@
     "section": "x11",
     "depends": [
       "qt6-wayland",
-      "xdg-utils"
+      "xdg-utils",
+      "qt6-svg-plugins"
     ]
   },
   "build": {

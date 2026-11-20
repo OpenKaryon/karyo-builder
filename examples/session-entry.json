@@ -14,7 +14,8 @@
       "labwc (>= 0.8.3)",
       "dbus-user-session",
       "qt6-wayland",
-      "karyo-style (= 0.1.0-1)"
+      "karyo-style (= 0.1.0-1)",
+      "dex"
     ]
   },
   "build": {
