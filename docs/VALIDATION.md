@@ -1,69 +1,82 @@
-# First native package acceptance
+# Package stage and UI integration validation
 
-Validated on 2026-11-20. Scope: the UI foundation development package and the
-Builder package stage. The full DE session and ISO pipeline are later milestones.
+Validated on 2026-11-20. This record covers the two DE development packages,
+the installed Python CLI and automatic dependencies for native executables.
+Full session/greeter integration and ISO stages remain later milestones.
 
-## Inputs
+## Sources and build environment
 
-- Donor Karyo prototype: `716d515b765319981b124fb1812a1e3edb9e0ffd`.
-- Standalone DE source: `3bf0f5221f66347592286b0a755ff5ead96f07ee`.
-- Recipe: `examples/ui-foundation.json`, schema 1, development component.
-- Fresh environment built from `environments/debian13/Dockerfile`.
-- Resolved Docker image: `sha256:fd5992eeaaed42873d9d8f8da955ae86594d84e72e14d434f26355007f20dc8f`.
-- Debian 13 amd64, GCC 14.2.0, CMake 3.31.6, Ninja 1.12.1, Python 3.13.5.
-- Host CLI also packaged as a wheel and installed into a disposable Python
-  virtual environment. The installed console command performed the final build.
+- DE source: `cef9c92`, including public `karyo/ui` headers and `Karyo::Ui`.
+- Builder uses the `src/karyo_builder` layout and its installed console command.
+- Recipes follow their source repository HEAD and record the resolved commit.
+- Debian 13 amd64, Qt 6.8.2, GCC 14.2.0, CMake 3.31.6, Ninja 1.12.1.
+- Environment: `environments/debian13/Dockerfile`, including Qt SVG.
+- Docker image ID:
+  `sha256:53b1763dffbae6dee245978bf42b55733f2d482a4bc056e56c57e7778b25b410`.
 
-## Reproduction
+Install Builder into a virtual environment before these commands. The
+acceptance run checks both editable development installation and a normal
+wheel installation. Unit tests import the installed package, with no root-level
+import directory masking packaging mistakes.
+
+## Commands and results
 
 ```sh
-python -m pip install -e .
+python -m pip install .
 python -m unittest discover -s tests -v
 docker build -t karyo-builder:trixie environments/debian13
-python -m karyo_builder package examples/ui-foundation.json --output out
+karyo-builder package examples/ui-foundation.json --output out/desktop-acceptance
+karyo-builder package examples/desktop-integration.json --output out/desktop-acceptance
+karyo-builder package tests/fixtures/runtime.json --output out/runtime-acceptance
 ```
 
-All five host contract tests pass, including malformed metadata, unsupported
-paths/schema and missing-recipe failure. The package stage passes CTest
-theme/painting checks and dpkg-deb metadata/content inspection.
+All seven host tests pass. They cover recipe/path validation, default HEAD and
+explicit tag selection, absent input, unsupported ELF ABI and ordinary
+data/static objects. Both Qt test targets pass: theme/painting and desktop
+entries/icons. The latter preserves qualified/profile application-ID behavior
+and covers current-desktop MIME defaults and embedded icon rendering.
 
-In a fresh container from the supported build image, with only the result and
-DE consumer source mounted read-only:
+Install both development DEBs into a disposable container, compile
+`tests/desktop-consumer` through the installed CMake packages and run it
+offscreen. The consumer locates static resources and renders the Files icon.
+Only `/usr/include/karyo/ui` is installed. Removing the integration package
+leaves the foundation headers/archive usable by its separate consumer.
+Then removing the foundation package succeeds.
 
-```sh
-dpkg -i /packages/karyo-ui-foundation-dev_0.1.0-1_amd64.deb
-cmake -S /de/tests/consumer -B /tmp/consumer -G Ninja
-cmake --build /tmp/consumer --parallel 2
-QT_QPA_PLATFORM=offscreen /tmp/consumer/foundation-consumer
-dpkg -i /packages/karyo-ui-foundation-dev_0.1.0-1_amd64.deb
-dpkg --remove karyo-ui-foundation-dev
-```
+The native Qt Core fixture starts with an empty explicit dependency list.
+dpkg-shlibdeps derives libc6, libgcc-s1, libqt6core6t64 and libstdc++6.
+A clean `debian:trixie` container installs the DEB through APT, resolves those
+dependencies, runs the executable (reporting Qt 6.8.2) and removes the package.
+Staging follows Debian's package-directory convention before symbol analysis.
 
-The independent consumer configures, links and renders successfully using
-installed headers/CMake metadata. Reinstallation and removal succeed. Headers
-and static library are removed, Qt development dependencies remain installed,
-and the already linked static consumer still runs.
+An empty install component was also tested end to end. It retains a failure log
+without publishing a successful result directory, including an output path
+containing spaces.
 
-A real build with an absent install component exits unsuccessfully, retains
-its failure log and publishes no successful artifact directory. This check
-also uses an output path containing spaces.
+## Captured artifacts
 
-## Artifact
+These hashes describe the acceptance runs. Subsequent HEAD changes produce
+their own source/export identity, timestamps and manifests.
 
-- `karyo-ui-foundation-dev_0.1.0-1_amd64.deb`, 43,256 bytes.
-- SHA-256: `b01ed71760fe0ca1505c3ebdfe69cbeaf15cad397ad8ec595499304b0cb8a589`.
-- Source export SHA-256: `ecb324f61e8e71640dd59cc60e0e75f1054643dc4ea40abaf80c3fb09827ac8b`.
+| Package | Bytes | SHA-256 |
+| --- | --- | --- |
+| karyo-ui-foundation-dev_0.1.0-1_amd64.deb | 43220 | bdf8cf1d869c7db611ab3af8d6e213bbf04ff8f63aedab018ec60afbe601352c |
+| karyo-desktop-integration-dev_0.1.0-1_amd64.deb | 77260 | ffd9fa8bc794e0657bb8869123be8be5979f53cb5a5d7d8c291484267c995812 |
+| karyo-builder-runtime-check_0.1.0-1_amd64.deb | 2936 | bbe0594e46a4b08aacfc58e96f8f2b7ca213e19fdec06533a7a233466b046ccf |
 
-Every build directory contains build.log, manifest.json, environment.json and
-SHA256SUMS. The local acceptance run also retains install-check.log.
-This verifies a development package in disposable containers. Selectable DE
-session, display-manager coexistence, runtime shlibs packaging, APT preparation
-and both ISO editions need their own subsequent acceptance.
+Build directories contain build.log, manifest.json, environment.json,
+dependencies.json and SHA256SUMS. The clean-runtime acceptance also retains
+runtime-install.log. Installed-consumer checks run in isolated containers.
+
+One measured initial foundation build took 8.414 seconds: external host
+commands accounted for 8.355 seconds and host Python work between commands
+for 0.058 seconds. This measures the small current component and supports
+retaining Python for orchestration. Broader scale needs separate measurements.
 
 ## Next slice
 
-Extend reviewed shared UI components/resources and define runtime packaging,
-then separate shell/session/lock from the optional greeter and OS defaults.
-Extend Builder's package stage to compute runtime dependencies before publishing
-ELF application packages. Add APT preparation after that contract is tested.
-Keep Forge as an external package input under its own agent's ownership.
+Continue reviewed shared widgets and platform/session boundaries. Newly
+introduced shared-library packages need their own symbols/shlibs policy.
+APT repository preparation, selectable Debian session, existing display-manager
+coexistence and the two ISO editions need subsequent acceptance.
+Forge remains an external package input maintained by its separate agent.

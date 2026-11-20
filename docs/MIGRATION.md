@@ -6,7 +6,7 @@ that source tree. This map assigns responsibility to reviewed components.
 
 | Donor | Target | Boundary or adaptation | Validation and first result |
 | --- | --- | --- | --- |
-| `distro/desktop/shared/libopenkaryon-ui` | karyo-de | Split theme/painting foundation first. Retain settings/API compatibility. Review subsequent widgets, SVG resources and platform integration separately. | Native development package, theme/painter tests and external CMake consumer. First slice implemented. |
+| `distro/desktop/shared/libopenkaryon-ui` | karyo-de | Split theme/painting foundation first. Retain user settings while using Karyo public names. Desktop entries/icons are now extracted. Review subsequent widgets and platform integration separately. | Native development package, theme/painter tests and external CMake consumer. First slice implemented. |
 | `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | Load the plugin in a separate Qt client before replacing platform integration. Pending. |
 | `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Isolated Wayland shell, tray and desktop-entry checks. Pending migration. |
 | `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | Lock and existing display-manager coexistence tests. Pending. |
@@ -14,7 +14,7 @@ that source tree. This map assigns responsibility to reviewed components.
 | `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Clean Debian install/upgrade/remove and unchanged host identity/display manager. Pending. |
 | `distro/distro/packages/openkaryon-defaults`, browser/boot/installer packages | karyo-linux | Own OS branding, Calamares, distribution/browser defaults and first-run selections. | Installed-system and image assertions. Pending. |
 | Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Home/Work isolation, clipboard/DnD and Wine/Darling tests. Pending. |
-| `distro/tools/build-packages.sh` | karyo-builder | Reuse configure/build/test/stage/dpkg workflow with committed source, one component, isolated output and provenance. | First package stage implemented. shlibs/runtime packages are a later extension. |
+| `distro/tools/build-packages.sh` | karyo-builder | Reuse configure/build/test/stage/dpkg workflow with committed source, one component, isolated output and provenance. | Package stage and external runtime dependency discovery implemented. Shared-library metadata remains a later extension. |
 | `distro/tools/build-patched-packages.sh`, `distro/distro/patched` | Builder mechanism and component recipes | Separate execution/cache rules from upstream versions, patches, licenses and owners. | Rebuild compatible labwc/wlroots and VMware packages. Pending. |
 | `distro/tools/fetch-pinned-debs.py`, runtime manifests | Builder input validation | Version/hash/architecture checks, redistribution review and explicit local inputs. | Reject missing or mismatched inputs. Pending. |
 | `distro/distro/image`, `distro/tools/build-image.ps1` | karyo-linux recipes and Builder stages | Separate package/overlay choices from orchestration. Workstation consumes extra products and private overlays explicitly. | Both images build through the same pipeline. Pending. |
@@ -24,8 +24,8 @@ that source tree. This map assigns responsibility to reviewed components.
 ## Reviewed first component
 
 Theme/paint uses Qt Widgets, per-user QSettings and ordinary painting APIs.
-The old C++ namespace and settings keys remain so future app migrations can
-reuse them. No system services or privileged helpers are introduced.
+Public headers now use karyo/ui and Karyo::Ui. User settings keys remain
+compatible with the prototype. No system services or privileged helpers are introduced.
 
 The donor bundled all shared widgets statically into applications. The first
 public foundation exposes a small installed static target with headers and

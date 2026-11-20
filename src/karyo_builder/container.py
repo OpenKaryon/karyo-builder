@@ -33,7 +33,7 @@ def main():
         raise ValueError("The selected build directory has no CMakeLists.txt")
     Path("/tmp/home").mkdir()
     build = Path("/tmp/build")
-    payload = Path("/tmp/package")
+    payload = build / "debian" / metadata["name"]
     run(["cmake", "-S", source, "-B", build, "-G", "Ninja",
          "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX=/usr",
          "-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu", "-DBUILD_TESTING=ON"])
@@ -43,13 +43,13 @@ def main():
     run(["cmake", "--install", build, "--component", recipe["build"]["component"]], env=install_env)
     if not payload.exists() or not any(path.is_file() for path in payload.rglob("*")):
         raise RuntimeError("The selected install component produced no files")
-    dependencies = list(dict.fromkeys(metadata["depends"] + discover(payload, build, metadata["name"])))
-    Path("/output/dependencies.json").write_text(
-        json.dumps(dependencies, indent=2) + "\n", encoding="utf-8")
     control_dir = payload / "DEBIAN"
     if control_dir.exists():
         raise RuntimeError("The CMake component must not supply Debian control files")
     control_dir.mkdir()
+    dependencies = list(dict.fromkeys(metadata["depends"] + discover(payload, build, metadata["name"])))
+    Path("/output/dependencies.json").write_text(
+        json.dumps(dependencies, indent=2) + "\n", encoding="utf-8")
     control = [
         f'Package: {metadata["name"]}', f'Version: {metadata["version"]}',
         f'Architecture: {architecture}', f'Section: {metadata["section"]}',
