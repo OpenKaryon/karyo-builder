@@ -18,6 +18,10 @@ docker build -t karyo-builder:trixie environments/debian13
 python -m karyo_builder package examples/ui-foundation.json --output out
 ```
 
+Package builds use the source repository\'s current `HEAD` by default. A release
+tag can be selected later with `--revision`. The manifest records the resolved
+commit for each build.
+
 Own executable code is GPL-3.0-or-later. Working prototype code is reused after
 review and adapted to the product boundaries described in CONTRIBUTING.md.
 

@@ -97,7 +97,7 @@ def package(args):
             environment = json.loads((staged / "environment.json").read_text(encoding="utf-8"))
             manifest = {
                 "schema": 1, "builder_version": __version__, "status": "success",
-                "source": {"revision": revision, "archive_sha256": sha256(archive),
+                "source": {"reference": revision_name, "revision": revision, "archive_sha256": sha256(archive),
                            "source_date_epoch": source_time},
                 "recipe": {"sha256": sha256(recipe_path), "resolved": recipe},
                 "environment": {"image_id": image_id, "packages": environment},
@@ -124,10 +124,10 @@ def package(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     subcommands = parser.add_subparsers(dest="stage", required=True)
-    build = subcommands.add_parser("package", help="Build one package from a committed Git revision")
+    build = subcommands.add_parser("package", help="Build one package from the source repository HEAD")
     build.add_argument("recipe")
     build.add_argument("--source", help="Override the source repository path")
-    build.add_argument("--revision", help="Override the source Git revision")
+    build.add_argument("--revision", help="Select a Git tag or revision instead of HEAD")
     build.add_argument("--output", required=True)
     build.add_argument("--image", default="karyo-builder:trixie",
                        help="An existing local Docker image (resolved to its immutable ID)")

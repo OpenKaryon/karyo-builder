@@ -19,11 +19,10 @@ Builder package stage. The full DE session and ISO pipeline are later milestones
 ```sh
 python -m unittest discover -s tests -v
 docker build -t karyo-builder:trixie environments/debian13
-python -m karyo_builder package examples/ui-foundation.json \
-  --revision 3bf0f5221f66347592286b0a755ff5ead96f07ee --output out
+python -m karyo_builder package examples/ui-foundation.json --output out
 ```
 
-All four host contract tests pass, including malformed metadata, unsupported
+All five host contract tests pass, including malformed metadata, unsupported
 paths/schema and missing-recipe failure. The package stage passes CTest
 theme/painting checks and dpkg-deb metadata/content inspection.
 

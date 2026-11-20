@@ -1,8 +1,7 @@
 {
   "schema": 1,
   "source": {
-    "path": "../../karyo-de",
-    "revision": "HEAD"
+    "path": "../../karyo-de"
   },
   "package": {
     "name": "karyo-ui-foundation-dev",

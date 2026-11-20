@@ -26,6 +26,8 @@ def load_recipe(path):
     if type(recipe["schema"]) is not int or recipe["schema"] != 1:
         raise ValueError("Only package recipe schema 1 is supported")
     source = recipe["source"]
+    if isinstance(source, dict):
+        source.setdefault("revision", "HEAD")
     fields(source, ("path", "revision"), "source")
     text(source["path"], "source.path")
     text(source["revision"], "source.revision")

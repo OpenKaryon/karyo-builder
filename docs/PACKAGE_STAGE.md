@@ -13,9 +13,13 @@ python -m karyo_builder package examples/ui-foundation.json --output out
 ```
 
 The example expects sibling checkouts `karyo-builder` and `karyo-de`.
-Use `--source PATH` and `--revision REVISION` to select another committed
-source. Source paths resolve from the recipe directory. The revision is
-resolved once to a full commit SHA; working-tree edits are not exported.
+The default input is the source repository\'s current `HEAD`. The recipe only
+needs `source.path`; `source.revision` is optional and defaults to `HEAD`.
+Source paths resolve from the recipe directory. Use `--source PATH` to select
+another repository. Later, `--revision v0.1.0` or `source.revision` can select
+a release tag. Each build records the requested reference and its resolved
+commit SHA in the manifest. HEAD means the checked-out Git state, with
+working-tree edits excluded from the export.
 The initial exporter rejects submodules until a complete pinned-input contract
 for them is implemented. Git archive data is extracted with Python's data filter.
 

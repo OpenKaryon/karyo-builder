@@ -25,6 +25,14 @@ class PackageRecipeTest(unittest.TestCase):
         recipe, folder = self.load(self.valid)
         self.assertEqual(recipe["source"]["path"], str(folder / "sources with spaces"))
 
+    def test_source_head_default_and_explicit_tag(self):
+        self.valid["source"].pop("revision", None)
+        recipe, _ = self.load(self.valid)
+        self.assertEqual(recipe["source"]["revision"], "HEAD")
+        self.valid["source"]["revision"] = "v0.1.0"
+        recipe, _ = self.load(self.valid)
+        self.assertEqual(recipe["source"]["revision"], "v0.1.0")
+
     def test_invalid_contracts(self):
         for section, key, value in (
             ("package", "name", "../escape"),
