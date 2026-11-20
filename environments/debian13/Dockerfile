@@ -11,6 +11,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends qt6-svg-dev \
 # Standalone session development and isolated headless acceptance tools.
 RUN apt-get update && apt-get install -y --no-install-recommends \
     qt6-wayland qt6-wayland-dev qt6-wayland-private-dev qt6-base-private-dev \
-    libpam0g-dev liblayershellqtinterface-dev libpolkit-qt6-1-dev \
+    libpam0g-dev liblayershellqtinterface-dev libpolkit-qt6-1-dev qt6-l10n-tools \
     labwc dbus-daemon wayland-utils wtype grim procps \
     && rm -rf /var/lib/apt/lists/*

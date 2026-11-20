@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-session",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Standalone Karyo desktop session",
+    "section": "x11",
+    "depends": [
+      "karyo-shell (= 0.1.0-1)",
+      "karyo-lock (= 0.1.0-1)",
+      "karyo-session-entry (= 0.1.0-1)",
+      "xdg-desktop-portal",
+      "xdg-desktop-portal-gtk",
+      "xdg-desktop-portal-wlr",
+      "pipewire",
+      "xwayland",
+      "xterm | x-terminal-emulator",
+      "polkitd"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "session-bundle"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-lock",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Karyo PAM and Wayland session lock",
+    "section": "x11",
+    "depends": [
+      "qt6-wayland",
+      "libpam-runtime",
+      "libpam-modules"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "lock-runtime"
+  }
+}
