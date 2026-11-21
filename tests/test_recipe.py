@@ -23,7 +23,7 @@ class PackageRecipeTest(unittest.TestCase):
     def test_paths_resolve_from_recipe(self):
         self.valid["source"]["path"] = "sources with spaces"
         recipe, folder = self.load(self.valid)
-        self.assertEqual(recipe["source"]["path"], str(folder / "sources with spaces"))
+        self.assertEqual(recipe["source"]["path"], str((folder / "sources with spaces").resolve()))
 
     def test_source_head_default_and_explicit_tag(self):
         self.valid["source"].pop("revision", None)
