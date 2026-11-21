@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-profile-accounts",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional Karyo local desktop account helpers",
+    "section": "admin",
+    "depends": [
+      "python3",
+      "passwd",
+      "pkexec",
+      "systemd",
+      "libsystemd0"
+    ]
+  },
+  "build": {
+    "directory": "profiles",
+    "component": "profile-accounts-runtime"
+  }
+}
