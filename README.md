@@ -219,3 +219,8 @@ Use --image karyo-builder:ubuntu2604 for the Ubuntu environment; keep outputs
 separate because dependency versions and native ABIs follow the selected base.
 The manifest records that identity as well as the immutable Docker image ID.
 Karyo Linux ISO recipes remain Debian-based; this does not create an Ubuntu ISO.
+
+The optional `examples/greeter.json` recipe builds the Karyo greetd frontend.
+Installing it does not change the current display manager. greetd/cage setup is
+an explicit administrator integration; its example and instructions install under
+`/usr/share/doc/karyo-greeter`. The session bundle does not depend on this frontend.

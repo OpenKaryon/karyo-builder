@@ -10,7 +10,7 @@ that source tree. This map assigns responsibility to reviewed components.
 | `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | Runtime plugin loads in a separate Qt client on clean Debian. Platform theme/portal migration remains pending. |
 | `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Shell migrated with independent libraries, tray/Start/service tests and real headless labwc startup. Real LightDM/Xfce coexistence is accepted on Debian; Ubuntu VM lifecycle acceptance also passes; later application checks remain. |
 | `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | PAM/Wayland lock migrated without greetd; real wrong/correct password scenario passes. Real display-manager and logind sleep/resume checks pass on the Debian VM; physical devices remain separate. |
-| `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | Twelve application families including Files and protected Archive are independently migrated with native Debian/Ubuntu regressions. Settings and App Center remain; see DE docs/MIGRATION-REVIEW.md. |
+| `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | All fourteen application families, including Settings and App Center, are independently migrated with native Debian/Ubuntu regressions and installed QA acceptance; later common/runtime fixes retain their own package gates. See DE docs/MIGRATION-REVIEW.md. |
 | `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Independent runtime components pass clean Debian VM install/upgrade/remove, actual Xfce coexistence and unchanged host identity/display manager. Remaining apps are added separately. |
 | `distro/distro/packages/openkaryon-defaults`, browser/boot/installer packages | karyo-linux | Own OS branding, Calamares, distribution/browser defaults and first-run selections. | Installed-system and image assertions. Pending. |
 | Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Home/Work isolation, clipboard/DnD and Wine/Darling tests. Pending. |
@@ -90,8 +90,9 @@ The addon contains documentation, not a bundled codec or second copy of Archive.
 
 See VALIDATION_APPLICATION_WAVE.md for the current installed app/Files package
 snapshots, real GUI/clipboard/extraction checks, native hashes and QA fixture
-corrections. The full goal remains open for Settings, App Center and reviewed
-optional compositor/system integration packages.
+corrections. The full goal remains open for the optional greeter and reviewed compositor/system
+integration packages; Settings and App Center installed acceptance is recorded
+in VALIDATION_APPLICATION_WAVE.md.
 
 examples/settings.json selects the independent Settings runtime, and
 examples/software.json selects its optional authorized APT integration. The
@@ -99,3 +100,8 @@ latter owns one fixed-path helper and polkit action, with explicit Python/APT/
 pkexec dependencies. App Center will consume the same component, so packages do
 not duplicate privileged files. Native source tests do not replace installed
 package and real-agent acceptance for this new integration.
+
+See VALIDATION_GREETER.md for the corrected installed 24-component font/greeter
+wave, real PAM wrong/correct-password and login/logout, terminal close and
+App Center retry checks, restored LightDM and exact artifact hashes. Later shell
+appearance publication has a distinct source/native and pending-runtime gate.
