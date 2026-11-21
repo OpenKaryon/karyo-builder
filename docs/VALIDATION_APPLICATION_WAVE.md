@@ -256,3 +256,107 @@ isolated staged fontconfig resolution pass on both supported bases, including
 UID 65534 payload checks. Native DEB and real VM font installation acceptance
 remain pending; the running App Center wave resolves an earlier source revision
 that predates this component.
+
+
+## Installed App Center wave
+
+Exact DE source 2e33ed69ce101883780c29e075057528f57512db builds a native set
+of 22 components on each base. All 59 then-current CTest entries pass before
+packaging, duplicate file ownership is rejected and every staged artifact hash
+is verified again before installation. Debian installs 21 components, keeping
+the optional RAR addon omitted; Ubuntu installs all 22. No repository sources or
+owner VM/laptop are changed. Both dpkg audits and installed package verification
+are clean. Local records are under out/migration/appcenter-wave-{debian,ubuntu}
+and out/{base}-vm-qa/appcenter-wave-input.
+
+Fresh actual LightDM Karyo logins succeed after installation (Debian GUI session
+119, shell 8555; Ubuntu GUI session 262, shell 37070). App Center starts from the
+Karyo menu as /usr/bin/karyo-appcenter in those GUI scopes. Discovery, the public
+catalog, system repository search and details render on both bases. Sources
+correctly identify Debian 13 and Ubuntu 26.04.1; update counts come from native
+APT simulation, with no unsolicited system upgrade.
+
+The small public ncdu package is initially absent on both guests. Cancelling
+its authorization leaves the app responsive and permits retry. A second request
+with the disposable account's administrator authorization installs ncdu through
+the fixed root helper on each base; package versions are 1.22-1 and 1.22-1build1.
+The UI changes to Open/Remove. Open shows ncdu --help in Karyo Terminal; Remove
+uninstalls the same test package and installed-state checks confirm its absence.
+The corresponding pkexec journal confirms the GUI user and explicit install/
+remove verbs. Existing htop/jq on Ubuntu are retained. No broad upgrade occurs.
+
+Real Environments without conda shows the explanatory setup state and does not
+download anything until explicitly requested. A per-user QA desktop entry
+selecting ru_RU.UTF-8 confirms the Russian chrome, navigation and environment
+page on both bases. No real Miniforge installation or Flatpak transaction is
+claimed; their isolated source regressions use substituted tools.
+
+The updated Settings network page is now accepted from its installed DEB rather
+than the earlier native overlay. Both GUI processes resolve to /usr/bin/karyo-
+settings and correctly show ens160, the guest IPv4/gateway/DNS and management
+outside NetworkManager. This closes the earlier loopback/disconnected package
+gate. Screenshots appcenter-wave-*.png and installation/verification logs remain
+local. Packaged Archive additionally contains the deterministic ZipCrypto fix;
+its native root/unprivileged tests establish the decoder/password behavior.
+
+Installed acceptance found one small App Center issue: the prior cancelled
+authorization notice remains after a later successful install. DE 8505b39 clears
+it on retry and passes the native/unprivileged window regressions on both bases;
+this later fix is not yet in the recorded installed DEB. Ubuntu's Terminal title-
+bar close clicks did not finish that fixture; exit was used and button behavior
+remains a separate follow-up, rather than an accepted result.
+
+Later font and greetd-transport work is intentionally outside this captured wave.
+The current native suite includes 61 tests, while the wave's exact revision has
+59. Neither the font DEB/VM installation, greeter UI/real login, optional
+compositor protocols, profile integrations nor physical-device acceptance is
+established by these application results. No commits are pushed.
+
+### Native App Center artifact hashes
+
+| Base | Package | SHA-256 |
+| --- | --- | --- |
+| debian | karyo-style | bfa527c54fe13b0675eeecbf33cad27304eb2034c889b8191a3bfc0556ab7d41 |
+| debian | karyo-shell | 3d51358f1c9a5b1fee5c29789e0c3f0fd69cf9d74ac56ad41c89dbcf12774468 |
+| debian | karyo-lock | 0a188f0b4ce72d3c930ab4c7dba7e758cb4d6f75bd44c9041209c0ed44c07239 |
+| debian | karyo-session-entry | 8e3fbff0454b076446d9ad75e7836dfe3f41d48e652f7abd876ac7dbd247269a |
+| debian | karyo-session | 02088134d76096debee0d845e8310a1c357fefe23e19882ceceeadaee420db09 |
+| debian | karyo-terminal | fe8f308dab7137e666ba01f7b45af42ae91607c6c14f0b96b68bc0239d28d3b6 |
+| debian | karyo-camera | 5077590e251b237822033e9865d219c29809592ebb6ad242358cd1c6cb4044fd |
+| debian | karyo-photos | ec0f59e4b8cbacbfe7685acb9c8191ebce78ecfb39933955c0c9c41357e219a5 |
+| debian | karyo-calculator | 948e6669d0341ca5bc0cc7fca35ba871d07d865cf4df54efb035638cd84ada72 |
+| debian | karyo-clock | 5dae6cd3fa9618c82d5845c0eaa790fd4e50baf27193d5ca9f2086ff30ccbe3a |
+| debian | karyo-editor | 06c8c3f5a65065208629adb12ddf7a2b0790b1b00ef29005ce141b8f537cda1d |
+| debian | karyo-reader | 9911dce2d0158e989a3e6e9e702ec35a1c3aaaba1e11b1bdda5a300bbff924f0 |
+| debian | karyo-player | c06b1a0dc78cd4084fa395e9ce53e9fb68d882f592a36bad3b737be73f7b15f6 |
+| debian | karyo-monitor | 18deb09a92d2cf59483d3a53f1edaccdcb333deac997b247a71b40d048677109 |
+| debian | karyo-snip | 5e4234b24529cf808a287592c828f9e083a14f1b490c53124bf104bcd7ed1789 |
+| debian | karyo-archive | 446708bc569a7d3bf888c1d5493eaaefb317ad146a86683d7d1a597f74d05293 |
+| debian | karyo-archive-rar | 14f431f64eed917828be660fe916ae89c6a8097968a680ae9fb02fc57e3b6c0f |
+| debian | karyo-files | ad603b437e13d9c82a1535bea5f876c3749839bfed1be74a2b3efe3ac21844aa |
+| debian | karyo-software | ad3d0dcddcca8c168f6defb9431bc5009f1f68da9954c9f29ee72388f411fb5e |
+| debian | karyo-settings | ccfb55a285d03de1d4de738abb0bf7ac0e7e03bb834538f4fec6570431f1c321 |
+| debian | karyo-appcenter | 9a4c824c9d384c24e6d4a0cb9481fb42dad78cfe35885121f76b2d4ec561f3d4 |
+| debian | karyo-appcenter-catalog | 901398e862177ba165a4c01678d97d58fd4bc76d27834ee621f6dbc7d7b03caa |
+| ubuntu | karyo-style | a21fe7b7f7a6f77c09b07a26a4c002ffe5e150906da3926dfd43cfed36a6de47 |
+| ubuntu | karyo-shell | a81aee402960be96ecc54997f591440f345bc5d8975d621d1cc30d6f20947295 |
+| ubuntu | karyo-lock | 75fef59d5270aaaa44c6469e0f47d2a5c35073a0196aa9dd1b5b5616faeee00e |
+| ubuntu | karyo-session-entry | 733a120b1d9438f8d3c86b459039784237252a183a7be1e54c89c850dfd3b3f8 |
+| ubuntu | karyo-session | e8aa12d3c1831f1ff461b88395a008371746c2d9d779e2548923a3fe836eca54 |
+| ubuntu | karyo-terminal | 2650fa9ccfacbc0b76d3ef2d30357f7c61ef9d49c6cb102b2f047f573930f6dc |
+| ubuntu | karyo-camera | f1a013392757d8a7faadf3c3d8ac7dbfb76829297afcc5ef5d475861f47cff29 |
+| ubuntu | karyo-photos | 4cfb0a23bf249392593edec268499226e3fe6ddd33de59cf3875703c11ba585e |
+| ubuntu | karyo-calculator | b7720339a677479291bbab29e55249e2ff16b5f8a3efedec460ab2570841e1c7 |
+| ubuntu | karyo-clock | 3304368546d7eb9776e46e3897419c1d8a12b19623e666bc815fddd735cd20bc |
+| ubuntu | karyo-editor | fa4ac9963ea0f96d9583f2018ff40a66908eedaf1ed463dad9c8ba3a6e4bb359 |
+| ubuntu | karyo-reader | bc59321c51d97caffbcc8fd3c4ce8b7705ecaa6e6da7ae6f8b7dcc245d2c22fe |
+| ubuntu | karyo-player | 5940491acc272efd135fd70b10d7a1d2401658ce5b3653b1066d2a35b4b53452 |
+| ubuntu | karyo-monitor | b198a2eeb5613f7c170ef787c5f02600243f9aed73ce7a36ab9144c5218eacb9 |
+| ubuntu | karyo-snip | 4592e2e339eb69761e7bf153fc3ec5ec96e534a8e3a5c6d93311fd62e13e95f4 |
+| ubuntu | karyo-archive | e6387b883209477a1fb660bc11484a95e6ba16dbf4ca0387899416a26404aaa1 |
+| ubuntu | karyo-archive-rar | ca3ea849b68c4365533d2bb926fb5ec83277fcc63ca72184c0f564fbf08ec6c1 |
+| ubuntu | karyo-files | 782f64a8ce594900019a1f18edf47d23cb747e8158fb7a2b2bc0a19eec8e1d08 |
+| ubuntu | karyo-software | 311cdb48b349b90433ae38120c5eee45cca55222de95ac3032912f764d4f8bba |
+| ubuntu | karyo-settings | 7801431dbb45de2cb460938c3cefad7acc1ed461be8b1253ba33359ca99340ec |
+| ubuntu | karyo-appcenter | 116a3cf9cea74e9fbc77c8af8da1d2a2ab7b206fdaae61b5904303b2639fc845 |
+| ubuntu | karyo-appcenter-catalog | ecbfcc7b040b2993257c864856bec46c140de9ec496242dc27cadd9a2ae81f4c |
