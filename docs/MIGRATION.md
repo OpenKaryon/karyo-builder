@@ -108,6 +108,17 @@ appearance publication has a distinct source/native and pending-runtime gate.
 
 ## Current optional profile integration gates
 
+The latest accepted gate now includes explicit optional runtime activation and
+public stopped-child startup on Debian and Ubuntu. See
+VALIDATION_PROFILE_PUBLIC_RUNTIME.md for exact packages, root/ordinary source
+regressions, real public-helper cold launches, private DNS/TCP, existing switches,
+initial protection and logout/crash cleanup. Earlier paragraphs below preserve
+the order of accepted layers; their former public-wiring pending labels are
+superseded by that gate. The whole migration remains incomplete for cold main
+login, interrupted GUI startup, dynamic network/provider integrations and the
+other explicitly listed remaining features.
+
+
 Later native evidence supersedes the initial inventory's broad pending label
 without declaring the complete integration finished. Installed account/PAM
 policy, public profile controls, two already-running sessions, initial protection

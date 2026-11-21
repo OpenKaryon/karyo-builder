@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-profile-runtime",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Explicitly enabled Karyo isolated desktop runtime",
+    "section": "admin",
+    "depends": [
+      "karyo-profile-host (= 0.1.0-1)",
+      "karyo-profile-session (= 0.1.0-1)",
+      "nftables",
+      "systemd-resolved",
+      "dbus",
+      "procps"
+    ]
+  },
+  "build": {
+    "directory": "profiles",
+    "component": "profile-runtime"
+  }
+}

@@ -1,8 +1,9 @@
 # Installed schema4 forwarding journal and private DNS GUI lifetime
 
 This gate owns physical forwarding across controller restart and joins it to the
-observed GUI/DNS lifecycle. Explicit host forwarding setup, public stopped-profile
-allocation and the whole migration remain unfinished. No push, owner-machine,
+observed GUI/DNS lifecycle. This historical layer gate precedes the later explicit setup/public startup
+acceptance in VALIDATION_PROFILE_PUBLIC_RUNTIME.md. The whole migration remains
+unfinished. No push, owner-machine,
 Forge or donor changes are performed.
 
 ## Exact runtime inputs
