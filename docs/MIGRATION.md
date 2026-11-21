@@ -58,7 +58,8 @@ The private pipeline remains the working reference during this migration.
 
 ## Application packaging during local review
 
-examples/terminal.json, camera.json, photos.json and calculator.json select
+examples/terminal.json, camera.json, photos.json, calculator.json, clock.json,
+editor.json, reader.json, player.json, monitor.json and snip.json select
 independent runtime components from current DE HEAD. They declare Wayland/icon
 plugins and applicable non-ELF data requirements (including the native Debian/Ubuntu
 QTermWidget data package alternatives); native ELF dependencies follow
@@ -69,3 +70,8 @@ VM acceptance; source-level regressions already run on both native bases.
 The local review phase intentionally creates commits without pushing. See the
 DE review checklist for pending components and the distinction between native,
 virtual-device and physical-hardware acceptance.
+
+The separate Ubuntu 26.04 VM now passed real session selection/login, lock and
+suspend, polkit, tray, file/capture portals, package upgrade/removal and Xfce
+coexistence. See VALIDATION_UBUNTU_VM.md for source revisions, fixture corrections
+and limits; native compilation alone is not used to claim those results.

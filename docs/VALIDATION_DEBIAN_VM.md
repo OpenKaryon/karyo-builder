@@ -102,3 +102,12 @@ Stock labwc still lacks Karyo's optional layout-cycle protocol. Physical GPU,
 multiple displays, physical sleep devices and the reviewed compositor extension
 remain separate gates. Files/Settings, distro/ISO stages and optional privileged
 integrations remain subsequent migration work.
+
+## Native capture follow-up (2026-11-21 UTC)
+
+The persistent Gio/PipeWire fixture in tests/vm/portal-screencast.py also captured
+a real 1280x800 PNG with 29 sampled colors through the normal monitor chooser.
+The frame was produced after an updating terminal damaged the display; an earlier
+static-screen attempt timed out and remains recorded as a failed fixture attempt.
+This supplements the browser result above rather than replacing it. The client
+keeps its portal session alive through frame decoding and closes it afterward.

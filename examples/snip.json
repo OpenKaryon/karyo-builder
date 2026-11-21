@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-snip",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Karyo screenshot capture and annotation",
+    "section": "x11",
+    "depends": [
+      "qt6-wayland",
+      "qt6-svg-plugins",
+      "grim",
+      "wl-clipboard",
+      "xdg-utils"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "snip-runtime"
+  }
+}
