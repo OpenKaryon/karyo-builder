@@ -230,3 +230,16 @@ only in these disposable QA installations.
 | ubuntu | karyo-files_0.1.0-1_amd64.deb | `1a58a7ca9933c2dcb2f6bb736ebacf7d4398b297eda7a5a1babd6df3b61775d5` |
 | ubuntu | karyo-software_0.1.0-1_amd64.deb | `b1551a100e0717a36a928bfd970df886ae54d25668daa1b59f20baa8a51a5658` |
 | ubuntu | karyo-settings_0.1.0-1_amd64.deb | `3c74adb45f0283424729d272e23a10ccf03da8b6b3b0e35dc1c63a90e6d4d0f8` |
+
+
+## App Center package contract
+
+The optional appcenter-runtime recipe supplies the standalone GUI, public
+appcenter launcher and Russian catalog. It depends on the shared authorized
+software helper and Karyo Terminal. Curated public application descriptions are
+a separate appcenter-catalog-runtime package; the GUI still supports repository
+search and environments if that optional catalog is absent. The source recipe
+continues to resolve HEAD at build start and the manifest records the exact SHA.
+Flatpak stays optional and per-user when installed; conda is set up only by an
+explicit user action with a checked upstream installer. Neither private profiles
+nor a downloaded conda environment is included in these package components.

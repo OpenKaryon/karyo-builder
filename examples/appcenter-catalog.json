@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-appcenter-catalog",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional public application catalog for Karyo",
+    "section": "x11",
+    "depends": []
+  },
+  "build": {
+    "directory": ".",
+    "component": "appcenter-catalog-runtime"
+  }
+}
