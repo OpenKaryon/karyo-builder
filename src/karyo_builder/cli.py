@@ -205,8 +205,17 @@ def main():
         build.add_argument("--image", default="karyo-builder:trixie",
                            help="An existing local Docker image (resolved to its immutable ID)")
         build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
+    source_build = subcommands.add_parser("source-package",
+        help="Rebuild checksummed Debian quilt source with ordered downstream patches")
+    source_build.add_argument("recipe")
+    source_build.add_argument("--output", required=True)
+    source_build.add_argument("--image", required=True, help="Existing image with native source build dependencies")
+    source_build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
     args = parser.parse_args()
     try:
+        if args.stage == "source-package":
+            from .source_package import build_source_package
+            return build_source_package(args)
         return package(args)
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError, tarfile.TarError) as error:
         detail = error.stderr.strip() if isinstance(error, subprocess.CalledProcessError) and error.stderr else str(error)

@@ -8,6 +8,9 @@ repository and produce installation images from versioned configuration.
 builds/tests native CMake components in isolated Debian 13 or Ubuntu 26.04
 containers and produces DEBs with logs, input hashes and a build manifest. Runtime ELF
 dependencies are calculated with Debian's dpkg-shlibdeps.
+A separate source-package stage builds checksummed distribution DSCs with ordered
+quilt patches using native packaging and upstream checks. See
+[the source-stage contract](docs/SOURCE_PACKAGE_STAGE.md).
 See [the package-stage contract](docs/PACKAGE_STAGE.md) and
 [reviewed migration inventory](docs/MIGRATION.md).
 
