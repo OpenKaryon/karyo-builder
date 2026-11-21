@@ -119,6 +119,15 @@ login, interrupted GUI startup, dynamic network/provider integrations and the
 other explicitly listed remaining features.
 
 
+The first actual NetBird provider primitive now passes isolated pre-login service,
+state reuse, Work socket/Home denial and private NET/resolver acceptance on Debian
+and Ubuntu; see VALIDATION_PROFILE_NETBIRD_PRELOGIN.md. Configured VPN startup fails
+before allocation until provider/tunnel journal, connected teardown and client/
+callback/GUI integration are ready. The external vendor package's global service
+activation is an explicit remaining packaging decision, not an inherited base-DE
+installation side effect.
+
+
 Later native evidence supersedes the initial inventory's broad pending label
 without declaring the complete integration finished. Installed account/PAM
 policy, public profile controls, two already-running sessions, initial protection
