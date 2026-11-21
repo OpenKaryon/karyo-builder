@@ -131,3 +131,36 @@ resource orchestration are not enabled yet. Actual NetBird lifecycle/callback, p
 overlays, family clipboard, Win32/macOS runners and remaining Wine/VMware
 integrations stay open. Distribution branding/installer/images and Forge remain
 assigned to their separate products.
+
+
+The first typed ownership journal now has installed SIGKILL recovery acceptance
+on Debian and Ubuntu, including actual host socket startup reconciliation. See
+VALIDATION_PROFILE_JOURNAL.md. This schema owns network leases only; remaining
+DNS/service/manager/graphical/forwarding receipts and complete profile runtime
+supervision are still required before public stopped-profile wiring.
+
+
+Schema-2 private DNS file/unit checkpointing now passes installed reattachment,
+interrupted cleanup and real host startup recovery on Debian and Ubuntu; old
+network-only and private-context transport scenarios remain compatible. See
+VALIDATION_PROFILE_DNS_JOURNAL.md. User-manager/graphical/forwarding/VPN receipts,
+proven live GUI consumers and complete profile supervision still remain open.
+
+
+Schema-3 manager/PAM/compositor receipts now preserve living unprotected and
+initially locked desktops through controller SIGKILL and actual host restart on
+Debian and Ubuntu. A manager-activated editor keeps its PID and unsaved text.
+See VALIDATION_PROFILE_SESSION_JOURNAL.md. Interrupted transitions, automatic
+logout return and complete public runtime/forwarding/VPN integration remain open.
+
+
+Acknowledged offline manager preparation and unstarted login-start intent now pass actual SIGKILL and host startup recovery on Debian and Ubuntu. See VALIDATION_PROFILE_PREPARED_JOURNAL.md. Interrupted policy removal/graphical closing and the complete public runtime remain open.
+
+
+Recorded offline login-close/manager-close reconciliation now passes six actual SIGKILL boundaries and host startup recovery on Debian and Ubuntu, including partial policy unlink/directory removal. See VALIDATION_PROFILE_CLOSING_JOURNAL.md. Active close supervision, automatic logout return and full public runtime integration remain open.
+
+
+The actual long-lived host now supervises observed logout/compositor crash without client traffic, returns only from the owned active seat/VT to Home, and naturally tears down captured manager/DNS/network leases. Installed Debian/Ubuntu normal, crash, background and initial-lock cases pass; see VALIDATION_PROFILE_SUPERVISION.md. Public allocation/forwarding and already-dead startup replay remain open.
+
+
+Schema4 forwarding ownership now passes native live reattachment, all seven interrupted delete ACKs and actual host recovery on Debian/Ubuntu. Joined private mounted DNS/NSS, NAT and GUI lifecycle also pass with a synthetic blocking Home policy. See VALIDATION_PROFILE_FORWARDING_JOURNAL.md, including the preserved cold-UDP failure and bounded diagnostic limitation. Explicit forwarding setup/public startup and the remaining runtime/provider integrations stay open.

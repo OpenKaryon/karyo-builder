@@ -13,7 +13,10 @@
     "depends": [
       "karyo-profile-accounts (= 0.1.0-1)",
       "systemd",
-      "libsystemd0"
+      "libsystemd0",
+      "iproute2",
+      "procps",
+      "util-linux"
     ]
   },
   "build": {

@@ -105,3 +105,8 @@ reconciliation and dependency/forwarding activation, then verify stopped-profile
 public GUI startup and logout on both bases. Actual NetBird lifecycle/callback,
 profile catalogs, family clipboard and remaining platform/VMware integrations
 remain open. Forge, distribution images, donor and owner machines are untouched.
+
+
+Later network journal/startup ownership has a distinct accepted gate in
+VALIDATION_PROFILE_JOURNAL.md. It supersedes the initial absence of a journal for
+the network layer only, without claiming the remaining complete resource graph.
