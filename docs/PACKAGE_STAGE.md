@@ -1,7 +1,8 @@
 # Native package stage, schema 1
 
-This is the first executable Builder stage. It builds one CMake install
-component from a Git commit into a Debian 13 amd64 package. The edition/image
+This is the first executable Builder stage. It builds CMake install
+components from a Git commit into native Debian-family amd64 packages.
+Debian 13 and Ubuntu 26.04 environments are validated separately. The edition/image
 YAML and full pipeline in the top-level roadmap are still design examples.
 
 The host needs Python 3.12+, Git and access to a running Docker engine.
@@ -16,7 +17,7 @@ karyo-builder package examples/ui-foundation.json --output out
 ```
 
 The example expects sibling checkouts `karyo-builder` and `karyo-de`.
-The default input is the source repository\'s current `HEAD`. The recipe only
+The default input is the source repository's current `HEAD`. The recipe only
 needs `source.path`; `source.revision` is optional and defaults to `HEAD`.
 Source paths resolve from the recipe directory. Use `--source PATH` to select
 another repository. Later, `--revision v0.1.0` or `source.revision` can select
@@ -69,3 +70,43 @@ the separate DE consumer to verify the exported CMake contract.
 
 The runtime acceptance recipe is `tests/fixtures/runtime.json`. It builds a small
 Qt Core executable from Builder's own HEAD and verifies automatic dependencies.
+
+## Several components from one source snapshot
+
+```sh
+karyo-builder package-set examples/shell.json examples/lock.json examples/style.json examples/session-entry.json examples/session.json --image karyo-builder:trixie --output out/session
+```
+
+package-set accepts the same schema-1 recipes. All inputs must use one source
+repository, one CMake directory and one resolved commit, with distinct package
+names. HEAD is resolved once at the start; different references are accepted if
+they identify that same commit. An explicit --source/--revision applies to all
+recipes. Mixed commits/directories and duplicate package names fail before build.
+Recipe and runner hashes describe their captured bytes, including when a file
+changes while a long build is running.
+
+The native runner configures, builds and runs CTest once, then stages each
+component separately. Each package retains its own dependency discovery,
+conffiles, control metadata, DEB, checksums and manifest. Shared directories are
+allowed; colliding file ownership or file/directory prefixes abort the whole set.
+The result directory is published only after every component succeeds.
+
+A successful karyo-package-set-* directory contains a shared build.log,
+environment/distribution records and a root manifest/checksum list. Named
+subdirectories contain the individual package records. Their manifests reference
+the shared log by path and hash; the root manifest hashes each package manifest.
+Keep that directory together for complete build evidence. A failed set remains
+under .failed-* with diagnostics and is never published as a successful set.
+The original package command retains its single-package output layout.
+
+Run the real single/set/native-execution/collision acceptance fixture on each base:
+
+```sh
+python tests/acceptance/check-package-set.py --image karyo-builder:trixie --output out/check-package-set-debian
+python tests/acceptance/check-package-set.py --image karyo-builder:ubuntu2604 --output out/check-package-set-ubuntu
+```
+
+The fixture uses a short-lived local Git repository with public test content.
+It executes the unpacked native ELF as an unprivileged user in an isolated
+matching image, checks per-package conffiles/dependencies and verifies that a
+colliding component produces no published result. It does not modify host APT.

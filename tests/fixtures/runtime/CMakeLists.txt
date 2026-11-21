@@ -9,3 +9,5 @@ install(TARGETS runtime-fixture RUNTIME DESTINATION bin COMPONENT runtime)
 add_test(NAME runtime-fixture COMMAND runtime-fixture)
 
 install(FILES example.conf DESTINATION ${CMAKE_INSTALL_SYSCONFDIR}/karyo-builder-runtime-check COMPONENT runtime)
+
+install(FILES example.conf DESTINATION share/doc/karyo-builder-runtime-doc COMPONENT documentation)

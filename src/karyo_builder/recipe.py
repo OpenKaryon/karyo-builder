@@ -20,8 +20,12 @@ def text(value, location):
 
 def load_recipe(path):
     path = Path(path).resolve(strict=True)
-    with path.open(encoding="utf-8") as stream:
-        recipe = json.load(stream)
+    return parse_recipe(path.read_bytes(), path.parent)
+
+
+def parse_recipe(data, directory):
+    """Validate an already captured UTF-8 recipe against its original directory."""
+    recipe = json.loads(data.decode("utf-8"))
     fields(recipe, ("schema", "source", "package", "build"), "recipe")
     if type(recipe["schema"]) is not int or recipe["schema"] != 1:
         raise ValueError("Only package recipe schema 1 is supported")
@@ -31,7 +35,7 @@ def load_recipe(path):
     fields(source, ("path", "revision"), "source")
     text(source["path"], "source.path")
     text(source["revision"], "source.revision")
-    source["path"] = str((path.parent / source["path"]).resolve())
+    source["path"] = str((Path(directory) / source["path"]).resolve())
     package = recipe["package"]
     fields(package, ("name", "version", "architecture", "maintainer", "description",
                      "section", "depends"), "package")

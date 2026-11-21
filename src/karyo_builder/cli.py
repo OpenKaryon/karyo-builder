@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Export a Git revision and build one native Debian package in Docker."""
+"""Export a Git revision and build native Debian packages in Docker."""
 import argparse
 from datetime import datetime, timezone
+from dataclasses import dataclass
 import hashlib
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import shutil
 import subprocess
 import sys
@@ -13,7 +14,7 @@ import tempfile
 import uuid
 
 from . import __version__
-from .recipe import load_recipe
+from .recipe import parse_recipe
 
 
 def command(args, **kwargs):
@@ -33,13 +34,53 @@ def mount(path, destination, readonly=True):
     return f"type=bind,source={value},target={destination}{suffix}"
 
 
+@dataclass(frozen=True)
+class PackageInput:
+    path: Path
+    recipe: dict
+    sha256: str
+    source: Path
+    reference: str
+    revision: str
+
+
+def resolve_inputs(paths, source_override=None, revision_override=None):
+    """Capture recipes and resolve each source reference once before building."""
+    inputs = []
+    revisions = {}
+    names = set()
+    for path in paths:
+        path = Path(path).resolve(strict=True)
+        data = path.read_bytes()
+        recipe = parse_recipe(data, path.parent)
+        name = recipe["package"]["name"]
+        if name in names:
+            raise ValueError("A package set needs distinct package names")
+        names.add(name)
+        source = Path(source_override or recipe["source"]["path"]).resolve(strict=True)
+        directory = PurePosixPath(recipe["build"]["directory"]).as_posix()
+        recipe["build"]["directory"] = directory
+        if inputs and (source != inputs[0].source or directory != inputs[0].recipe["build"]["directory"]):
+            raise ValueError("A package set needs one source repository and CMake directory")
+        reference = revision_override or recipe["source"]["revision"]
+        key = (source, reference)
+        if key not in revisions:
+            revisions[key] = command(["git", "-C", str(source), "rev-parse", "--verify",
+                                      "--end-of-options", f"{reference}^{{commit}}"])
+        revision = revisions[key]
+        if inputs and revision != inputs[0].revision:
+            raise ValueError("A package set needs one resolved source commit")
+        inputs.append(PackageInput(path, recipe, hashlib.sha256(data).hexdigest(), source, reference, revision))
+    if not inputs:
+        raise ValueError("At least one package recipe is required")
+    return inputs
+
+
 def package(args):
-    recipe_path = Path(args.recipe).resolve(strict=True)
-    recipe = load_recipe(recipe_path)
-    source = Path(args.source or recipe["source"]["path"]).resolve(strict=True)
-    revision_name = args.revision or recipe["source"]["revision"]
-    revision = command(["git", "-C", str(source), "rev-parse", "--verify",
-                        "--end-of-options", f"{revision_name}^{{commit}}"])
+    batch = args.stage == "package-set"
+    paths = args.recipe if batch else [args.recipe]
+    inputs = resolve_inputs(paths, args.source, args.revision)
+    source, revision = inputs[0].source, inputs[0].revision
     source_time = int(command(["git", "-C", str(source), "show", "-s", "--format=%ct", revision]))
     tree = command(["git", "-C", str(source), "ls-tree", "-r", revision])
     if any(line.startswith("160000 ") for line in tree.splitlines()):
@@ -67,13 +108,15 @@ def package(args):
                 tar.extractall(exported, filter="data")
             input_dir = temporary / "input"
             input_dir.mkdir()
-            recipe["source"] = {"path": "/source", "revision": revision}
-            (input_dir / "recipe.json").write_text(
-                json.dumps(recipe, indent=2) + "\n", encoding="utf-8")
+            recipes = [dict(item.recipe, source={"path": "/source", "revision": revision}) for item in inputs]
+            (input_dir / ("recipes.json" if batch else "recipe.json")).write_text(
+                json.dumps(recipes if batch else recipes[0], indent=2) + "\n", encoding="utf-8")
             runner = Path(__file__).with_name("container.py")
             shutil.copyfile(runner, input_dir / "container.py")
             dependency_runner = runner.with_name("dependencies.py")
             shutil.copyfile(dependency_runner, input_dir / "dependencies.py")
+            runner_hash = sha256(input_dir / "container.py")
+            dependency_hash = sha256(input_dir / "dependencies.py")
             invocation = [
                 "docker", "run", "--rm", "--network=none", "--cpus", str(args.jobs),
                 "--memory=4g", "--pids-limit=512", "--cap-drop=ALL",
@@ -91,52 +134,77 @@ def package(args):
                 result = subprocess.run(invocation, stdout=log, stderr=subprocess.STDOUT)
             if result.returncode:
                 raise RuntimeError(f"Package build exited with status {result.returncode}")
-            metadata = recipe["package"]
-            filename = f'{metadata["name"]}_{metadata["version"].replace(":", "%3a")}_amd64.deb'
-            artifact = staged / filename
-            if not artifact.is_file():
-                raise RuntimeError("The build did not produce the expected Debian package")
-            environment = json.loads((staged / "environment.json").read_text(encoding="utf-8"))
-            manifest = {
-                "schema": 1, "builder_version": __version__, "status": "success",
-                "source": {"reference": revision_name, "revision": revision, "archive_sha256": sha256(archive),
-                           "source_date_epoch": source_time},
-                "recipe": {"sha256": sha256(recipe_path), "resolved": recipe},
-                "environment": {"image_id": image_id, "packages": environment,
-                                "distribution": json.loads((staged / "distribution.json").read_text())},
-                "runner_sha256": sha256(runner),
-                "dependency_runner_sha256": sha256(dependency_runner),
-                "dependencies": json.loads((staged / "dependencies.json").read_text(encoding="utf-8")),
-                "artifact": {"file": filename, "sha256": sha256(artifact),
-                             "bytes": artifact.stat().st_size},
-                "validation": {"ctest": "passed", "dpkg_deb": "passed"},
+            environment = {
+                "image_id": image_id,
+                "packages": json.loads((staged / "environment.json").read_text(encoding="utf-8")),
+                "distribution": json.loads((staged / "distribution.json").read_text(encoding="utf-8")),
             }
-            (staged / "manifest.json").write_text(
-                json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-            (staged / "SHA256SUMS").write_text(
-                f'{sha256(artifact)}  {filename}\n', encoding="utf-8")
-        final = output / f"{metadata['name']}-{job}"
+            source_record = {"revision": revision, "archive_sha256": sha256(archive),
+                             "source_date_epoch": source_time}
+            records, checksums = [], []
+            for item, recipe in zip(inputs, recipes):
+                metadata = recipe["package"]
+                folder = staged / metadata["name"] if batch else staged
+                filename = f'{metadata["name"]}_{metadata["version"].replace(":", "%3a")}_amd64.deb'
+                artifact = folder / filename
+                if not artifact.is_file():
+                    raise RuntimeError("The build did not produce the expected Debian package")
+                artifact_hash = sha256(artifact)
+                manifest = {
+                    "schema": 1, "builder_version": __version__, "status": "success",
+                    "source": dict(source_record, reference=item.reference),
+                    "recipe": {"sha256": item.sha256, "resolved": recipe},
+                    "environment": environment,
+                    "runner_sha256": runner_hash,
+                    "dependency_runner_sha256": dependency_hash,
+                    "dependencies": json.loads((folder / "dependencies.json").read_text(encoding="utf-8")),
+                    "artifact": {"file": filename, "sha256": artifact_hash, "bytes": artifact.stat().st_size},
+                    "validation": {"ctest": "passed", "dpkg_deb": "passed"},
+                }
+                if batch:
+                    manifest["shared_build_log"] = {"file": "../build.log", "sha256": sha256(staged / "build.log")}
+                (folder / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+                (folder / "SHA256SUMS").write_text(f"{artifact_hash}  {filename}\n", encoding="utf-8")
+                records.append({"package": metadata["name"], "directory": metadata["name"],
+                                "manifest_sha256": sha256(folder / "manifest.json")})
+                checksums.append(f'{artifact_hash}  {metadata["name"]}/{filename}')
+            if batch:
+                manifest = {"schema": 1, "kind": "package-set", "builder_version": __version__,
+                            "status": "success", "source": source_record, "environment": environment,
+                            "packages": records, "build_log_sha256": sha256(staged / "build.log")}
+                (staged / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+                (staged / "SHA256SUMS").write_text("\n".join(checksums) + "\n", encoding="utf-8")
+        final = output / f"{'karyo-package-set' if batch else metadata['name']}-{job}"
+        if final.parent != output or staged.parent != output:
+            raise ValueError("Build result paths must remain in the selected output directory")
         staged.rename(final)
     except BaseException:
         failed = output / f".failed-{job}"
+        if staged.parent != output or failed.parent != output:
+            raise ValueError("Failed build paths must remain in the output directory")
         staged.rename(failed)
         print(f"Failed build retained at {failed}", file=sys.stderr)
         raise
-    print(f"Package and build record: {final}")
+    print(f"{'Package set' if batch else 'Package'} and build record: {final}")
     return 0
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     subcommands = parser.add_subparsers(dest="stage", required=True)
-    build = subcommands.add_parser("package", help="Build one package from the source repository HEAD")
-    build.add_argument("recipe")
-    build.add_argument("--source", help="Override the source repository path")
-    build.add_argument("--revision", help="Select a Git tag or revision instead of HEAD")
-    build.add_argument("--output", required=True)
-    build.add_argument("--image", default="karyo-builder:trixie",
-                       help="An existing local Docker image (resolved to its immutable ID)")
-    build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
+    for name, help_text in (("package", "Build one package from source HEAD"),
+                            ("package-set", "Build/test one source revision and package several components")):
+        build = subcommands.add_parser(name, help=help_text)
+        if name == "package-set":
+            build.add_argument("recipe", nargs="+")
+        else:
+            build.add_argument("recipe")
+        build.add_argument("--source", help="Override the source repository path")
+        build.add_argument("--revision", help="Select a Git tag or revision instead of HEAD")
+        build.add_argument("--output", required=True)
+        build.add_argument("--image", default="karyo-builder:trixie",
+                           help="An existing local Docker image (resolved to its immutable ID)")
+        build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
     args = parser.parse_args()
     try:
         return package(args)

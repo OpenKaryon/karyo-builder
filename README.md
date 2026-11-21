@@ -5,8 +5,8 @@ and Karyo Workstation. It will build native packages, prepare a package
 repository and produce installation images from versioned configuration.
 
 **Status: first package stage implemented.** The CLI exports a Git revision,
-builds/tests one native CMake component in an isolated Debian 13 container and
-produces a DEB with logs, input hashes and a build manifest. Runtime ELF
+builds/tests native CMake components in isolated Debian 13 or Ubuntu 26.04
+containers and produces DEBs with logs, input hashes and a build manifest. Runtime ELF
 dependencies are calculated with Debian's dpkg-shlibdeps.
 See [the package-stage contract](docs/PACKAGE_STAGE.md) and
 [reviewed migration inventory](docs/MIGRATION.md).
@@ -22,9 +22,11 @@ python -m venv .venv
 # Activate .venv, then install this checkout.
 python -m pip install -e .
 karyo-builder package examples/ui-foundation.json --output out
+# One build/test pass for several components from the same source commit:
+karyo-builder package-set examples/shell.json examples/lock.json examples/style.json --output out/session
 ```
 
-Package builds use the source repository\'s current `HEAD` by default. A release
+Package builds use the source repository's current `HEAD` by default. A release
 tag can be selected later with `--revision`. The manifest records the resolved
 commit for each build.
 
