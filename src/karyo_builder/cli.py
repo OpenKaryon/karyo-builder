@@ -158,6 +158,7 @@ def package(args):
                     "runner_sha256": runner_hash,
                     "dependency_runner_sha256": dependency_hash,
                     "dependencies": json.loads((folder / "dependencies.json").read_text(encoding="utf-8")),
+                    "maintainer_scripts": json.loads((folder / "maintainer-scripts.json").read_text(encoding="utf-8")),
                     "artifact": {"file": filename, "sha256": artifact_hash, "bytes": artifact.stat().st_size},
                     "validation": {"ctest": "passed", "dpkg_deb": "passed"},
                 }

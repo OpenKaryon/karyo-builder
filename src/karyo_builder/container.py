@@ -1,10 +1,13 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Package-stage runner, invoked only inside the selected Debian-family container."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
 import shlex
+import re
+import stat
 import subprocess
 
 if __package__:
@@ -58,7 +61,44 @@ def claim_payload(payload, package_name, owners):
             owners[relative] = (package_name, directory)
 
 
-def build_package(recipe, build, output, architecture, owners):
+def install_maintainer_scripts(metadata, source, control_dir):
+    """Copy explicitly declared source-owned shell scripts; never execute them."""
+    source = Path(source).resolve(strict=True)
+    captured = []
+    for role, relative in sorted(metadata.get("maintainer_scripts", {}).items()):
+        if role not in {"preinst", "postinst", "prerm", "postrm"}:
+            raise ValueError("Unexpected maintainer script role")
+        if not isinstance(relative, str) or len(relative) > 256 or re.fullmatch(r"[A-Za-z0-9_./-]+", relative) is None:
+            raise ValueError("Maintainer script must use a canonical source path")
+        parts = relative.split("/")
+        if any(part in {"", ".", ".."} for part in parts) or relative.startswith(("/", "-")) or Path(relative).is_absolute():
+            raise ValueError("Maintainer script must stay inside the captured source")
+        path = source
+        for part in parts:
+            path = path / part
+            if path.is_symlink():
+                raise ValueError("Maintainer script paths must not contain symlinks")
+        info = path.stat()
+        if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_size > 65536:
+            raise ValueError("Maintainer scripts must be bounded single-link regular files")
+        data = path.read_bytes()
+        if len(data) > 65536 or not data.startswith(b"#!/bin/sh\n") or b"\0" in data or b"\r" in data:
+            raise ValueError("Maintainer scripts must be bounded LF-only /bin/sh scripts")
+        data.decode("utf-8")
+        captured.append((role, relative, data))
+    # Validate every selected input before mutating any control destination.
+    records = []
+    for role, relative, data in captured:
+        destination = control_dir / role
+        with destination.open("xb") as stream:
+            stream.write(data)
+        destination.chmod(0o755)
+        records.append({"role": role, "source": relative, "sha256": hashlib.sha256(data).hexdigest(),
+                        "bytes": len(data)})
+    return records
+
+
+def build_package(recipe, source, build, output, architecture, owners):
     metadata = recipe["package"]
     payload = build / "debian" / metadata["name"]
     output.mkdir(parents=True, exist_ok=True)
@@ -72,6 +112,8 @@ def build_package(recipe, build, output, architecture, owners):
         raise RuntimeError("The CMake component must not supply Debian control files")
     control_dir.mkdir()
     write_conffiles(payload, control_dir)
+    scripts = install_maintainer_scripts(metadata, source, control_dir)
+    (output / "maintainer-scripts.json").write_text(json.dumps(scripts, indent=2) + "\n", encoding="utf-8")
     dependencies = list(dict.fromkeys(metadata["depends"] + discover(payload, build, metadata["name"])))
     (output / "dependencies.json").write_text(
         json.dumps(dependencies, indent=2) + "\n", encoding="utf-8")
@@ -126,7 +168,7 @@ def main():
     owners = {}
     for recipe in recipes:
         output = Path("/output") / recipe["package"]["name"] if batch else Path("/output")
-        build_package(recipe, build, output, architecture, owners)
+        build_package(recipe, Path("/source"), build, output, architecture, owners)
     inventory = subprocess.check_output(
         ["dpkg-query", "-W", "-f", "${binary:Package}=${Version}\n"], text=True)
     Path("/output/environment.json").write_text(

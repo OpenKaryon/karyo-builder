@@ -37,8 +37,19 @@ def parse_recipe(data, directory):
     text(source["revision"], "source.revision")
     source["path"] = str((Path(directory) / source["path"]).resolve())
     package = recipe["package"]
-    fields(package, ("name", "version", "architecture", "maintainer", "description",
-                     "section", "depends"), "package")
+    package_fields = ["name", "version", "architecture", "maintainer", "description", "section", "depends"]
+    if isinstance(package, dict) and "maintainer_scripts" in package:
+        package_fields.append("maintainer_scripts")
+    fields(package, package_fields, "package")
+    scripts = package.get("maintainer_scripts", {})
+    if not isinstance(scripts, dict) or set(scripts) - {"preinst", "postinst", "prerm", "postrm"}:
+        raise ValueError("Only the four Debian maintainer script roles are supported")
+    for role, script in scripts.items():
+        text(script, f"package.maintainer_scripts.{role}")
+        if (len(script) > 256 or re.fullmatch(r"[A-Za-z0-9_./-]+", script) is None
+                or any(part in {"", ".", ".."} for part in script.split("/"))
+                or script.startswith(("/", "-"))):
+            raise ValueError("Maintainer scripts must use canonical paths inside the captured Git source")
     for key in ("name", "version", "architecture", "maintainer", "description", "section"):
         text(package[key], f"package.{key}")
     if not re.fullmatch(r"[a-z0-9][a-z0-9+.-]+", package["name"]):
