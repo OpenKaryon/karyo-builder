@@ -1,4 +1,4 @@
-# Disposable Debian VM checks
+# Disposable Debian and Ubuntu VM checks
 
 These fixtures are for a new disposable Debian 13 VM, never a working machine.
 They do not operate VMware on the host or contain login credentials. The recorded
@@ -79,3 +79,29 @@ application PIDs. Return to Xfce before removing the Karyo packages; verify its
 PID survives, the Karyo session/portal selection disappears, and another real
 LightDM login still reaches Xfce. Purge the lock to verify only owned conffiles
 are removed. Retain logs/screenshots locally and shut down only this test VM.
+
+## Native ScreenCast and PipeWire check
+
+When a browser is unavailable, portal-screencast.py exercises the real
+ScreenCast request lifecycle, waits for the normal monitor chooser and passes
+the OpenPipeWireRemote file descriptor into GStreamer's pipewiresrc. It decodes
+one actual PNG frame and records dimensions/pixel diversity; it uses no fake
+source and does not bypass user selection.
+
+Install python3-gi, gir1.2-gdkpixbuf-2.0, gstreamer1.0-tools,
+gstreamer1.0-pipewire and gstreamer1.0-plugins-good in the disposable guest.
+The session bundle needs slurp for the wlr output chooser. Run inside Karyo:
+
+```sh
+python3 tests/vm/portal-screencast.py --output ~/qa-results/cast
+```
+
+Click the monitor and change something on screen while capture starts (for
+example, run a terminal counter). Debian's older wlr backend may wait for
+damage before producing its first frame. Inspect pipewire-frame.png and retain screen-cast.json plus
+gstreamer.log. Repeat with Escape at the chooser: the command must fail and
+leave no PNG or PASS JSON from an earlier attempt. The D-Bus session remains
+alive until capture finishes and is then closed, including error paths.
+
+Protocol references: [ScreenCast](https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.ScreenCast.html)
+and [Gio Unix FD calls](https://docs.gtk.org/gio/method.DBusConnection.call_with_unix_fd_list_sync.html).

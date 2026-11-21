@@ -20,7 +20,8 @@
       "pipewire",
       "xwayland",
       "xterm | x-terminal-emulator",
-      "polkitd"
+      "polkitd",
+      "slurp"
     ]
   },
   "build": {
