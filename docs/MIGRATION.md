@@ -105,3 +105,24 @@ See VALIDATION_GREETER.md for the corrected installed 24-component font/greeter
 wave, real PAM wrong/correct-password and login/logout, terminal close and
 App Center retry checks, restored LightDM and exact artifact hashes. Later shell
 appearance publication has a distinct source/native and pending-runtime gate.
+
+## Current optional profile integration gates
+
+Later native evidence supersedes the initial inventory's broad pending label
+without declaring the complete integration finished. Installed account/PAM
+policy, public profile controls, two already-running sessions, initial protection
+and output lifetime have distinct accepted gates. See
+VALIDATION_INSTALLED_PROFILE_MENU.md and VALIDATION_TWO_SESSIONS.md.
+
+Owned namespace, physical forwarding, private resolver and DNS service-controller
+libraries now have installed Debian/Ubuntu acceptance. The offline user-manager
+network/resolver/capability scope additionally passes native PAM and ordinary
+password sudo checks. See VALIDATION_PROFILE_NETWORKS.md,
+VALIDATION_PROFILE_FORWARDING.md, VALIDATION_PROFILE_DNS.md,
+VALIDATION_PROFILE_SERVICES.md and VALIDATION_PROFILE_USER_MANAGER.md.
+
+These library/fixture gates do not yet provide controlled graphical startup for
+a stopped profile, the host dispatcher or persistent runtime recovery. Actual
+NetBird lifecycle/callback, family clipboard, Win32/macOS runners and remaining
+Wine/VMware integrations stay open. Distribution branding/installer/images and
+Forge remain assigned to their separate products.
