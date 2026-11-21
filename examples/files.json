@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-files",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Karyo file manager and FileManager1 service",
+    "section": "x11",
+    "depends": [
+      "qt6-wayland",
+      "qt6-svg-plugins",
+      "karyo-archive (= 0.1.0-1)",
+      "udisks2",
+      "libarchive-tools",
+      "xdg-utils"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "files-runtime"
+  }
+}
