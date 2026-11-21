@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-profile-netbird-client",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional Karyo isolated NetBird CLI and GUI launchers",
+    "section": "admin",
+    "depends": [
+      "karyo-profile-accounts (= 0.1.0-1)",
+      "util-linux",
+      "xdg-utils"
+    ]
+  },
+  "build": {
+    "directory": "profiles",
+    "component": "profile-netbird-client"
+  }
+}

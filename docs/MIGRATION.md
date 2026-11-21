@@ -108,6 +108,42 @@ appearance publication has a distinct source/native and pending-runtime gate.
 
 ## Current optional profile integration gates
 
+Actual IPv4 exit-node forwarding now passes with both bases in router and client
+roles: ordinary TCP/UDP reaches a captured endpoint outside the selected router
+profile, with the expected remote host, masqueraded source and wt0 default route.
+See VALIDATION_PROFILE_NETBIRD_EXIT.md. This does not establish arbitrary Internet/
+IPv6 exits, Home-tunnel interference, browser PKCE or final public packaging.
+
+
+Actual ordinary peer traffic and private NSS now pass between Debian and Ubuntu
+profile namespaces: TCP and UDP by overlay address and peer name, proven wt0
+routing/counters, with private names and endpoint absent in Home. See
+VALIDATION_PROFILE_NETBIRD_PEERS.md for exact QA/report provenance and cleanup.
+This does not establish exit-node/Home-tunnel interaction, browser PKCE, final
+vendor/catalog integration or public VPN activation.
+
+
+Actual controller SIGKILL with a connected provider now also passes on Debian
+and Ubuntu: the real socket-activated host restores unchanged living native
+receipts and Connected status, then supervises logout/crash/background/initially
+locked teardown; an interrupted closed graph also reconciles. Both original
+six-mode pre-login matrices were repeated. See
+VALIDATION_PROFILE_NETBIRD_CONNECTED_RECOVERY.md. This does not establish a second
+SIGKILL of an already-running systemd host, all connected mutation boundaries,
+peer payload/DNS/exit-node behavior, real browser PKCE or public VPN packaging.
+
+
+The newest provider gate now includes actual setup-key enrollment against an
+isolated disposable NetBird realm, one explicitly delegated kernel tunnel,
+fresh-journal live reattachment and connected-owner teardown without `down` on
+Debian and Ubuntu. See VALIDATION_PROFILE_NETBIRD_CONNECTED.md for schema6,
+exact artifacts, laboratory credential lifetime, preserved fixture failures and
+native/source evidence. This supersedes older connected-ownership pending labels
+only within that tested boundary. Actual connected host-SIGKILL recovery, peer
+payload/DNS/exit-node traffic, browser PKCE, final vendor/catalog packaging and
+public VPN activation remain open, as does the full migration.
+
+
 The latest accepted gate now includes explicit optional runtime activation and
 public stopped-child startup on Debian and Ubuntu. See
 VALIDATION_PROFILE_PUBLIC_RUNTIME.md for exact packages, root/ordinary source
@@ -126,6 +162,22 @@ before allocation until provider/tunnel journal, connected teardown and client/
 callback/GUI integration are ready. The external vendor package's global service
 activation is an explicit remaining packaging decision, not an inherited base-DE
 installation side effect.
+
+
+Ordinary provider client endpoints and asynchronous browser handoff now have
+installed real CLI/GUI and synthetic private callback evidence on both bases;
+see VALIDATION_PROFILE_NETBIRD_CLIENT.md. The strict renderer-sandbox gate now
+passes on both bases after preserving the sandbox against the vendor Ubuntu
+bootstrap heuristic. Schema5 pre-login provider ownership and controller recovery
+also pass; see VALIDATION_PROFILE_NETBIRD_JOURNAL.md. Actual provider enrollment,
+connected tunnel ownership/recovery and public VPN integration remain open.
+
+The captured provider is now joined to the graphical/session-manager lifecycle
+and inherited client environment. Debian and Ubuntu pass six native preparation,
+logout/crash, protected/background and closing cases, plus the strict actual
+journaled GUI/CLI/synthetic callback gate. See VALIDATION_PROFILE_NETBIRD_SESSION.md
+for exact artifacts and scope. Connected provider state, real enrollment, public
+VPN activation and vendor/catalog packaging remain required.
 
 
 Later native evidence supersedes the initial inventory's broad pending label
