@@ -243,3 +243,16 @@ continues to resolve HEAD at build start and the manifest records the exact SHA.
 Flatpak stays optional and per-user when installed; conda is set up only by an
 explicit user action with a checked upstream installer. Neither private profiles
 nor a downloaded conda environment is included in these package components.
+
+
+## Font runtime contract
+
+The separate fonts-runtime recipe packages the 16 original complete IBM Plex
+Sans/Mono files with their OFL notices. The session bundle depends on this
+runtime; installing an individual app still permits its ordinary font fallback.
+Distribution Noto fonts supply additional scripts and emoji. No package installs
+global fontconfig family aliases. Native Qt hash/family/Cyrillic checks and
+isolated staged fontconfig resolution pass on both supported bases, including
+UID 65534 payload checks. Native DEB and real VM font installation acceptance
+remain pending; the running App Center wave resolves an earlier source revision
+that predates this component.

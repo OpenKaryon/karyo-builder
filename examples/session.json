@@ -21,7 +21,8 @@
       "xwayland",
       "xterm | x-terminal-emulator",
       "polkitd",
-      "slurp"
+      "slurp",
+      "karyo-fonts (= 0.1.0-1)"
     ]
   },
   "build": {

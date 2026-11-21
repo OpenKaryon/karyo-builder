@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-fonts",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Original IBM Plex fonts and native fallback for Karyo",
+    "section": "fonts",
+    "depends": [
+      "fontconfig",
+      "fonts-noto-core",
+      "fonts-noto-color-emoji"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "fonts-runtime"
+  }
+}
