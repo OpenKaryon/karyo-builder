@@ -227,3 +227,10 @@ The optional `examples/greeter.json` recipe builds the Karyo greetd frontend.
 Installing it does not change the current display manager. greetd/cage setup is
 an explicit administrator integration; its example and instructions install under
 `/usr/share/doc/karyo-greeter`. The session bundle does not depend on this frontend.
+
+
+The optional examples/profile-host.json recipe packages the root-only systemd
+host profile transport separately from account helpers and controlled PAM entry.
+It starts/enables nothing on installation. Current public helpers are unchanged;
+see docs/VALIDATION_PROFILE_HOST.md for the accepted native peer gate and remaining
+persistent runtime/startup integration.

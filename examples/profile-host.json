@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-profile-host",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional Karyo root host desktop transport",
+    "section": "admin",
+    "depends": [
+      "karyo-profile-accounts (= 0.1.0-1)",
+      "systemd",
+      "libsystemd0"
+    ]
+  },
+  "build": {
+    "directory": "profiles",
+    "component": "profile-host-runtime"
+  }
+}

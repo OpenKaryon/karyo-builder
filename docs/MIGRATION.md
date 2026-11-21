@@ -124,8 +124,10 @@ VALIDATION_PROFILE_SERVICES.md and VALIDATION_PROFILE_USER_MANAGER.md.
 Controlled graphical startup/explicit owned teardown now also passes installed
 Debian/Ubuntu unprotected, Home-password and separate-password GUI roundtrips.
 See VALIDATION_INSTALLED_GRAPHICAL_PROFILES.md. The public stopped-profile
-operation, host dispatcher, persistent runtime recovery and automatic logout
-return are still required. Actual NetBird lifecycle/callback, profile catalog
+operation, persistent runtime recovery and automatic logout return are still
+required. The optional root-only host transport now has separate installed
+peer acceptance in VALIDATION_PROFILE_HOST.md; public helper wiring and owned
+resource orchestration are not enabled yet. Actual NetBird lifecycle/callback, profile catalog
 overlays, family clipboard, Win32/macOS runners and remaining Wine/VMware
 integrations stay open. Distribution branding/installer/images and Forge remain
 assigned to their separate products.
