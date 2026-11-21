@@ -121,8 +121,11 @@ password sudo checks. See VALIDATION_PROFILE_NETWORKS.md,
 VALIDATION_PROFILE_FORWARDING.md, VALIDATION_PROFILE_DNS.md,
 VALIDATION_PROFILE_SERVICES.md and VALIDATION_PROFILE_USER_MANAGER.md.
 
-These library/fixture gates do not yet provide controlled graphical startup for
-a stopped profile, the host dispatcher or persistent runtime recovery. Actual
-NetBird lifecycle/callback, family clipboard, Win32/macOS runners and remaining
-Wine/VMware integrations stay open. Distribution branding/installer/images and
-Forge remain assigned to their separate products.
+Controlled graphical startup/explicit owned teardown now also passes installed
+Debian/Ubuntu unprotected, Home-password and separate-password GUI roundtrips.
+See VALIDATION_INSTALLED_GRAPHICAL_PROFILES.md. The public stopped-profile
+operation, host dispatcher, persistent runtime recovery and automatic logout
+return are still required. Actual NetBird lifecycle/callback, profile catalog
+overlays, family clipboard, Win32/macOS runners and remaining Wine/VMware
+integrations stay open. Distribution branding/installer/images and Forge remain
+assigned to their separate products.
