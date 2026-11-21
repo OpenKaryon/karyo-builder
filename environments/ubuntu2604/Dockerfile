@@ -23,3 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # QTermWidget's exported CMake target references the utf8proc linker file.
 RUN apt-get update && apt-get install -y --no-install-recommends libutf8proc-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# Ubuntu supplies the RAR codec separately in multiverse for integration tests.
+RUN apt-get update && apt-get install -y --no-install-recommends 7zip 7zip-rar libarchive-tools \
+    && rm -rf /var/lib/apt/lists/*

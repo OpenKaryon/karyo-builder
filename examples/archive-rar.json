@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-archive-rar",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Protected RAR codec integration for Karyo Archive",
+    "section": "x11",
+    "depends": [
+      "karyo-archive (= 0.1.0-1)",
+      "7zip-rar"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "archive-rar-addon"
+  }
+}

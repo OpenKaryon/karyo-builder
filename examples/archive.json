@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-archive",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Karyo native archive manager",
+    "section": "x11",
+    "depends": [
+      "qt6-wayland",
+      "qt6-svg-plugins",
+      "7zip",
+      "xdg-utils"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "archive-runtime"
+  }
+}

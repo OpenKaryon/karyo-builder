@@ -59,7 +59,7 @@ The private pipeline remains the working reference during this migration.
 ## Application packaging during local review
 
 examples/terminal.json, camera.json, photos.json, calculator.json, clock.json,
-editor.json, reader.json, player.json, monitor.json and snip.json select
+editor.json, reader.json, player.json, monitor.json, snip.json and archive.json select
 independent runtime components from current DE HEAD. They declare Wayland/icon
 plugins and applicable non-ELF data requirements (including the native Debian/Ubuntu
 QTermWidget data package alternatives); native ELF dependencies follow
@@ -75,3 +75,15 @@ The separate Ubuntu 26.04 VM now passed real session selection/login, lock and
 suspend, polkit, tray, file/capture portals, package upgrade/removal and Xfce
 coexistence. See VALIDATION_UBUNTU_VM.md for source revisions, fixture corrections
 and limits; native compilation alone is not used to claim those results.
+
+Archive integration uses external distribution 7zip and 7zip-rar executables,
+not copied engine source. The native build/test images include the separate RAR
+codec (Debian non-free / Ubuntu multiverse) so encrypted RAR regressions are run,
+not skipped. That image repository configuration is confined to Docker; DE
+packages never enable repositories on the installation host. Codec licensing
+and installation remain separate from the GPL application source.
+
+examples/archive-rar.json packages the optional codec integration separately.
+Its explicit dependency on distribution 7zip-rar is useful where the distribution
+component is enabled; the base Archive package does not silently edit sources.
+The addon contains documentation, not a bundled codec or second copy of Archive.

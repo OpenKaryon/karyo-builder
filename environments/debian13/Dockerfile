@@ -23,3 +23,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # QTermWidget's exported CMake target references the utf8proc linker file.
 RUN apt-get update && apt-get install -y --no-install-recommends libutf8proc-dev \
     && rm -rf /var/lib/apt/lists/*
+
+# Integration tests exercise encrypted ZIP/7z/RAR through distribution engines.
+# This is a build/test image; runtime packages do not rewrite host APT sources.
+RUN sed -i 's/^Components: main$/Components: main non-free/' /etc/apt/sources.list.d/debian.sources \
+    && apt-get update && apt-get install -y --no-install-recommends 7zip 7zip-rar libarchive-tools \
+    && rm -rf /var/lib/apt/lists/*
