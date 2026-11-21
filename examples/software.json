@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-software",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Authorized Karyo software-management integration",
+    "section": "x11",
+    "depends": [
+      "python3",
+      "apt",
+      "pkexec"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "software-runtime"
+  }
+}

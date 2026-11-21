@@ -82,7 +82,7 @@ checks are documented separately in VALIDATION_DEBIAN_VM.md and
 VALIDATION_UBUNTU_VM.md. Settings, App Center and optional integrations remain
 part of the active migration, rather than being waived by this checkpoint.
 
-## Native artifact hashes
+## Earlier-wave native artifact hashes
 
 These are QA artifacts, not signed release packages. The same package filename
 across base rows denotes a different native build; never exchange their binaries.
@@ -127,3 +127,106 @@ across base rows denotes a different native build; never exchange their binaries
 | ubuntu | karyo-terminal_0.1.0-1_amd64.deb | `5df4ed1361cc6db6c30e79d8a15e9acf040aef1634ea7aa528c6d68ec56507ff` |
 | ubuntu | karyo-files_0.1.0-1_amd64.deb | `2afc53f71c2a871843b4b4917e48a71090fd58d0fe8e92d3d2ced5f34e637ec3` |
 | ubuntu | karyo-session-entry_0.1.0-1_amd64.deb | `fc36f1f77638ce433bc7049a60f8812102be2b85e5fffbeb7950170f167e0285` |
+
+
+## Settings wave: installed native packages and real authorization
+
+Both 20-package native sets use exact DE
+`93765d7c6cb8fb1cb77d5d89b3f52a0b382ba4e1`, source archive SHA-256
+`edddbe423ec6c7b1e9976b6c57102551297d1afc8013a948d81306704e4854e0`.
+Each runs all 53 then-current CTest entries successfully before staging.
+Debian installs/reinstalls nineteen packages, omitting only optional RAR;
+Ubuntu installs all twenty. The input record verifies each package manifest and
+artifact hash before SCP and again inside the VM. dpkg audits are empty.
+No APT repository component was enabled on either installation host.
+
+The new real Karyo logins use Debian session 95 (shell PID 7024, idle Files 7020)
+and Ubuntu session 243 (shell 34708, Files 34704). Installed Archive from
+`/usr/bin/karyo-archive` extracts the public ZIP into `sample (4)`, retains the
+24-byte readme and 18-byte UTF-8 CSV, and opens the new foreground Files window
+on both bases. wlrctl and inspected `settings-wave-packaged-uri-fixed.png`
+confirm that the URI fix is now accepted in real DEBs, superseding the earlier
+native-overlay-only gate. Existing background-window activation is still separate.
+
+Installed Settings renders its real pages on both systems. Its new authorized
+APT action resolves to `/usr/libexec/karyo/appcenter-apt` and retains admin
+polkit policy. A first test launched through SSH inherited the SSH cgroup and
+login UID, so its immediate authorization failure is excluded from product
+acceptance. Launching Settings through Karyo's own Start footer produced a
+process in the actual GUI session, displayed the real Karyo authentication card,
+and accepted the fixture administrator password after cancellation/retry.
+The real root helper completed `apt-get update`; the UI re-enabled its controls
+and displayed the package-list results on both VMs. No package upgrade was run.
+Screenshots `settings-wave-real-auth.png` and `settings-wave-auth-result.png`
+and the polkit journal retain the observed action and completion.
+
+### Network observation correction
+
+The installed 93765d7 Settings network page failed its first real UI check:
+Debian displayed loopback, and Ubuntu reported disconnected despite working SSH.
+These cloud QA bases use ifupdown/networkd rather than NetworkManager for their
+uplinks. The failure is recorded in `settings-wave-network.png` on each base.
+
+DE `4214e77` fixes observation without replacing the host's network manager.
+All 56 then-current native CTests pass on both bases. Explicitly marked native
+test overlays, installed only as `~/qa-bin/karyo-settings`, now show `ens160`,
+the correct QA IPv4, gateway and resolver on both systems, with a clear
+“Managed outside NetworkManager” explanation. They were launched via a disposable
+Start entry in the real GUI cgroup; screenshots
+`settings-network-observation-fixed.png` were inspected. These overlays do not
+replace `/usr/bin/karyo-settings` or its DEB. A final package containing this
+newer correction is still required.
+
+| Base | Native Settings observation overlay SHA-256 |
+| --- | --- |
+| Debian | `7cdcba80a10289facbc99fcf60f8eeb0f4aa796d6a03b1686119d56891ae30b2` |
+| Ubuntu | `ef3511f2165d4c2b021d81b767850a57a14b882e9fbfe30abf397aed037ed059` |
+
+### Settings-wave DEB hashes
+
+These filenames retain the QA version; the source revision and base below
+identify the new wave unambiguously. They supersede earlier same-name inputs
+only in these disposable QA installations.
+
+| Base | Artifact | SHA-256 |
+| --- | --- | --- |
+| debian | karyo-style_0.1.0-1_amd64.deb | `be2b553a18dc6fd2038244d0c95a4b9be90abc271881c34a17736f466c45cb3c` |
+| debian | karyo-shell_0.1.0-1_amd64.deb | `c40c4e66f19f21809a0641a291e6c799ca8041af04404718aed172bd18eee0f8` |
+| debian | karyo-lock_0.1.0-1_amd64.deb | `321229037b83ce591c3a3a46040598e57371477ee165b71f88fdf8ce8e2a3b02` |
+| debian | karyo-session-entry_0.1.0-1_amd64.deb | `eca9d9fccd33229022ebc7195fffdd54f84312a2a87aa8d13f940204b0360bb1` |
+| debian | karyo-session_0.1.0-1_amd64.deb | `6a00b8abbac1742f647b789619460c62e1068b3dd5a9adf8f16faa1a921e7aa4` |
+| debian | karyo-terminal_0.1.0-1_amd64.deb | `2e26393a1b001ed71d8bd94a57f8090509a23c56444a994092aa77a7f98b2b8b` |
+| debian | karyo-camera_0.1.0-1_amd64.deb | `ebba526dabba8d91ad0a2a6281ccd38a293eebddd7130c2deb9afac4a904efa0` |
+| debian | karyo-photos_0.1.0-1_amd64.deb | `8169c0d5095d10c15d9258705d08e1d138680937969e1e2a749f290fd55bcf27` |
+| debian | karyo-calculator_0.1.0-1_amd64.deb | `ab779cb2814c427e6b9d6a5db89242d373a4b40a785c5248d00c1d1713c31ee6` |
+| debian | karyo-clock_0.1.0-1_amd64.deb | `26fa6e34ce80552d4c47b757e59cdf7374838c0bc5016f7b8f02479d7f82b070` |
+| debian | karyo-editor_0.1.0-1_amd64.deb | `e682c7893f8eae1b2a46c7c4ddac0c9fdd4ac5fad3448d047c93a6f99444618d` |
+| debian | karyo-reader_0.1.0-1_amd64.deb | `7f73668e72c13f803ebd2bd4deae95dcb2fe1683411f9c3235043ff37c9b8bb7` |
+| debian | karyo-player_0.1.0-1_amd64.deb | `496af4f569fca9b805c03e0ec913548c2ee71110b6d32cfbd6ab83faac1f00b2` |
+| debian | karyo-monitor_0.1.0-1_amd64.deb | `43c254792769b682a7763b7c5e32dacaab23625f6c71bc4f276de5d1fd58ca00` |
+| debian | karyo-snip_0.1.0-1_amd64.deb | `6b54ed51d79178ff3b564a63e7a5826e880839403ee2eed0269c999e6b124895` |
+| debian | karyo-archive_0.1.0-1_amd64.deb | `e58bc5faa3b9fe1807e7f6d6d0615aba923c7eb84a8ac14fee572f1eef2cf792` |
+| debian | karyo-archive-rar_0.1.0-1_amd64.deb | `31c5cbab9be244cd740d6907c62cb42100728680015c386ecc1d6fc4a2b7cf22` |
+| debian | karyo-files_0.1.0-1_amd64.deb | `4cff282f01fd0f04ec5c8c393ee3f460724f0975d14a3fe787eaee148410a274` |
+| debian | karyo-software_0.1.0-1_amd64.deb | `7ebd9bc548fb4655f1790e036be4677b816c88b9762203da488882960022ba00` |
+| debian | karyo-settings_0.1.0-1_amd64.deb | `e407a6a5224542907899a916346f0c58f7c991de64b990aec2c03578924aeb7e` |
+| ubuntu | karyo-style_0.1.0-1_amd64.deb | `d25413d801ed66aed2fea3e11f7505405122f202a0fce6455fff319e804536e7` |
+| ubuntu | karyo-shell_0.1.0-1_amd64.deb | `c9eb29d22a4f31db0454c131d8308f6804d95cab4d474ed45e2f7e840486df6b` |
+| ubuntu | karyo-lock_0.1.0-1_amd64.deb | `53f2e9bf294fc711379af4aa18adc254e023f9aad10dc29c8a198f636cb3ca47` |
+| ubuntu | karyo-session-entry_0.1.0-1_amd64.deb | `a33b4fe68555e57f7b154e5330d9d0d7af6a398d2ffab924da1b4a7cc6e6ddfa` |
+| ubuntu | karyo-session_0.1.0-1_amd64.deb | `c40ad1f48598a724202628d27370284d9d8acee66020ec73ef9debf670a3a98d` |
+| ubuntu | karyo-terminal_0.1.0-1_amd64.deb | `2d4572298646c93f8148e90d429bb8b47b63e73a8115e13331a5bbff009cf319` |
+| ubuntu | karyo-camera_0.1.0-1_amd64.deb | `ef4da72f573f4bf58736ceebb9614550b7d7c87c4110282a73493a09851ef8a9` |
+| ubuntu | karyo-photos_0.1.0-1_amd64.deb | `1b412c7a22ceacc99ea68569b54c6612b669c58006f8e30c774dece5baf1c4de` |
+| ubuntu | karyo-calculator_0.1.0-1_amd64.deb | `536b26770d9132255727869c21148250a8cccad7577e9aaf9d2fa3697f5e79a2` |
+| ubuntu | karyo-clock_0.1.0-1_amd64.deb | `a004007f7958c6127bb687a4d35a00fa1cf58a557513b77bf3c5eebc5839a105` |
+| ubuntu | karyo-editor_0.1.0-1_amd64.deb | `965bb1ce2500aefa866afae0de8781652eb297788a19310af2ec20fe21c68074` |
+| ubuntu | karyo-reader_0.1.0-1_amd64.deb | `7fe2b9d78693bd9e1a486cdd841354b1f5be7d401f3583fc8f4b279af38e991e` |
+| ubuntu | karyo-player_0.1.0-1_amd64.deb | `126f4dfcbca8ebdbe36b036431fe828e672c23c6f40dec012fa44d014fc8bec7` |
+| ubuntu | karyo-monitor_0.1.0-1_amd64.deb | `b3185152e1ffaf11f5612b21ff5c5cf4a22cd5650e3f87edbc2fa3b25aeb1741` |
+| ubuntu | karyo-snip_0.1.0-1_amd64.deb | `04f42c1010c5c00fab74feaa5950bec6ad4856903eba9813e82798fe629a41a3` |
+| ubuntu | karyo-archive_0.1.0-1_amd64.deb | `d94d36a7700ccebdc9e76d632f6599563442f615e1991f97ee4e18968f2381c9` |
+| ubuntu | karyo-archive-rar_0.1.0-1_amd64.deb | `5757386946fdd6e09e06d974777048538f81e4741e36b81dcaae72012ea23f9f` |
+| ubuntu | karyo-files_0.1.0-1_amd64.deb | `1a58a7ca9933c2dcb2f6bb736ebacf7d4398b297eda7a5a1babd6df3b61775d5` |
+| ubuntu | karyo-software_0.1.0-1_amd64.deb | `b1551a100e0717a36a928bfd970df886ae54d25668daa1b59f20baa8a51a5658` |
+| ubuntu | karyo-settings_0.1.0-1_amd64.deb | `3c74adb45f0283424729d272e23a10ccf03da8b6b3b0e35dc1c63a90e6d4d0f8` |

@@ -92,3 +92,10 @@ See VALIDATION_APPLICATION_WAVE.md for the current installed app/Files package
 snapshots, real GUI/clipboard/extraction checks, native hashes and QA fixture
 corrections. The full goal remains open for Settings, App Center and reviewed
 optional compositor/system integration packages.
+
+examples/settings.json selects the independent Settings runtime, and
+examples/software.json selects its optional authorized APT integration. The
+latter owns one fixed-path helper and polkit action, with explicit Python/APT/
+pkexec dependencies. App Center will consume the same component, so packages do
+not duplicate privileged files. Native source tests do not replace installed
+package and real-agent acceptance for this new integration.
