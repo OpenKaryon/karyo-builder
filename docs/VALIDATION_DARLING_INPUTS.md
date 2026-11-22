@@ -1,3 +1,49 @@
+# Current Darling source and native build status
+
+The latest reviewed series contains26 common patches. A new joined gate,
+out/migration/darling-current-inputs-accepted-v3/acceptance.json, passes on both
+native SDKs:24 source/packaging cases, all44 verified Swift inputs, zero-fuzz
+quilt plus Git application/reversal of26 patches and59 byte-identical restored
+source files. It records each native quilt/compiler version while requiring
+identical source effects. The earlier sections below preserve the history of
+smaller source gates; their counts are not the current stack size.
+
+The normal Debian3.0(quilt) source producer rechecks those input/proof hashes and
+emits per-base source-package recipes. Real sequential Debian compilation has
+found and corrected five distinct blockers:
+
+| Native attempt | Observed failure | General correction |
+| --- | --- | --- |
+|1|GNU quilt rejected incomplete hunk context at fuzz0|Refresh only0001/0006 context; preserve exact source effect|
+|2|ELF -z flags reached the Mach-O linker|Patch0023 routes native flags separately; retains ELF hardening|
+|3|objc4 debug metadata disagreed with Release NDEBUG|Patch0024 matches standard build modes|
+|4|Foundation used exception variables as format strings|Patch0025 supplies literal formats, retaining format-security|
+|5|Ruby self-included remapped __FILE__|Patch0026 uses its adjacent header, retaining reproducible path maps|
+
+Patch0022 separately supplies exact source-archive revision metadata without
+Git administrative files. Extra objc4/Foundation/Ruby module pins and explicit
+source footprints are verified. The sixth real native Debian engine build is
+in progress with the current26-patch DSC; no completed engine package, full
+staged ELF/bridge dependency audit or real Mac execution has been accepted yet.
+Ubuntu's complete engine build remains separate subsequent work.
+
+The standalone core's two CTest entries pass again on both native bases. Builder
+passes69 cases on each base, with only its two existing native-only Windows
+skips on the host. Three real Intel64 executable Mach-O probes now compile from
+clean product sources in a separately provided immutable cross SDK; see
+[VALIDATION_MACOS_PROBES.md](VALIDATION_MACOS_PROBES.md). Compilation is explicitly
+not runtime compatibility.
+
+Each base's own freshly built core0.1.0-2 is installed in its separate existing
+VMware kernel QA guest. Verified Mac probe archives are prepared under the
+ordinary graphical account. Before/after account, PAM, display-manager, shell
+and unrelated package state remains unchanged. Both actual guest checks reject
+the deliberately absent engine and leave runtime/complete false. This prepares
+the positive kernel/SUID/CLI/Cocoa/Qt/prefix/upgrade gates; it does not satisfy
+them. The working Karyo VM, Acer, Forge and distribution checkouts are untouched.
+
+---
+
 # Native Darling source preparation
 
 This gate prepares the optional macOS runtime's reproducible inputs. It does

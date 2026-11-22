@@ -573,3 +573,22 @@ packages abort in that before-control on both bases; final0.1.0-2 packages pass
 after Qt initialization is isolated from the application's captured arguments.
 Both complete native suites and the five-stage Wayland/MIME gate pass again.
 See VALIDATION_MACOS_PICKER.md for exact before/after artifacts and fixture limits.
+
+
+## Common Darling source closure and real application probes prepared
+
+The independent runtime now owns its complete pinned recursive source closure,
+verified44 Swift binary inputs and26 reviewed common patches. Both native SDKs
+pass the joined source gate, including actual zero-fuzz quilt/Git application
+and reversal with59 pristine files restored. Normal per-base Debian source
+recipes feed sequential native engine compilation; real compiler failures are
+fixed generally while retaining hardening and reproducible paths. No finished
+engine/native dependency audit or application execution is claimed yet.
+
+Real Intel Mach-O CLI, Cocoa and static Qt Widgets probes compile separately
+from clean DE sources. Core packages and verified probes are prepared in the
+two native kernel QA guests; absent-engine controls correctly remain negative.
+See [VALIDATION_DARLING_INPUTS.md](VALIDATION_DARLING_INPUTS.md) and
+[VALIDATION_MACOS_PROBES.md](VALIDATION_MACOS_PROBES.md). Actual engine install,
+SUID/namespace bootstrap, application/prefix/upgrade and visible-window checks
+remain open, together with the broader VMware/VPN/final-joined migration gates.
