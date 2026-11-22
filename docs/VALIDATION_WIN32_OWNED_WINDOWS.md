@@ -101,3 +101,9 @@ Wine/XWayland focus-loop and popup-menu behavior, Windows-like captions/rounding
 icons/desktop registration, Wine engine patches and experimental Darling. The
 full DE migration remains active; this slice closes only the generic compositor
 owned-window capability under the verified model above.
+
+
+Later ordinary-user EXE/MSI/registration acceptance is documented separately in
+VALIDATION_WIN32_RUNTIME.md; actual generic Wine menu metadata and native source
+package checks are in VALIDATION_WINE_MENUS.md. Those later gates do not relabel
+this older modeled palette/minimize evidence as actual Wine-owned-window proof.

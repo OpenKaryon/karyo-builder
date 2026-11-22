@@ -111,6 +111,6 @@ POPUP_MENU/no-input metadata plus repeated navigation. PE32 mode remains explici
 Evidence is retained under out/migration/win32-ubuntu-pe32-baseline-v1,
 win32-ubuntu-pe32-menus-baseline-v1 and win32-debian-captured-baseline-v1.
 The new native Wine patch's Debian acceptance is separate under
-wine-debian-patched-acceptance-v1; Ubuntu's rebuilt patch still has its own
-pending source build and must pass separately before claiming both bases.
+wine-debian-patched-acceptance-v1. The completed Ubuntu rebuilt-patch and
+PE32/PE64 acceptance is now recorded in VALIDATION_WINE_MENUS.md.
 Original e782fb0 runtime package identity and earlier receipts are preserved.

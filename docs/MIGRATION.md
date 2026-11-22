@@ -402,3 +402,24 @@ storage, with Karyo-scoped MIME defaults preserving user preferences. See
 retained fixture/frontend corrections and limits. Actual full application menu/
 owned-palette styling,32-bit Wine, legacy prefix import, installed user upgrade
 and Darling remain open; this is not a new ISO or completion of all runtimes.
+
+
+## Native generic Wine menus accepted
+
+Reviewed LGPL Wine source recipes now rebuild both native bases without private
+profiles or per-application rules. Installed Debian PE64 and Ubuntu PE64/PE32
+runtime plus keyboard/mouse menu gates pass; observed popups have the correct
+nonactivating X11 type. See [VALIDATION_WINE_MENUS.md](VALIDATION_WINE_MENUS.md)
+for exact source/artifacts, the honest metadata-only baseline and signed Ubuntu
+generator-data preparation. Matching Debian i386 Wine is being built separately;
+actual owned palettes, window styling, user deployment and Darling remain open.
+
+
+## Matching native Debian32/64 Wine accepted
+
+The explicit i386 recipe now builds the same native engine version/patch/epoch.
+All88 shared libwine files match, both architectures coinstall in one transaction,
+and actual PE32/PE64, MSI and both menu modes pass in the disposable Debian image.
+See [VALIDATION_WINE_COINSTALLATION.md](VALIDATION_WINE_COINSTALLATION.md) for exact
+artifacts, negative fixtures and preserved preparation failures. User deployment,
+legacy prefixes, actual owned palettes/styling and Darling remain separate gates.
