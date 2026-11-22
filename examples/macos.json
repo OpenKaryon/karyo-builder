@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-macos",
+    "version": "0.1.0-2",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional Karyo Qt launcher for Intel macOS applications",
+    "section": "otherosfs",
+    "depends": [
+      "karyo-macos-core (>= 0.1.0-2)",
+      "qt6-wayland",
+      "qt6-svg-plugins",
+      "hicolor-icon-theme",
+      "desktop-file-utils",
+      "shared-mime-info"
+    ]
+  },
+  "build": {
+    "directory": ".",
+    "component": "macos-picker-runtime"
+  }
+}

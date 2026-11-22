@@ -29,7 +29,7 @@ def main():
     manifest=args.package.resolve(strict=True)/'manifest.json'
     package=json.loads(manifest.read_text());assert package['status']=='success'
     control=package['recipe']['resolved']['package']
-    assert control['name']=='karyo-macos-core' and control['version']=='0.1.0-1' and control['architecture']=='amd64'
+    assert control['name']=='karyo-macos-core' and control['version'] in ('0.1.0-1','0.1.0-2') and control['architecture']=='amd64'
     artifact=package['artifact'];assert re.fullmatch(r'[A-Za-z0-9.+_~-]+[.]deb',artifact['file'])
     binary=manifest.parent/artifact['file']
     assert not binary.is_symlink() and binary.stat().st_size==artifact['bytes'] and digest(binary)==artifact['sha256']
@@ -81,7 +81,7 @@ assert not Path('/root/.karyo-macos').exists()
     assert result.returncode==0,'Installed macOS core check failed; see retained native logs'
     native=json.loads((output/'native-acceptance.json').read_text())
     assert native['uid']==1001 and native['package_version']==control['version']
-    assert native['accepted'] and native['fixture_only'] and not native['darling_runtime_proven'] and len(native['checks'])==10
+    assert native['accepted'] and native['fixture_only'] and not native['darling_runtime_proven'] and len(native['checks'])==(12 if control['version']=='0.1.0-2' else 10)
     report.update(installed_image=installed,native=native,accepted=True,
         native_receipt_sha256=digest(output/'native-acceptance.json'))
     (output/'acceptance.json').write_text(json.dumps(report,indent=2)+'\n')

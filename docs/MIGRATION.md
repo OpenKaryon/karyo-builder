@@ -553,3 +553,23 @@ Native33-case ordinary-user regressions and ten installed public-CLI checks pass
 on Debian and Ubuntu. See [VALIDATION_MACOS_CORE.md](VALIDATION_MACOS_CORE.md)
 for exact inputs and clearly identified Linux subprocess fixtures. Shared Qt
 picker/MIME and actual Darling engine/runtime acceptance remain open.
+
+
+## Shared Qt macOS frontend and MIME accepted
+
+The separate Qt6/C++17 frontend now uses shared Karyo windows/style,29 Russian
+messages and custom Mach-O handler registration. Native74-entry complete builds,
+35 ordinary-user backend cases,17 QtTest results and actual installed
+Wayland/shell/MIME/close-guard checks pass on both bases. Core-only GUI errors,
+existing user data, Win32 defaults ownership and folder/user associations are
+preserved. See [VALIDATION_MACOS_PICKER.md](VALIDATION_MACOS_PICKER.md) for exact
+packages and explicit Linux-engine fixture limits. Actual Darling/macOS engine
+acceptance remains open; this does not complete the broader migration.
+
+
+The stronger installed macOS picker gate now includes a relative leading-dash
+filename, literal leading -- and Qt-looking application options. Old frontend
+packages abort in that before-control on both bases; final0.1.0-2 packages pass
+after Qt initialization is isolated from the application's captured arguments.
+Both complete native suites and the five-stage Wayland/MIME gate pass again.
+See VALIDATION_MACOS_PICKER.md for exact before/after artifacts and fixture limits.
