@@ -1,46 +1,49 @@
 # Current Darling source and native build status
 
-The latest reviewed series contains26 common patches. A new joined gate,
-out/migration/darling-current-inputs-accepted-v3/acceptance.json, passes on both
-native SDKs:24 source/packaging cases, all44 verified Swift inputs, zero-fuzz
-quilt plus Git application/reversal of26 patches and59 byte-identical restored
-source files. It records each native quilt/compiler version while requiring
-identical source effects. The earlier sections below preserve the history of
-smaller source gates; their counts are not the current stack size.
+The current reviewed series contains29 common patches. The joined gate
+out/migration/darling-current-inputs-accepted-v4/acceptance.json passes on both
+native SDKs:28 source/packaging cases, all44 verified Swift inputs, zero-fuzz
+quilt plus Git application/reversal of29 patches and71 byte-identical restored
+source files. Native tool versions are recorded independently; source effects
+must agree. Log hashes were checked after both SDK jobs completed. Earlier
+sections below preserve historical smaller gates and their original counts.
 
-The normal Debian3.0(quilt) source producer rechecks those input/proof hashes and
-emits per-base source-package recipes. Real sequential Debian compilation has
-found and corrected five distinct blockers:
+The ordinary Debian3.0(quilt) producer rechecks the current input/proof hashes
+and emits per-base source-package recipes. Sequential full Debian builds found:
 
 | Native attempt | Observed failure | General correction |
 | --- | --- | --- |
-|1|GNU quilt rejected incomplete hunk context at fuzz0|Refresh only0001/0006 context; preserve exact source effect|
-|2|ELF -z flags reached the Mach-O linker|Patch0023 routes native flags separately; retains ELF hardening|
-|3|objc4 debug metadata disagreed with Release NDEBUG|Patch0024 matches standard build modes|
-|4|Foundation used exception variables as format strings|Patch0025 supplies literal formats, retaining format-security|
-|5|Ruby self-included remapped __FILE__|Patch0026 uses its adjacent header, retaining reproducible path maps|
+|1|GNU quilt rejected incomplete context at fuzz0|Refresh only0001/0006 context; preserve exact source effect|
+|2|ELF -z flags reached the Mach-O linker|0023 separates native flags and retains ELF hardening|
+|3|objc4 debug metadata disagreed with Release NDEBUG|0024 matches standard build modes|
+|4|Foundation used exception variables as format strings|0025 retains format-security with literal formats|
+|5|Ruby self-included remapped __FILE__|0026 uses the adjacent header, retaining reproducible path maps|
+|6|Screen forwarded an existing message as a format|0027 treats it as literal data; collect independent Ninja errors|
+|7|Thirty additional Screen diagnostics and dyld's relative libunwind lookup table|0028 fixes every observed diagnostic;0029 confines no-jump-tables to static bootstrap unwind|
 
-Patch0022 separately supplies exact source-archive revision metadata without
-Git administrative files. Extra objc4/Foundation/Ruby module pins and explicit
-source footprints are verified. The sixth real native Debian engine build is
-in progress with the current26-patch DSC; no completed engine package, full
-staged ELF/bridge dependency audit or real Mac execution has been accepted yet.
-Ubuntu's complete engine build remains separate subsequent work.
+The seventh build reached26425/26426 Ninja steps and correctly failed. Both
+native compiler suites reject all thirty original Screen calls and execute the
+replacements with percent characters unchanged. A native CMake control proves
+the unwind option remains confined to its target and preserves switch behavior;
+Mach-O LLVM IR shows the default relative table and its absence with the option.
+Optimized compilation, native hardening and dyld chained fixups stay enabled.
+Exact extra module pins include libunwind alongside objc4/Foundation/Ruby/Screen.
 
-The standalone core's two CTest entries pass again on both native bases. Builder
-passes69 cases on each base, with only its two existing native-only Windows
-skips on the host. Three real Intel64 executable Mach-O probes now compile from
-clean product sources in a separately provided immutable cross SDK; see
-[VALIDATION_MACOS_PROBES.md](VALIDATION_MACOS_PROBES.md). Compilation is explicitly
-not runtime compatibility.
+The eighth complete Debian engine build is running with the29-patch DSC. No
+completed engine package, staged ELF/bridge audit or real Mac execution has been
+accepted. The complete Ubuntu engine build remains subsequent work. Source
+preparation and isolated compiler controls do not establish successful dyld
+linking or runtime compatibility.
 
-Each base's own freshly built core0.1.0-2 is installed in its separate existing
-VMware kernel QA guest. Verified Mac probe archives are prepared under the
-ordinary graphical account. Before/after account, PAM, display-manager, shell
-and unrelated package state remains unchanged. Both actual guest checks reject
-the deliberately absent engine and leave runtime/complete false. This prepares
-the positive kernel/SUID/CLI/Cocoa/Qt/prefix/upgrade gates; it does not satisfy
-them. The working Karyo VM, Acer, Forge and distribution checkouts are untouched.
+Real Intel64 Mach-O CLI, Cocoa and static Qt Widgets probes compile from clean
+DE sources in a separate immutable cross SDK; see
+[VALIDATION_MACOS_PROBES.md](VALIDATION_MACOS_PROBES.md). Each base's native core
+is installed in its separate kernel QA guest with verified probes staged under
+the ordinary graphical account. Both absent-engine controls remain negative.
+Positive SUID/namespace/bootstrap, actual CLI/Cocoa/Qt, prefix/upgrade/multiuser
+and visible-window gates are still required. Account/PAM/DM/shell and unrelated
+package snapshots survived core setup. The working Karyo VM, Acer, donor, Forge
+and distribution checkouts remain untouched.
 
 ---
 

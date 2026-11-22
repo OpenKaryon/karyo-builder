@@ -578,9 +578,9 @@ See VALIDATION_MACOS_PICKER.md for exact before/after artifacts and fixture limi
 ## Common Darling source closure and real application probes prepared
 
 The independent runtime now owns its complete pinned recursive source closure,
-verified44 Swift binary inputs and26 reviewed common patches. Both native SDKs
+verified44 Swift binary inputs and29 reviewed common patches. Both native SDKs
 pass the joined source gate, including actual zero-fuzz quilt/Git application
-and reversal with59 pristine files restored. Normal per-base Debian source
+and reversal with71 pristine files restored. Normal per-base Debian source
 recipes feed sequential native engine compilation; real compiler failures are
 fixed generally while retaining hardening and reproducible paths. No finished
 engine/native dependency audit or application execution is claimed yet.
