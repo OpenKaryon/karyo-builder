@@ -267,3 +267,16 @@ The generic Win32 hidden-owner palette/minimize compositor slice now has native
 Debian/Ubuntu before/after, four-palette and normal/startup-lock protocol evidence.
 See [VALIDATION_WIN32_OWNED_WINDOWS.md](docs/VALIDATION_WIN32_OWNED_WINDOWS.md) for exact packages, the retained Ubuntu API/XID
 fixture corrections and the still-open real Wine runtime/installed upgrade gates.
+
+
+Real Wine32/Wine64 owned-palette and focus acceptance is now recorded separately
+in [VALIDATION_WIN32_PALETTES.md](docs/VALIDATION_WIN32_PALETTES.md), including
+native wlroots lifecycle fixes, unchanged ABI and the remaining toolkit/styling
+and installed-upgrade boundaries. The reproducible driver is
+`tests/acceptance/check-win32-palettes.py`.
+
+
+The later [unmapped-owner validation](docs/VALIDATION_WIN32_UNMAPPED_OWNERS.md)
+records both framework layouts, exact native compositor/library pairing and
+actual refusal/recovery of an unpaired dpkg installation. The optional
+`--verify-library-dependency` gate uses the driver's copied native installer.

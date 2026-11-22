@@ -423,3 +423,26 @@ and actual PE32/PE64, MSI and both menu modes pass in the disposable Debian imag
 See [VALIDATION_WINE_COINSTALLATION.md](VALIDATION_WINE_COINSTALLATION.md) for exact
 artifacts, negative fixtures and preserved preparation failures. User deployment,
 legacy prefixes, actual owned palettes/styling and Darling remain separate gates.
+
+
+## Real Wine owned palettes accepted for a mapped framework owner
+
+Both native bases now pass real PE32/PE64 late palettes, unrelated-frame return,
+NormalState-preserving minimize/restore, focus quiescence and a real-click-based
+foreign-process focus probe. Native labwc/wlroots lifecycle corrections preserve
+the existing library ABI. See [VALIDATION_WIN32_PALETTES.md](VALIDATION_WIN32_PALETTES.md)
+for exact inputs, retained failures and the separate unmapped-owner limitation.
+Actual third-party application deployment, legacy prefixes, Windows-like styling
+and the broader remaining integrations still require their own acceptance.
+
+
+## Fully unmapped Win32 owners accepted with a paired native runtime
+
+A checked parent-hint refresh now distinguishes missing WM_CLASS from unread
+explicit identity. Native labwc depends on the matching native wlroots package;
+actual dpkg rejection of an unpaired upgrade and subsequent paired installation
+are verified. Real PE32/PE64 pass mapped and fully unmapped layouts on both bases,
+alongside ten X11 models, protocol/lock gates and unchanged exported ABI. See
+[VALIDATION_WIN32_UNMAPPED_OWNERS.md](VALIDATION_WIN32_UNMAPPED_OWNERS.md).
+Styling, legacy imports, third-party apps, existing-user upgrade and remaining
+system/runtime integrations still need their own acceptance.
