@@ -83,3 +83,34 @@ Darling, VMware enabled host payload/DnD/HGFS and remaining VPN lifecycle work
 retain separate gates. See VALIDATION_WIN32_OWNED_WINDOWS.md for prior modeled
 palette/minimize compositor evidence; that is not relabeled as an actual Wine
 owned-palette test. Full migration remains active and no push/fetch was used.
+
+
+## Later native WoW64 and captured-actor acceptance
+
+The actors now validate actual PE machine/optional-header bitness and can select
+separately compiled32-bit PE/MSI fixtures. Stock Ubuntu26.04 Wine10's native
+--enable-archs=x86_64,i386 configuration passes real PE32 and PE64 GDI/Unicode,
+icon/menu registration, registered reuse, exit42 and installed MSI inheritance.
+No i386 system package is installed. Keyboard and persistent-pointer standard
+menus also pass navigation in both bitnesses, while their unpatched EWMH type
+is DIALOG. This is a metadata baseline, not reproduction of the older hover bug.
+
+Debian13 repeats the updated PE64 actor successfully. Its legacy native Wine64
+configuration has no established32-bit acceptance; matching native32-bit runtime
+preparation remains open. Do not transfer the Ubuntu claim to Debian.
+
+The expanded host driver captures actor bytes and generated fixture inputs
+before execution and runs those frozen scripts through a read-only mount. An
+immutable inspected image is assigned a unique local build tag, avoiding mutable
+base-tag races or treating sha256:ID as a Docker repository name. Native Wine
+source-package outputs can be installed as a checksum-checked runtime subset;
+dev/debug/tools packages are excluded. Baseline menu mode is explicit and cannot
+be combined with patched native Wine acceptance. Positive menu mode requires
+POPUP_MENU/no-input metadata plus repeated navigation. PE32 mode remains explicit.
+
+Evidence is retained under out/migration/win32-ubuntu-pe32-baseline-v1,
+win32-ubuntu-pe32-menus-baseline-v1 and win32-debian-captured-baseline-v1.
+The new native Wine patch's Debian acceptance is separate under
+wine-debian-patched-acceptance-v1; Ubuntu's rebuilt patch still has its own
+pending source build and must pass separately before claiming both bases.
+Original e782fb0 runtime package identity and earlier receipts are preserved.
