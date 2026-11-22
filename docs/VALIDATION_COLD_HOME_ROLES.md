@@ -93,6 +93,11 @@ were consumed as terminal. Credentials or private profiles were not used.
 
 The real graphical Home role startup/removal boundary is now accepted. This does
 not establish real vendor application behavior, onward NetBird GUI/tray, a
-simultaneous authenticated Home VPN, dynamic physical DHCP/DNS or the remaining
+provider-specific Home VPN, dynamic physical DHCP/DNS or the remaining
 family clipboard/Wine/macOS/VMware integrations. Those remain part of the active
 full migration. No push occurred.
+
+
+Subsequent generic real Home WireGuard plus public Work NetBird peer/DNS/packet
+acceptance passes both bases; see VALIDATION_REAL_HOME_VPN.md for exact scope and
+remaining external client, exit-node and reconnect boundaries.

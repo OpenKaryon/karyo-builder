@@ -292,3 +292,16 @@ cleanup failure and restored host state. Actual vendor clients and simultaneous 
 pending gates. Fresh graphical Home role startup and removal are now accepted
 through real LightDM on both bases; see
 [VALIDATION_COLD_HOME_ROLES.md](VALIDATION_COLD_HOME_ROLES.md).
+
+
+## Accepted real Home tunnel with public Work peers
+
+A real Home kernel WireGuard/DNS/TCP tunnel and two actual public Work NetBird
+peers now pass simultaneous native Debian/Ubuntu packet and resolver acceptance.
+Both Work peers exchange TCP/UDP by IP/private FQDN, keep external DNS/HTTPS and
+cannot resolve Home's private QA zone. Connected logout and captured Home tunnel
+teardown restore original state. See
+[VALIDATION_REAL_HOME_VPN.md](VALIDATION_REAL_HOME_VPN.md) for exact actors, retained
+QA failures, on-demand peer synchronization, final postchecks and the separate
+ExternalProvider/kill-switch, simultaneous exit-node and live reconnect boundaries.
+No production package changes are claimed by this QA-only step.
