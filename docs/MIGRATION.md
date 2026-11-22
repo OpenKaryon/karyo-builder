@@ -592,3 +592,24 @@ See [VALIDATION_DARLING_INPUTS.md](VALIDATION_DARLING_INPUTS.md) and
 [VALIDATION_MACOS_PROBES.md](VALIDATION_MACOS_PROBES.md). Actual engine install,
 SUID/namespace bootstrap, application/prefix/upgrade and visible-window checks
 remain open, together with the broader VMware/VPN/final-joined migration gates.
+
+
+## Installed optional system HGFS accepted on both native kernels
+
+The independent optional shared-folder package restores /mnt/hgfs without
+privileging the ordinary VMware session agent. Both native package builds,
+13 source ownership cases and both integrated VMware groups pass. Actual host
+file exchange and newly cloned private-mount inheritance, NoNewPrivs1 on the
+root FUSE child, disabled-host skip, same-type replacement preservation,
+administrator disable on reinstall and disconnected-host purge pass on Debian
+and Ubuntu. Account/PAM/DM/fstab/shell/root vmtools state remains unchanged;
+temporary host shares/runtime flags are restored.
+
+The first real runs exposed an EIO foreign mount and immediate old mount ID/
+device reuse; the accepted helper checks kernel metadata first and binds to the
+non-recycled64-bit mount identity. See
+[VALIDATION_VMWARE_HGFS.md](VALIDATION_VMWARE_HGFS.md) for exact current actors,
+packages, receipts and retained controls. This closes the system HGFS slice;
+enabled clipboard payloads, drag/drop, actual resize/multi-monitor behavior,
+actual Home/Work GUI integration, VPN lifecycle, Darling and final joined HEAD
+still need their own applicable gates.

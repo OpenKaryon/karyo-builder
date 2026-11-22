@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-vmware-shared-folders",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional system VMware shared folders for Karyo",
+    "section": "admin",
+    "depends": [
+      "python3",
+      "systemd",
+      "init-system-helpers",
+      "open-vm-tools",
+      "fuse3",
+      "mount",
+      "util-linux (>= 2.40)"
+    ],
+    "maintainer_scripts": {
+      "postinst": "integrations/vmware/shared-folders/package/postinst",
+      "prerm": "integrations/vmware/shared-folders/package/prerm",
+      "postrm": "integrations/vmware/shared-folders/package/postrm"
+    }
+  },
+  "build": {
+    "directory": "integrations/vmware/shared-folders",
+    "component": "vmware-shared-folders-runtime"
+  }
+}
