@@ -542,3 +542,14 @@ profiles and preserves both source and new edits on repeat refusal. See
 [VALIDATION_WIN32_PREFIX_IMPORT.md](VALIDATION_WIN32_PREFIX_IMPORT.md) for exact
 artifacts and retained preparation failures. This does not convert registry
 architecture or establish arbitrary engine compatibility or final joined HEAD.
+
+
+## Optional Intel macOS launcher core accepted
+
+A separate account-scoped karyo-macos-core package now preserves the prototype's
+Mach-O/.app inspection, short/display-specific Darling profiles, scoped fixed
+script and direct-child output contracts without the old two-slot authority.
+Native33-case ordinary-user regressions and ten installed public-CLI checks pass
+on Debian and Ubuntu. See [VALIDATION_MACOS_CORE.md](VALIDATION_MACOS_CORE.md)
+for exact inputs and clearly identified Linux subprocess fixtures. Shared Qt
+picker/MIME and actual Darling engine/runtime acceptance remain open.

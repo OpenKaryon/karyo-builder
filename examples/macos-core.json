@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-macos-core",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional ordinary-account Intel macOS launcher core for Karyo",
+    "section": "otherosfs",
+    "depends": [
+      "python3 (>= 3.10)"
+    ]
+  },
+  "build": {
+    "directory": "integrations/macos",
+    "component": "macos-runtime"
+  }
+}
