@@ -217,8 +217,18 @@ def main():
     vendor_build.add_argument("--output", required=True)
     vendor_build.add_argument("--image", required=True, help="Existing local native Debian/Ubuntu image")
     vendor_build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
+    snapshot = subcommands.add_parser("source-snapshot",
+        help="Export exact public Git sources with pinned recursive submodules")
+    snapshot.add_argument("recipe")
+    snapshot.add_argument("--cache", required=True, help="Separate bare upstream dependency cache")
+    snapshot.add_argument("--output", required=True)
+    snapshot.add_argument("--fetch", action="store_true", help="Explicitly download missing pinned Git objects")
+    snapshot.add_argument("--lfs-objects", help="Local directory of SHA256-named verified LFS objects")
     args = parser.parse_args()
     try:
+        if args.stage == "source-snapshot":
+            from .source_snapshot import source_snapshot
+            return source_snapshot(args)
         if args.stage == "vendor-package":
             from .vendor_package import build_vendor_package
             return build_vendor_package(args)

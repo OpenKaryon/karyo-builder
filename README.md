@@ -11,6 +11,9 @@ dependencies are calculated with Debian's dpkg-shlibdeps.
 A separate source-package stage builds checksummed distribution DSCs with ordered
 quilt patches using native packaging and upstream checks. See
 [the source-stage contract](docs/SOURCE_PACKAGE_STAGE.md).
+A separate [source-snapshot preparation](docs/SOURCE_SNAPSHOT_STAGE.md) captures
+exact recursive public Git trees and explicitly inventories/materializes LFS
+inputs before native packaging.
 See [the package-stage contract](docs/PACKAGE_STAGE.md) and
 [reviewed migration inventory](docs/MIGRATION.md).
 
