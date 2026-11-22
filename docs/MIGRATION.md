@@ -15,8 +15,8 @@ Current runtime checkpoints include
 [existing Wine prefixes](VALIDATION_WIN32_EXISTING_PREFIX.md),
 [VMware session/lock](VALIDATION_VMWARE_LOCK.md) and
 [profile browser enrollment](VALIDATION_PROFILE_NETBIRD_PKCE.md).
-Wine caption-engine changes are still undergoing native acceptance and are not
-included in those accepted checkpoints.
+The [default Wine close-button milestone](VALIDATION_WINE_CLOSE_BUTTONS.md) now
+passes native/runtime, displayed-frame and GDI gates; other window styling remains open.
 
 | Donor | Target | Boundary or adaptation | Validation and first result |
 | --- | --- | --- | --- |
@@ -470,3 +470,15 @@ reuse pass with installed source236dd5a packages and preserved data markers.
 See [VALIDATION_WIN32_EXISTING_PREFIX.md](VALIDATION_WIN32_EXISTING_PREFIX.md).
 This does not close legacy import/conversion, pure win32 Ubuntu compatibility,
 new caption-engine validation or complete current-HEAD desktop deployment.
+
+
+## Default Wine close buttons accepted on both native bases
+
+Matching Wine+karyo2 packages now pass Debian multilib coinstallation, all
+runtime/menu gates and real mapped rendering of red/white default close buttons.
+The same frozen before/after fixture and actual compositor-frame assertions pass
+on Debian and Ubuntu, alongside existing owned-palette gates. The new launcher
+also passes existing-prefix reuse with both new engines. See
+[VALIDATION_WINE_CLOSE_BUTTONS.md](VALIDATION_WINE_CLOSE_BUTTONS.md) for exact native
+inputs, retained preparation errors and the still-open rounding/custom UI,
+legacy-import, real-application and complete installed-user deployment gates.

@@ -71,9 +71,22 @@ The final actor resolves this from dpkg-query and passes both native bases.
 Older failed/preliminary outputs are preserved and are not the final matrix.
 
 The native engines here are still the accepted Wine+karyo1 versions, with the
-paired compositor/library stack of the unmapped-owner milestone. This does not
-accept the concurrently building Wine+karyo2 caption changes. It proves console
+paired compositor/library stack of the unmapped-owner milestone. This original
+before/after matrix is separate from the later Wine+karyo2 caption milestone. It proves console
 PE32 prefix reuse, not a complete GUI application or joined current-HEAD DE
 installation. Pure win32-prefix compatibility on Ubuntu, arbitrary legacy import,
 conversion, real third-party applications and existing-user upgrade remain open.
 No push/fetch, Forge change, user/QA VM deployment or ISO rebuild was performed.
+
+
+## Subsequent new-engine combination
+
+wine2-existing-prefix-debian-v1 and wine2-existing-prefix-ubuntu-v1 repeat the
+positive checks with the accepted Wine+karyo2 engines and the same installed
+source236dd5a launcher. Both initialization/wait and both real PE32 launches pass
+on each base with the same actor. A direct read of the immutable accepted images
+confirms that all five installed launcher Python sources match current checkout
+runtime bytes. This adds engine compatibility; it does not change the original
+before/after baseline or establish a full current-HEAD desktop installation.
+See [the caption milestone](VALIDATION_WINE_CLOSE_BUTTONS.md) for their joined
+local evidence and the still-open import/conversion and application boundaries.

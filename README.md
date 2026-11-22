@@ -285,3 +285,8 @@ actual refusal/recovery of an unpaired dpkg installation. The optional
 The installed launcher also preserves existing native prefix architecture;
 [the before/after report](docs/VALIDATION_WIN32_EXISTING_PREFIX.md) distinguishes
 Debian win32 reuse from Ubuntu PE32-on-WoW64 and from pending legacy import.
+
+
+The native Wine caption patch now passes real displayed-frame and GDI pixel
+checks on both bases; see [the source/runtime report](docs/VALIDATION_WINE_CLOSE_BUTTONS.md).
+The optional caption QA script needs Pillow; the Builder CLI remains standard-library-only.
