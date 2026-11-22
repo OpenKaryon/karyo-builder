@@ -4,6 +4,20 @@ The reviewed donor is the Karyo prototype at revision
 `716d515b765319981b124fb1812a1e3edb9e0ffd`. Paths below are relative to
 that source tree. This map assigns responsibility to reviewed components.
 
+The table summarizes ownership and accepted boundaries; milestone notes below
+are chronological and can contain earlier pending labels. Read the linked
+validation report for exact source/package/image revisions. A component pass is
+not proof of a joined current-HEAD desktop or completion of the whole migration.
+Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
+
+Current runtime checkpoints include
+[unmapped Win32 owners](VALIDATION_WIN32_UNMAPPED_OWNERS.md),
+[existing Wine prefixes](VALIDATION_WIN32_EXISTING_PREFIX.md),
+[VMware session/lock](VALIDATION_VMWARE_LOCK.md) and
+[profile browser enrollment](VALIDATION_PROFILE_NETBIRD_PKCE.md).
+Wine caption-engine changes are still undergoing native acceptance and are not
+included in those accepted checkpoints.
+
 | Donor | Target | Boundary or adaptation | Validation and first result |
 | --- | --- | --- | --- |
 | `distro/desktop/shared/libopenkaryon-ui` | karyo-de | Split theme/painting foundation first. Retain user settings while using Karyo public names. Desktop entries/icons, common widgets and style are now extracted. Review platform integration separately. | Separate development packages, widget tests and external CMake consumers. Implemented. |
@@ -11,14 +25,14 @@ that source tree. This map assigns responsibility to reviewed components.
 | `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Shell migrated with independent libraries, tray/Start/service tests and real headless labwc startup. Real LightDM/Xfce coexistence is accepted on Debian; Ubuntu VM lifecycle acceptance also passes; later application checks remain. |
 | `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | PAM/Wayland lock migrated without greetd; real wrong/correct password scenario passes. Real display-manager and logind sleep/resume checks pass on the Debian VM; physical devices remain separate. |
 | `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | All fourteen application families, including Settings and App Center, are independently migrated with native Debian/Ubuntu regressions and installed QA acceptance; later common/runtime fixes retain their own package gates. See DE docs/MIGRATION-REVIEW.md. |
-| `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Independent runtime components pass clean Debian VM install/upgrade/remove, actual Xfce coexistence and unchanged host identity/display manager. Remaining apps are added separately. |
+| `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Independent runtime components pass clean Debian VM install/upgrade/remove, actual Xfce coexistence and unchanged host identity/display manager. All fourteen application families now have their own package/installed-QA milestones; later joined HEAD remains a separate gate. |
 | `distro/distro/packages/openkaryon-defaults`, browser/boot/installer packages | karyo-linux | Own OS branding, Calamares, distribution/browser defaults and first-run selections. | Installed-system and image assertions. Pending. |
-| Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Home/Work isolation, clipboard/DnD and Wine/Darling tests. Pending. |
+| Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Optional profile, Wine and VMware integrations now have separate native/installed milestones. Darling, enabled host channels, physical resize/multioutput, remaining VPN lifecycle and Windows styling still have open gates. |
 | `distro/tools/build-packages.sh` | karyo-builder | Reuse configure/build/test/stage/dpkg workflow with committed source, one component, isolated output and provenance. | Package stage and external runtime dependency discovery implemented. Shared-library metadata remains a later extension. |
-| `distro/tools/build-patched-packages.sh`, `distro/distro/patched` | Builder mechanism and component recipes | Separate execution/cache rules from upstream versions, patches, licenses and owners. | Rebuild compatible labwc/wlroots and VMware packages. Pending. |
-| `distro/tools/fetch-pinned-debs.py`, runtime manifests | Builder input validation | Version/hash/architecture checks, redistribution review and explicit local inputs. | Reject missing or mismatched inputs. Pending. |
+| `distro/tools/build-patched-packages.sh`, `distro/distro/patched` | Builder mechanism and component recipes | Separate execution/cache rules from upstream versions, patches, licenses and owners. | Implemented [source-package stage](SOURCE_PACKAGE_STAGE.md), compatible native labwc/wlroots pairs and matching Wine32/64 builds. Component runtime and exact dependency acceptance are recorded separately. |
+| `distro/tools/fetch-pinned-debs.py`, runtime manifests | Builder input validation | Version/hash/architecture checks, redistribution review and explicit local inputs. | Implemented exact native input/hash/architecture checks and the inert [vendor-package stage](VENDOR_PACKAGE_STAGE.md). Product versions, payload selection and redistribution review remain component-owned. |
 | `distro/distro/image`, `distro/tools/build-image.ps1` | karyo-linux recipes and Builder stages | Separate package/overlay choices from orchestration. Workstation consumes extra products and private overlays explicitly. | Both images build through the same pipeline. Pending. |
-| Image smoke/installed-system checks and desktop-dev tools | Builder QA and component tests | Preserve isolated VM/headless checks and artifact records. Remove personal machine paths. | Boot/install/update checks and manifests. Pending. |
+| Image smoke/installed-system checks and desktop-dev tools | Builder QA and component tests | Preserve isolated VM/headless checks and artifact records. Remove personal machine paths. | Installed standalone-DE Debian/Ubuntu session, coexistence, upgrade/remove and component QA are implemented with exact manifests. ISO boot/install-image checks remain a later distribution/image stage. |
 | `ide` | KaryoForge | Owned by a separate agent. The OS/Builder can consume its package as an external input. | Outside this implementation. |
 
 ## Reviewed first component
@@ -37,7 +51,7 @@ Initial configuration reload was corrected during migration: following settings
 now applies the current accent immediately. Other retained functions preserve
 the donor behavior. No fonts/icons are embedded in this slice.
 
-## Next boundaries
+## Initial boundaries (historical)
 
 Shared widgets and the Qt style have independent packages. The shell and
 PAM/Wayland lock are now migrated; karyo-session assembles their runtime packages
