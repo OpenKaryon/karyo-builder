@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-win32",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional ordinary-user Windows application integration for Karyo",
+    "section": "otherosfs",
+    "depends": [
+      "python3",
+      "python3-pyqt6",
+      "wine",
+      "wine64",
+      "xwayland",
+      "fonts-wine",
+      "fonts-liberation",
+      "desktop-file-utils",
+      "shared-mime-info",
+      "icoutils"
+    ]
+  },
+  "build": {
+    "directory": "integrations/win32",
+    "component": "win32-runtime"
+  }
+}

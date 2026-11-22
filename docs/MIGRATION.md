@@ -390,3 +390,15 @@ The generic Win32 hidden-owner palette/minimize compositor slice now has native
 Debian/Ubuntu before/after, four-palette and normal/startup-lock protocol evidence.
 See [VALIDATION_WIN32_OWNED_WINDOWS.md](VALIDATION_WIN32_OWNED_WINDOWS.md) for exact packages, the retained Ubuntu API/XID
 fixture corrections and the still-open real Wine runtime/installed upgrade gates.
+
+
+## Optional ordinary-user Windows launcher accepted
+
+The independent launcher now has real native Wine64 EXE/MSI, Unicode, icon/menu
+registration, prefix reuse, exit status and installed Qt dialog acceptance on
+Debian13/Ubuntu26.04. Fixed prototype slots are replaced by actual Unix-account
+storage, with Karyo-scoped MIME defaults preserving user preferences. See
+[VALIDATION_WIN32_RUNTIME.md](VALIDATION_WIN32_RUNTIME.md) for exact artifacts,
+retained fixture/frontend corrections and limits. Actual full application menu/
+owned-palette styling,32-bit Wine, legacy prefix import, installed user upgrade
+and Darling remain open; this is not a new ISO or completion of all runtimes.
