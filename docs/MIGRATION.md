@@ -108,6 +108,46 @@ appearance publication has a distinct source/native and pending-runtime gate.
 
 ## Current optional profile integration gates
 
+
+Actual S256 enrollment now passes through cold real Chromium on Debian and
+MiniBrowser/WebKit on Ubuntu, using ordinary HTTP/HTTPS XDG browser association
+and the installed asynchronous opener without a BROWSER override. The real
+private callback, successful browser page, Connected CLI/provider, strict native
+renderer sandbox and connected logout/Home return are proven. See
+VALIDATION_PROFILE_NETBIRD_PKCE.md for exact QA, safe native reports/frames,
+retained fixture failures and external-IdP/onward-UI/Home-tunnel limits. Older
+browser-PKCE pending labels below are historical for this tested boundary.
+
+
+
+Configured NetBird children now start through the public desktop switcher, with
+trusted optional-payload preflight before allocation and a fixed actionable
+missing-provider error. Debian/Ubuntu installed public cold launches, ordinary
+private CLI, persistent-state reuse, existing switches, logout/crash/protected
+teardown and actual connected enrollment/logout pass. See
+VALIDATION_PROFILE_PUBLIC_NETBIRD.md for exact artifacts and root-only context
+fixture limits. Older public-VPN gated labels below are historical; actual
+browser PKCE, onward UI/tray and Home-tunnel interaction remain open.
+
+
+
+Scoped provider desktop/catalog identity now passes real Work-only GIO lookup,
+correct NetBird title/taskbar icons and strict sandboxed GUI on Debian and Ubuntu.
+Schema7 preserves exact legacy/new manager policy through prepared/live/closing
+recovery, including actual connected-provider controller SIGKILL and teardown.
+See VALIDATION_PROFILE_NETBIRD_CATALOG.md for current production packages, exact
+provenance, the retained Ubuntu GUI environment assertion failure and limits.
+Browser PKCE, Home-tunnel interaction and public VPN activation remain open.
+
+
+The optional inert vendor package now exists as a real Builder `vendor-package`
+output with pinned public inputs, exact file selection and no upstream control
+hooks or activation data. Actual dpkg install, ordinary CLI/strict sandboxed GUI,
+synthetic private callback and clean purge pass on Debian and Ubuntu; see
+VALIDATION_PROFILE_NETBIRD_VENDOR.md. Real browser PKCE, Home-tunnel interaction and public profile activation remain
+open; scoped desktop/catalog/icon identity is accepted by the later gate above.
+
+
 Actual IPv4 exit-node forwarding now passes with both bases in router and client
 roles: ordinary TCP/UDP reaches a captured endpoint outside the selected router
 profile, with the expected remote host, masqueraded source and wt0 default route.
