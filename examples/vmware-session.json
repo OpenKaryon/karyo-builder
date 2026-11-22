@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-vmware-session",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional native-session VMware channel coordination for Karyo",
+    "section": "x11",
+    "depends": [
+      "python3",
+      "libsystemd0",
+      "systemd",
+      "open-vm-tools-desktop",
+      "wlr-randr",
+      "karyo-xclipboard (= 0.1.0-1)"
+    ]
+  },
+  "build": {
+    "directory": "integrations/vmware",
+    "component": "vmware-session-runtime"
+  }
+}

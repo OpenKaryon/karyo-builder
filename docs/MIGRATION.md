@@ -332,3 +332,55 @@ removed. See [VALIDATION_XCLIPBOARD.md](VALIDATION_XCLIPBOARD.md) for exact hash
 request/resource bounds and sensitive-selection behavior. This protocol component
 does not complete VMware host exchange, active-seat vmusr handover, drag/drop,
 HGFS or display following; these remain explicit subsequent integration gates.
+
+
+## VMware native-session coordinator source prepared
+
+The optional independent VMware session component now derives identity from the
+native process/logind session and coordinates foreground vmusr/clipboard workers
+across cooperating active unlocked desktops. It has separate packaging and a
+Karyo-only XDG stock-autostart mask. Eleven ordinary agent cases,14 session contracts,
+all71 DE CTest groups and native package builds pass on both bases. See
+[VALIDATION_VMWARE_SESSION.md](VALIDATION_VMWARE_SESSION.md). This is a source/package
+gate; actual installed Home/Work handover and VMware host payload exchange remain
+pending, along with privileged file transfer, drag/drop, HGFS and display following.
+
+
+## Installed VMware coordinator handover accepted
+
+The exact d74a8a8 coordinator/session packages now pass real Home and cold Work
+handover on both native guests. Actual identities, capability removal, inherited
+channel reservations, background release, killed-child recovery, parent-death
+release, existing-session reuse and captured teardown pass without replacing the
+original Home or root tools process. See
+[VALIDATION_VMWARE_SESSION.md](VALIDATION_VMWARE_SESSION.md) for executed actor hashes,
+the corrected first Terminal cleanup and retained vendor mount. These QA VMs keep
+host copy/paste/HGFS disabled in VMX, so host payload/privileged file transfer,
+actual GUI lock/unlock, drag/drop, HGFS/display following and other-DE handover
+remain explicit subsequent integration gates.
+
+
+## Joined native VMware GUI lock accepted
+
+Both installed guests now pass protected cold-entry and real manual Wayland
+lock/unlock with separate temporary Work credentials. Wrong passwords keep the
+coordinator/workers closed initially and workers stopped on manual lock; correct
+authentication restores the same session/coordinator. Captured credentials/policy
+and account/runtime resources are restored. See
+[VALIDATION_VMWARE_LOCK.md](VALIDATION_VMWARE_LOCK.md) for the exact native actors,
+inspected denial frames and preserved first Ubuntu release-observation race.
+This closes the earlier GUI-lock pending label for these cases; enabled host
+payload, privileged transfer, drag/drop, HGFS/display following and other-DE
+integration remain distinct open gates.
+
+
+## Installed preferred-mode following accepted on activation
+
+The new optional worker now passes real Work activation, manual-mode retention,
+background release and preferred-size restoration on Debian and Ubuntu. A
+Debian-only custom-mode output format exposed and fixed a parser defect before
+acceptance. See [VALIDATION_VMWARE_DISPLAY.md](VALIDATION_VMWARE_DISPLAY.md) for
+exact source/artifacts, the preserved initial failures and networkd recovery,
+and limits: actual host resize/multi-monitor events and real GUI lock of the new
+display child remain separate gates. Earlier lock/handover evidence keeps its
+original runtime revision; it is not silently relabeled as a new joined pass.

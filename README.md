@@ -248,3 +248,16 @@ adapter independently of VMware daemons and profile accounts. The extended test
 environments are environments/clipboard-debian13 and clipboard-ubuntu2604. See
 [X11/Wayland validation](docs/VALIDATION_XCLIPBOARD.md) for installed native results
 and the remaining VMware host-channel boundary.
+
+
+`examples/vmware-session.json` prepares the optional native-session VMware
+coordinator and its ordinary worker policy. The separate QA environments under
+environments/vmware-* exercise its channel lock and process lifetime without
+privileges. See [VMware source/package validation](docs/VALIDATION_VMWARE_SESSION.md)
+for accepted source and installed Home/Work coordinator checks and the remaining
+host-payload and privileged file-transfer gates. Actual joined GUI lock acceptance
+is recorded separately in [VMware lock validation](docs/VALIDATION_VMWARE_LOCK.md).
+
+The optional VMware display worker's installed activation-time acceptance and
+remaining host-resize boundaries are documented in
+[VALIDATION_VMWARE_DISPLAY.md](docs/VALIDATION_VMWARE_DISPLAY.md).
