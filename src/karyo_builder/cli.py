@@ -212,8 +212,16 @@ def main():
     source_build.add_argument("--output", required=True)
     source_build.add_argument("--image", required=True, help="Existing image with native source build dependencies")
     source_build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
+    vendor_build = subcommands.add_parser("vendor-package", help="Repack exact vendor files without install hooks")
+    vendor_build.add_argument("recipe")
+    vendor_build.add_argument("--output", required=True)
+    vendor_build.add_argument("--image", required=True, help="Existing local native Debian/Ubuntu image")
+    vendor_build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
     args = parser.parse_args()
     try:
+        if args.stage == "vendor-package":
+            from .vendor_package import build_vendor_package
+            return build_vendor_package(args)
         if args.stage == "source-package":
             from .source_package import build_source_package
             return build_source_package(args)

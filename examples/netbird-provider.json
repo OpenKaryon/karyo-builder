@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "package": {
+    "name": "karyo-netbird-provider",
+    "version": "0.82.1-1karyo1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Inert NetBird binaries for isolated Karyo profiles",
+    "section": "net",
+    "depends": [
+      "karyo-profile-netbird-client (= 0.1.0-1)",
+      "libgtk-4-1 (>= 4.14)",
+      "libwebkitgtk-6.0-4",
+      "xdg-utils"
+    ],
+    "provides": [
+      "netbird (= 0.82.1)",
+      "netbird-ui (= 0.82.1)"
+    ],
+    "conflicts": [
+      "netbird",
+      "netbird-ui"
+    ]
+  },
+  "inputs": [
+    {
+      "path": "../out/vendor-inputs/netbird/netbird_0.82.1_linux_amd64.deb",
+      "sha256": "4adff2bbc1529942e914c181badfc17585c78f0532ccaf6c000f5c9300d9a632",
+      "package": "netbird",
+      "version": "0.82.1",
+      "architecture": "amd64",
+      "files": [
+        "usr/bin/netbird"
+      ]
+    },
+    {
+      "path": "../out/vendor-inputs/netbird/netbird-ui_0.82.1_linux_amd64.deb",
+      "sha256": "88b36705e8bdd8c297722412ef801519ad9f9b829efd44594d004d35fbe9a937",
+      "package": "netbird-ui",
+      "version": "0.82.1",
+      "architecture": "amd64",
+      "files": [
+        "usr/bin/netbird-ui",
+        "usr/share/pixmaps/netbird.png"
+      ]
+    }
+  ],
+  "licenses": [
+    {
+      "path": "../out/vendor-inputs/netbird/LICENSE.netbird",
+      "sha256": "8343fe949e32a30e2261c4f0967365271d08c4644e879dec5b998d1af666fdb3",
+      "destination": "usr/share/doc/karyo-netbird-provider/LICENSE.netbird"
+    }
+  ],
+  "source_date_epoch": 0
+}

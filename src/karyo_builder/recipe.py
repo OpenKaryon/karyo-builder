@@ -36,9 +36,22 @@ def parse_recipe(data, directory):
     text(source["path"], "source.path")
     text(source["revision"], "source.revision")
     source["path"] = str((Path(directory) / source["path"]).resolve())
-    package = recipe["package"]
+    validate_package(recipe["package"])
+    fields(recipe["build"], ("directory", "component"), "build")
+    directory = text(recipe["build"]["directory"], "build.directory")
+    if directory.startswith(("/", "\\")) or "\\" in directory or ":" in directory or ".." in directory.split("/"):
+        raise ValueError("build.directory must remain inside the source tree")
+    text(recipe["build"]["component"], "build.component")
+    return recipe
+
+
+def validate_package(package, *, allow_scripts=True, relationships=()):
+    """Share control-field validation without enabling vendor install hooks."""
     package_fields = ["name", "version", "architecture", "maintainer", "description", "section", "depends"]
-    if isinstance(package, dict) and "maintainer_scripts" in package:
+    for relationship in relationships:
+        if isinstance(package, dict) and relationship in package:
+            package_fields.append(relationship)
+    if allow_scripts and isinstance(package, dict) and "maintainer_scripts" in package:
         package_fields.append("maintainer_scripts")
     fields(package, package_fields, "package")
     scripts = package.get("maintainer_scripts", {})
@@ -64,9 +77,9 @@ def parse_recipe(data, directory):
         raise ValueError("package.depends must be a list")
     for dependency in package["depends"]:
         text(dependency, "package.depends entry")
-    fields(recipe["build"], ("directory", "component"), "build")
-    directory = text(recipe["build"]["directory"], "build.directory")
-    if directory.startswith(("/", "\\")) or "\\" in directory or ":" in directory or ".." in directory.split("/"):
-        raise ValueError("build.directory must remain inside the source tree")
-    text(recipe["build"]["component"], "build.component")
-    return recipe
+    for relationship in relationships:
+        if relationship in package:
+            if not isinstance(package[relationship], list):
+                raise ValueError("package." + relationship + " must be a list")
+            for entry in package[relationship]:
+                text(entry, "package." + relationship + " entry")
