@@ -24,9 +24,14 @@ def main():
     parser.add_argument('--wlroots-package', type=Path, required=True)
     parser.add_argument('--win32-package', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--shell-package', type=Path, help='Required captured regular shell package for shell-icons')
     parser.add_argument('--baseline', action='store_true')
-    parser.add_argument('--scenario', choices=('caption-buttons', 'rounded-frames'), default='caption-buttons')
+    parser.add_argument('--scenario', choices=('caption-buttons', 'rounded-frames', 'desktop-icons', 'shell-icons'), default='caption-buttons')
     args = parser.parse_args()
+    if (args.scenario == 'shell-icons') != (args.shell_package is not None):
+        parser.error('--shell-package is required only for the shell-icons scenario')
+    if args.scenario == 'shell-icons' and args.baseline:
+        parser.error('shell-icons requires positive compositor acceptance')
     source = args.source.resolve(strict=True)
     previous_path = args.runtime_acceptance.resolve(strict=True) / 'acceptance.json'
     previous = json.loads(previous_path.read_text())
@@ -43,6 +48,11 @@ def main():
     shutil.copyfile(source / 'integrations/compositor/tests' / actor.name, actor)
     if args.scenario != 'caption-buttons':
         shutil.copyfile(source / 'integrations/compositor/tests/caption-buttons.py', actors / 'caption-buttons.py')
+    if args.scenario in ('desktop-icons', 'shell-icons'):
+        shutil.copyfile(source / 'integrations/compositor/tests/foreign-icons-probe.c', actors / 'foreign-icons-probe.c')
+        shutil.copyfile(source / 'shell/protocols/wlr-foreign-toplevel-management-unstable-v1.xml', actors / 'wlr-icons.xml')
+    if args.scenario == 'shell-icons':
+        shutil.copyfile(source / 'integrations/compositor/tests/desktop-icons.py', actors / 'desktop-icons.py')
     rows = []
 
     def capture(folder, name, *, native=True, optional=False):
@@ -66,8 +76,14 @@ def main():
         assert not path.is_symlink() and path.stat().st_size == row['bytes'] and digest(path) == row['sha256']
         assert not (context / filename).exists(), 'Aliased native artifact'
         shutil.copyfile(path, context / filename)
-        rows.append({'distribution':manifest['environment']['distribution'], 'artifact':row,
-            'version':version, 'only_if_installed':optional, 'manifest_sha256':digest(folder / 'manifest.json')})
+        record = {'distribution':manifest['environment']['distribution'], 'artifact':row,
+            'version':version, 'only_if_installed':optional, 'manifest_sha256':digest(folder / 'manifest.json')}
+        if not native:
+            revision = manifest['source']['revision']
+            assert re.fullmatch(r'[a-f0-9]{40}', revision), 'Regular package source revision is missing'
+            record['source_revision'] = revision
+            record['source_archive_sha256'] = manifest['source']['archive_sha256']
+        rows.append(record)
 
     capture(args.compositor_package, 'labwc')
     library = json.loads((args.wlroots_package / 'manifest.json').read_text())
@@ -77,6 +93,8 @@ def main():
     if names[0] + '-dev' in library['binaries']:
         capture(args.wlroots_package, names[0] + '-dev', optional=True)
     capture(args.win32_package, 'karyo-win32', native=False)
+    if args.shell_package is not None:
+        capture(args.shell_package, 'karyo-shell', native=False)
     assert all(row['distribution'] == rows[0]['distribution'] for row in rows)
     (context / 'native.json').write_text(json.dumps(rows, indent=2) + '\n')
     (context / 'dependency-policy.json').write_text('{"check": false}\n')

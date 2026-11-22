@@ -19,21 +19,27 @@ The [default Wine close-button milestone](VALIDATION_WINE_CLOSE_BUTTONS.md) now
 passes native/runtime, displayed-frame and GDI gates. The
 [default child/MDI region milestone](VALIDATION_WINE_CHILD_REGIONS.md) also passes
 PE32/PE64 at 96/192 DPI with real input and restored-icon damage checks. Main/owned
-compositor frame styling, caption metrics/icons and legacy import remain open.
+compositor frames and caption metrics/icons now pass their native and actual-shell
+checks: see [rounded frames](VALIDATION_ROUNDED_FRAMES.md),
+[desktop identity](VALIDATION_DESKTOP_ICONS.md) and
+[real taskbar rendering](VALIDATION_SHELL_ICONS.md).
+[Real third-party PE32/64 applications](VALIDATION_WIN32_APPLICATIONS.md) now pass
+common menu/dialog/minimize, icon/identity and file operations on both bases.
+Legacy-prefix import/conversion and existing-user upgrade remain open.
 The [native scene-mask API](VALIDATION_SCENE_CLIP.md) now passes both native ABI,
-renderer/input and paired-compositor regressions; its use for rounded application
-frames is the next integration.
+renderer/input and paired-compositor regressions; rounded application frames
+are now accepted separately by the linked frame and shell milestones.
 
 | Donor | Target | Boundary or adaptation | Validation and first result |
 | --- | --- | --- | --- |
 | `distro/desktop/shared/libopenkaryon-ui` | karyo-de | Split theme/painting foundation first. Retain user settings while using Karyo public names. Desktop entries/icons, common widgets and style are now extracted. Review platform integration separately. | Separate development packages, widget tests and external CMake consumers. Implemented. |
-| `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | Runtime plugin loads in a separate Qt client on clean Debian. Platform theme/portal migration remains pending. |
+| `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | The donor is a QStylePlugin, not a platform-theme plugin. Independent native style loading is accepted; GTK/wlr portals stay external session dependencies. Karyo provider selection and actual VM FileChooser/ScreenCast checks are recorded in VALIDATION_SESSION.md and VALIDATION_UBUNTU_VM.md, with final joined-HEAD deployment still separate. |
 | `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Shell migrated with independent libraries, tray/Start/service tests and real headless labwc startup. Real LightDM/Xfce coexistence is accepted on Debian; Ubuntu VM lifecycle acceptance also passes; later application checks remain. |
 | `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | PAM/Wayland lock migrated without greetd; real wrong/correct password scenario passes. Real display-manager and logind sleep/resume checks pass on the Debian VM; physical devices remain separate. |
 | `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | All fourteen application families, including Settings and App Center, are independently migrated with native Debian/Ubuntu regressions and installed QA acceptance; later common/runtime fixes retain their own package gates. See DE docs/MIGRATION-REVIEW.md. |
 | `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Independent runtime components pass clean Debian VM install/upgrade/remove, actual Xfce coexistence and unchanged host identity/display manager. All fourteen application families now have their own package/installed-QA milestones; later joined HEAD remains a separate gate. |
 | `distro/distro/packages/openkaryon-defaults`, browser/boot/installer packages | karyo-linux | Own OS branding, Calamares, distribution/browser defaults and first-run selections. | Installed-system and image assertions. Pending. |
-| Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Optional profile, Wine and VMware integrations now have separate native/installed milestones. Darling, enabled host channels, physical resize/multioutput, remaining VPN lifecycle and Windows styling still have open gates. |
+| Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Optional profile, Wine and VMware integrations now have separate native/installed milestones. Darling, enabled host channels, physical resize/multioutput, remaining VPN lifecycle and arbitrary legacy-prefix import/upgrade still have open gates. Windows styling and tested real-application operations have their linked native and actual-shell acceptance records. |
 | `distro/tools/build-packages.sh` | karyo-builder | Reuse configure/build/test/stage/dpkg workflow with committed source, one component, isolated output and provenance. | Package stage and external runtime dependency discovery implemented. Shared-library metadata remains a later extension. |
 | `distro/tools/build-patched-packages.sh`, `distro/distro/patched` | Builder mechanism and component recipes | Separate execution/cache rules from upstream versions, patches, licenses and owners. | Implemented [source-package stage](SOURCE_PACKAGE_STAGE.md), compatible native labwc/wlroots pairs and matching Wine32/64 builds. Component runtime and exact dependency acceptance are recorded separately. |
 | `distro/tools/fetch-pinned-debs.py`, runtime manifests | Builder input validation | Version/hash/architecture checks, redistribution review and explicit local inputs. | Implemented exact native input/hash/architecture checks and the inert [vendor-package stage](VENDOR_PACKAGE_STAGE.md). Product versions, payload selection and redistribution review remain component-owned. |
