@@ -384,3 +384,9 @@ exact source/artifacts, the preserved initial failures and networkd recovery,
 and limits: actual host resize/multi-monitor events and real GUI lock of the new
 display child remain separate gates. Earlier lock/handover evidence keeps its
 original runtime revision; it is not silently relabeled as a new joined pass.
+
+
+The generic Win32 hidden-owner palette/minimize compositor slice now has native
+Debian/Ubuntu before/after, four-palette and normal/startup-lock protocol evidence.
+See [VALIDATION_WIN32_OWNED_WINDOWS.md](VALIDATION_WIN32_OWNED_WINDOWS.md) for exact packages, the retained Ubuntu API/XID
+fixture corrections and the still-open real Wine runtime/installed upgrade gates.

@@ -261,3 +261,9 @@ is recorded separately in [VMware lock validation](docs/VALIDATION_VMWARE_LOCK.m
 The optional VMware display worker's installed activation-time acceptance and
 remaining host-resize boundaries are documented in
 [VALIDATION_VMWARE_DISPLAY.md](docs/VALIDATION_VMWARE_DISPLAY.md).
+
+
+The generic Win32 hidden-owner palette/minimize compositor slice now has native
+Debian/Ubuntu before/after, four-palette and normal/startup-lock protocol evidence.
+See [VALIDATION_WIN32_OWNED_WINDOWS.md](docs/VALIDATION_WIN32_OWNED_WINDOWS.md) for exact packages, the retained Ubuntu API/XID
+fixture corrections and the still-open real Wine runtime/installed upgrade gates.
