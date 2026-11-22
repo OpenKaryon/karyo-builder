@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-xclipboard",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional ordinary X11 and Wayland clipboard transport",
+    "section": "x11",
+    "depends": [
+      "python3",
+      "python3-xlib",
+      "wl-clipboard",
+      "xclip",
+      "libx11-6",
+      "libxfixes3"
+    ]
+  },
+  "build": {
+    "directory": "integrations/clipboard",
+    "component": "xclipboard-runtime"
+  }
+}

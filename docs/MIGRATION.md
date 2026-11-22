@@ -305,3 +305,30 @@ teardown restore original state. See
 QA failures, on-demand peer synchronization, final postchecks and the separate
 ExternalProvider/kill-switch, simultaneous exit-node and live reconnect boundaries.
 No production package changes are claimed by this QA-only step.
+
+
+## Accepted optional family clipboard
+
+The separate profile-clipboard package and post-PAM ordinary Wayland adapter now
+pass actual Home/Work text, byte-exact PNG, sensitive-local preservation,
+outsider denial, confined broker restart and running-session reuse on Debian13
+and Ubuntu26.04. Installation enables nothing; clipboard sharing is an explicit
+family opt-in independent of network isolation. Captured QA fixtures are removed
+and both original Home sessions remain intact. See
+[VALIDATION_FAMILY_CLIPBOARD.md](VALIDATION_FAMILY_CLIPBOARD.md) for artifact hashes,
+source regressions, retained fixture failures and native cleanup. Earlier broad
+pending clipboard labels refer to the previous inventory snapshot. X11/VMware,
+rich/file transfer and unmarked-secret detection are not accepted by this gate.
+
+
+## Accepted optional X11 / Wayland clipboard transport
+
+DE's standalone integrations/clipboard component now preserves timestamped text,
+PNG and lazy local file-copy URLs with independent native packaging. All21 real
+ordinary Xvfb/headless-labwc cases pass from source and installed packages on
+Debian13/Ubuntu26.04; full DE builds pass70 CTest groups. Original Home and
+account/PAM/display-manager settings remain unchanged, and captured fixtures are
+removed. See [VALIDATION_XCLIPBOARD.md](VALIDATION_XCLIPBOARD.md) for exact hashes,
+request/resource bounds and sensitive-selection behavior. This protocol component
+does not complete VMware host exchange, active-seat vmusr handover, drag/drop,
+HGFS or display following; these remain explicit subsequent integration gates.

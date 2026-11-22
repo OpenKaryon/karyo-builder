@@ -234,3 +234,17 @@ host profile transport separately from account helpers and controlled PAM entry.
 It starts/enables nothing on installation. Current public helpers are unchanged;
 see docs/VALIDATION_PROFILE_HOST.md for the accepted native peer gate and remaining
 persistent runtime/startup integration.
+
+
+`examples/profile-clipboard.json` builds optional volatile clipboard sharing for
+trusted Karyo desktop families. It installs no enabled service; administrators
+opt in separately from profile network isolation. Actual Debian/Ubuntu Wayland
+Home/Work acceptance and limits are recorded in
+[family clipboard validation](docs/VALIDATION_FAMILY_CLIPBOARD.md).
+
+
+`examples/xclipboard.json` packages the optional ordinary X11/Wayland clipboard
+adapter independently of VMware daemons and profile accounts. The extended test
+environments are environments/clipboard-debian13 and clipboard-ubuntu2604. See
+[X11/Wayland validation](docs/VALIDATION_XCLIPBOARD.md) for installed native results
+and the remaining VMware host-channel boundary.
