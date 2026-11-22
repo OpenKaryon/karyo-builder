@@ -25,7 +25,9 @@ checks: see [rounded frames](VALIDATION_ROUNDED_FRAMES.md),
 [real taskbar rendering](VALIDATION_SHELL_ICONS.md).
 [Real third-party PE32/64 applications](VALIDATION_WIN32_APPLICATIONS.md) now pass
 common menu/dialog/minimize, icon/identity and file operations on both bases.
-Legacy-prefix import/conversion and existing-user upgrade remain open.
+[Explicit offline prefix import and existing-user package upgrade](VALIDATION_WIN32_PREFIX_IMPORT.md)
+now pass with a real prototype-created win64 source on both bases. Architecture
+conversion and arbitrary older-prefix compatibility remain separate limits.
 The [native scene-mask API](VALIDATION_SCENE_CLIP.md) now passes both native ABI,
 renderer/input and paired-compositor regressions; rounded application frames
 are now accepted separately by the linked frame and shell milestones.
@@ -39,7 +41,7 @@ are now accepted separately by the linked frame and shell milestones.
 | `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | All fourteen application families, including Settings and App Center, are independently migrated with native Debian/Ubuntu regressions and installed QA acceptance; later common/runtime fixes retain their own package gates. See DE docs/MIGRATION-REVIEW.md. |
 | `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Independent runtime components pass clean Debian VM install/upgrade/remove, actual Xfce coexistence and unchanged host identity/display manager. All fourteen application families now have their own package/installed-QA milestones; later joined HEAD remains a separate gate. |
 | `distro/distro/packages/openkaryon-defaults`, browser/boot/installer packages | karyo-linux | Own OS branding, Calamares, distribution/browser defaults and first-run selections. | Installed-system and image assertions. Pending. |
-| Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Optional profile, Wine and VMware integrations now have separate native/installed milestones. Darling, enabled host channels, physical resize/multioutput, remaining VPN lifecycle and arbitrary legacy-prefix import/upgrade still have open gates. Windows styling and tested real-application operations have their linked native and actual-shell acceptance records. |
+| Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Optional profile, Wine and VMware integrations now have separate native/installed milestones. Darling, enabled host channels, physical resize/multioutput, remaining VPN lifecycle and arbitrary older-engine/architecture compatibility still have open gates. Explicit prototype-prefix copy and existing-user package upgrade pass VALIDATION_WIN32_PREFIX_IMPORT.md. Windows styling and tested real-application operations have their linked native and actual-shell acceptance records. |
 | `distro/tools/build-packages.sh` | karyo-builder | Reuse configure/build/test/stage/dpkg workflow with committed source, one component, isolated output and provenance. | Package stage and external runtime dependency discovery implemented. Shared-library metadata remains a later extension. |
 | `distro/tools/build-patched-packages.sh`, `distro/distro/patched` | Builder mechanism and component recipes | Separate execution/cache rules from upstream versions, patches, licenses and owners. | Implemented [source-package stage](SOURCE_PACKAGE_STAGE.md), compatible native labwc/wlroots pairs and matching Wine32/64 builds. Component runtime and exact dependency acceptance are recorded separately. |
 | `distro/tools/fetch-pinned-debs.py`, runtime manifests | Builder input validation | Version/hash/architecture checks, redistribution review and explicit local inputs. | Implemented exact native input/hash/architecture checks and the inert [vendor-package stage](VENDOR_PACKAGE_STAGE.md). Product versions, payload selection and redistribution review remain component-owned. |
@@ -527,3 +529,16 @@ public ABI. Actual corner/state/metadata/input and caption-control matrices,
 square controls, native model/lock gates, twelve real Wine palette runs and eight
 real menu runs pass. See [VALIDATION_ROUNDED_FRAMES.md](VALIDATION_ROUNDED_FRAMES.md).
 Application icon matching and the remaining full migration gates stay open.
+
+
+## Offline legacy-prefix copy and real package upgrade accepted
+
+The public launcher now previews/copies an explicitly selected stopped prefix
+without replacing source or existing destination data. Native package upgrades
+from0.1.0-1 to0.1.0-2 preserve a complete pre-existing ordinary-user tree on both
+bases. A real old launcher session-2 prefix installs 7-Zip, rejects import while
+active, copies unchanged file bytes, launches through inherited/registered new
+profiles and preserves both source and new edits on repeat refusal. See
+[VALIDATION_WIN32_PREFIX_IMPORT.md](VALIDATION_WIN32_PREFIX_IMPORT.md) for exact
+artifacts and retained preparation failures. This does not convert registry
+architecture or establish arbitrary engine compatibility or final joined HEAD.

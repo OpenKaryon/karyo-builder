@@ -5,7 +5,7 @@
   },
   "package": {
     "name": "karyo-win32",
-    "version": "0.1.0-1",
+    "version": "0.1.0-2",
     "architecture": "amd64",
     "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
     "description": "Optional ordinary-user Windows application integration for Karyo",
