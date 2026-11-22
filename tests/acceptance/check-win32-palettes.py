@@ -34,6 +34,7 @@ def main():
     parser.add_argument("--owner", choices=("mapped", "unmapped"), default="mapped")
     parser.add_argument("--baseline", action="store_true", help="Observe old stacking; not positive acceptance")
     parser.add_argument("--trace-wayland", action="store_true")
+    parser.add_argument("--rounded-frames", action="store_true", help="Require actual Wine main/tool rounded corners")
     parser.add_argument("--verify-library-dependency", action="store_true", help="Require rejection of the compositor alone before installing its matching native library")
     args = parser.parse_args()
     if args.verify_library_dependency and not args.wlroots_package:
@@ -63,6 +64,10 @@ def main():
         if len(names) != 1:
             raise ValueError("One supported native wlroots runtime is required")
         selected.append((args.wlroots_package, names[0]))
+        # Preserve an existing native SDK instead of leaving its exact runtime
+        # dependency broken. Runtime-only images do not gain a new SDK.
+        if names[0] + '-dev' in library['binaries']:
+            selected.append((args.wlroots_package, names[0] + '-dev'))
     for folder, package_name in selected:
         folder = folder.resolve(strict=True)
         spec = json.loads((folder / "manifest.json").read_text())
@@ -76,7 +81,7 @@ def main():
         if artifact.get("architecture", spec.get("architecture", "amd64")) != "amd64" or path.is_symlink() or path.stat().st_size != artifact["bytes"] or digest(path) != artifact["sha256"]:
             raise ValueError("Changed or non-native package artifact")
         shutil.copyfile(path, context / name)
-        native.append({"manifest_sha256": digest(folder / "manifest.json"), "distribution": spec["environment"]["distribution"], "artifact": artifact, "version": spec["version"]})
+        native.append({"manifest_sha256": digest(folder / "manifest.json"), "distribution": spec["environment"]["distribution"], "artifact": artifact, "version": spec["version"], "only_if_installed": package_name.endswith('-dev')})
     (context / "native.json").write_text(json.dumps(native, indent=2) + "\n")
     (context / "dependency-policy.json").write_text(json.dumps({"check": args.verify_library_dependency}) + "\n")
     shutil.copyfile(Path(__file__).with_name("win32-palette-install.py"), context / "install-native.py")
@@ -104,7 +109,7 @@ def main():
             label = f"pe{bits}-{iteration}"
             name = "karyo-palette-" + identity + "-" + label
             command = ["docker", "run", "--rm", "--name", name, "--network", "none", "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges", "--user", "1001:1001", "--tmpfs", "/tmp:rw,exec,nosuid,nodev,mode=1777", "--tmpfs", "/home/win32qa:rw,exec,nosuid,nodev,uid=1001,gid=1001,mode=700", "--mount", "type=bind,src=" + str(actors) + ",dst=/actors,readonly", "--mount", "type=bind,src=" + str(output) + ",dst=/output", image, "dbus-run-session", "--", "python3", "-I", "-B", "/actors/palette-acceptance.py", "--output", "/output/" + label, "--bits", str(bits)]
-            for flag, enabled in [("--mapped-owner", args.owner == "mapped"), ("--baseline", args.baseline), ("--trace-wayland", args.trace_wayland)]:
+            for flag, enabled in [("--mapped-owner", args.owner == "mapped"), ("--baseline", args.baseline), ("--trace-wayland", args.trace_wayland), ("--rounded-frames", args.rounded_frames)]:
                 if enabled:
                     command.append(flag)
             try:

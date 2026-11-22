@@ -16,7 +16,13 @@ Current runtime checkpoints include
 [VMware session/lock](VALIDATION_VMWARE_LOCK.md) and
 [profile browser enrollment](VALIDATION_PROFILE_NETBIRD_PKCE.md).
 The [default Wine close-button milestone](VALIDATION_WINE_CLOSE_BUTTONS.md) now
-passes native/runtime, displayed-frame and GDI gates; other window styling remains open.
+passes native/runtime, displayed-frame and GDI gates. The
+[default child/MDI region milestone](VALIDATION_WINE_CHILD_REGIONS.md) also passes
+PE32/PE64 at 96/192 DPI with real input and restored-icon damage checks. Main/owned
+compositor frame styling, caption metrics/icons and legacy import remain open.
+The [native scene-mask API](VALIDATION_SCENE_CLIP.md) now passes both native ABI,
+renderer/input and paired-compositor regressions; its use for rounded application
+frames is the next integration.
 
 | Donor | Target | Boundary or adaptation | Validation and first result |
 | --- | --- | --- | --- |
@@ -482,3 +488,36 @@ also passes existing-prefix reuse with both new engines. See
 [VALIDATION_WINE_CLOSE_BUTTONS.md](VALIDATION_WINE_CLOSE_BUTTONS.md) for exact native
 inputs, retained preparation errors and the still-open rounding/custom UI,
 legacy-import, real-application and complete installed-user deployment gates.
+
+
+## Native per-view Windows frame theme foundation
+
+Both native labwc recipes now independently select Windows captions by generic
+XWayland class while preserving the Linux theme. Pixel-measured mixed themes,
+late class reversal, reload and previous-package negative controls pass on both
+bases, alongside all model/protocol gates and eight real Wine PE32/64 palette
+runs. See [VALIDATION_WINDOW_THEMES.md](VALIDATION_WINDOW_THEMES.md). Final icons,
+caption button assets/geometry and client/lower rounding remain the next slice.
+
+
+## Packaged Windows caption controls
+
+Native Debian/Ubuntu packages now install independent SVG controls and share
+46/24 logical-pixel button measurements across render/layout/input. Actual pointer
+edge actions, narrow windows, previous-package controls, native theme/group/lock
+regressions, eight Wine palette runs and eight real menu runs pass. The native QA
+installer also preserves an existing wlroots SDK and leaves headerless images
+headerless, requiring apt-get check in both cases. See
+[VALIDATION_CAPTION_BUTTONS.md](VALIDATION_CAPTION_BUTTONS.md). Rounded client frames are covered below;
+registered application icons remain separate work.
+
+
+## Native floating Wine frame corners
+
+Ordinary and structurally owned Wine windows now have rounded top/bottom corners
+on both native bases, with matching input masks and square max/fullscreen states.
+The Debian XWM follows newer native property-deletion semantics with unchanged
+public ABI. Actual corner/state/metadata/input and caption-control matrices,
+square controls, native model/lock gates, twelve real Wine palette runs and eight
+real menu runs pass. See [VALIDATION_ROUNDED_FRAMES.md](VALIDATION_ROUNDED_FRAMES.md).
+Application icon matching and the remaining full migration gates stay open.

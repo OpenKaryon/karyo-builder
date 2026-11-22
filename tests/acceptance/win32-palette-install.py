@@ -22,6 +22,11 @@ def main():
         actual = subprocess.check_output(['dpkg-deb', '-f', str(path), 'Package', 'Version', 'Architecture'], text=True)
         fields = dict((line.split(': ', 1) for line in actual.splitlines()))
         assert fields == {'Package': artifact['package'], 'Version': row['version'], 'Architecture': 'amd64'}, 'Wrong native metadata'
+        if row.get('only_if_installed'):
+            status = subprocess.run(['dpkg-query', '-W', '-f=${db:Status-Status}', artifact['package']],
+                capture_output=True, text=True)
+            if status.returncode or status.stdout.strip() in ('not-installed', 'config-files', ''):
+                continue
         names.append(artifact['package'])
         packages.append(str(path))
     if json.loads(Path('/tmp/karyo-palette-native/dependency-policy.json').read_text())['check']:
@@ -43,5 +48,6 @@ def main():
         receipt.write_text(json.dumps({'accepted': True, 'library': library_name, 'required': required, 'previous': installed, 'rejected_returncode': rejected.returncode, 'compositor_version': compositor['version']}) + chr(10))
     subprocess.run(['dpkg', '-i', *packages], check=True)
     subprocess.run(['dpkg', '-V', *names], check=True)
+    subprocess.run(['apt-get', 'check'], check=True)
 if __name__ == '__main__':
     main()
