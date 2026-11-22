@@ -45,7 +45,9 @@ def validate_recipe(recipe):
             raise ValueError("Each input needs a lowercase SHA256")
     build = recipe["build"]
     fields(build, ("revision", "distribution", "maintainer", "message", "binaries",
-                   "source_date_epoch"), "source build")
+                   "source_date_epoch") + (("architecture",) if isinstance(build, dict) and "architecture" in build else ()), "source build")
+    if not isinstance(build.get("architecture", "amd64"), str) or build.get("architecture", "amd64") not in {"amd64", "i386"}:
+        raise ValueError("Source architecture must be native amd64 or i386")
     for key in ("revision", "distribution", "maintainer", "message"):
         text(build[key], "build." + key)
     if not re.fullmatch(r"[a-z0-9][a-z0-9.+~]*", build["revision"]):

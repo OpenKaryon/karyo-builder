@@ -13,8 +13,19 @@ from .cli import command, mount, sha256
 from .source_recipe import capture_recipe
 
 
+def validate_source_image(image, architecture):
+    expected = {"amd64": "amd64", "i386": "386"}.get(architecture)
+    if (expected is None or image.get("Os") != "linux" or image.get("Architecture") != expected
+            or not str(image.get("Id", "")).startswith("sha256:")):
+        raise ValueError("A local immutable Linux image matching the recipe architecture is required")
+    return image["Id"]
+
+
 def validate_receipt(receipt, spec, staged):
     """Check native records against captured inputs before publishing output."""
+    architecture = spec["build"].get("architecture", "amd64")
+    if receipt.get("architecture", "amd64") != architecture:
+        raise ValueError("Native source receipt architecture does not match the recipe")
     if receipt["version"] != spec["source"]["version"] + "+" + spec["build"]["revision"]:
         raise ValueError("Native source build returned a different version")
     expected_order = [f"karyo-{index:03d}-{item['file']}"
@@ -37,6 +48,8 @@ def validate_receipt(receipt, spec, staged):
         if type(item["bytes"]) is not int or path.stat().st_size != item["bytes"]:
             raise ValueError("Native source artifact size mismatch")
         if Path(name).suffix in {".deb", ".ddeb"}:
+            if item.get("architecture", "amd64" if architecture == "amd64" else None) not in {architecture, "all"}:
+                raise ValueError("Binary package architecture differs from native source target")
             package = item["package"]
             if package in binaries:
                 raise ValueError("Duplicate binary package in native receipt")
@@ -64,9 +77,8 @@ def build_source_package(args):
             shutil.copyfile(Path(__file__).with_name(name), inputs / name)
             runner_hashes[name] = sha256(inputs / name)
         image = json.loads(command(["docker", "image", "inspect", args.image]))[0]
-        image_id = image["Id"]
-        if image.get("Os") != "linux" or image.get("Architecture") != "amd64" or not image_id.startswith("sha256:"):
-            raise ValueError("A local immutable Linux amd64 build image is required")
+        architecture = spec["build"].get("architecture", "amd64")
+        image_id = validate_source_image(image, architecture)
         output = Path(args.output).resolve()
         output.mkdir(parents=True, exist_ok=True)
         job = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:8]
@@ -76,7 +88,9 @@ def build_source_package(args):
             shutil.copyfile(inputs / "original-recipe.json", staged / "original-recipe.json")
             (staged / "resolved-input.json").write_text(json.dumps(spec, indent=2) + "\n", encoding="utf-8")
             invocation = [
-                "docker", "run", "--rm", "--network=none", "--cpus", str(args.jobs),
+                "docker", "run", "--rm", "--network=none",
+                "--platform=linux/" + ("386" if architecture == "i386" else "amd64"),
+                "--cpus", str(args.jobs),
                 "--memory=4g", "--pids-limit=512", "--cap-drop=ALL",
                 "--security-opt=no-new-privileges",
                 "--mount", mount(inputs, "/input"),
@@ -92,7 +106,7 @@ def build_source_package(args):
             artifacts, distribution = validate_receipt(receipt, spec, staged)
             manifest = {
                 "schema": 1, "kind": "source-package", "status": "success",
-                "builder_version": __version__, "recipe_sha256": recipe_hash, "input": spec,
+                "builder_version": __version__, "architecture": architecture, "recipe_sha256": recipe_hash, "input": spec,
                 "environment": {"image_id": image_id,
                     "distribution": distribution,
                     "packages": json.loads((staged / "environment.json").read_text())},

@@ -39,7 +39,8 @@ Example schema (paths are relative to this JSON file; fill actual SHA256s):
     }
 
 Only exact fields are accepted. The supported targets are Debian 13/trixie
-and Ubuntu 26.04/resolute on amd64. Archives are tar.gz/xz/bz2/zst parts of the
+and Ubuntu 26.04/resolute. Native amd64 remains the default; build.architecture
+can explicitly select i386 with a matching Linux386 image. Archives are tar.gz/xz/bz2/zst parts of the
 selected DSC; native source and non-quilt formats are outside this stage.
 Expected binaries are a required subset: automatically generated debug packages
 and other native outputs are retained too. The resulting version appends a plus
@@ -104,3 +105,36 @@ Both native fixtures passed on Debian 13 and Ubuntu 26.04. The source-input unit
 suite also passed inside both matching Linux images as UID 65534, including
 real symlink rejection. These fixtures establish the stage contract; a product's
 patched compositor still needs its own native build and session acceptance.
+
+
+## Native source architecture selection
+
+Existing recipes retain their amd64 meaning and their original captured bytes.
+An optional build.architecture accepts amd64 or i386. The host checks the local
+immutable Docker image architecture (amd64/386); an image mismatch fails before
+creating a native build job. The runner independently checks dpkg's native
+architecture before extraction and verifies every binary's architecture/version.
+Receipts and manifests record the target; i386 receipts require explicit package
+architecture metadata. Architecture-independent all packages remain allowed.
+Legacy amd64 receipts retain their previous compatibility behavior.
+
+This selects a native userspace, not a cross compiler, emulated Windows machine
+or new target for the CMake/vendor packaging stages. For the Debian native SDK:
+
+    docker build --platform=linux/386 -t karyo-source-builder:trixie-i386 environments/source-debian13-i386
+    python tests/acceptance/check-source-package.py --image karyo-source-builder:trixie-i386 --distribution trixie --architecture i386 --output out/check-source-i386
+
+The same real quilt fixture now checks the actual DEB architecture and ELF
+class/machine, executes its patched binary as UID65534, proves upstream checks
+ran and rejects reversed patches, a foreign base and a foreign image architecture.
+Native Debian i386, Debian amd64 and Ubuntu amd64 all pass. These checks establish
+the source stage; matching32-bit Wine installation has its own product gate.
+Ubuntu's Wine WoW64 runtime uses its native amd64 SDK; no Ubuntu i386 SDK is
+claimed by this acceptance.
+
+All50 Builder regressions also pass in ordinary-user Debian/Ubuntu amd64 and
+Debian i386 QA containers, including native symlink cases. The first full-suite
+runs in minimal SDKs lacked Git and failed four Git-based fixtures; those logs
+remain. Separate QA derivatives add Git, and unchanged assertions then pass on
+all three targets. Product/host packages and existing source SDK images remain
+unchanged; source builds need no Git or network after input capture.

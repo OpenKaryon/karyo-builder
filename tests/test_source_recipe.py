@@ -62,6 +62,22 @@ class SourceInputsTest(unittest.TestCase):
         self.assertEqual([p["file"] for p in result["patches"]], ["first.patch", "second.patch"])
         self.assertEqual(digest, hashlib.sha256((self.root / "captured.json").read_bytes()).hexdigest())
 
+    def test_native_architecture_is_explicit_and_old_inputs_keep_their_default(self):
+        original = copy.deepcopy(self.recipe)
+        default, _ = self.capture(label="default-architecture")
+        self.assertNotIn("architecture", default["build"])
+        self.assertEqual(self.recipe, original)
+        for architecture in ("amd64", "i386"):
+            recipe = copy.deepcopy(original)
+            recipe["build"]["architecture"] = architecture
+            captured, _ = self.capture(recipe, "architecture-" + architecture)
+            self.assertEqual(captured["build"]["architecture"], architecture)
+        for index, architecture in enumerate(("all", "386", "arm64", "", None, [], True)):
+            recipe = copy.deepcopy(original)
+            recipe["build"]["architecture"] = architecture
+            with self.subTest(architecture=architecture), self.assertRaisesRegex(ValueError, "architecture"):
+                self.capture(recipe, "invalid-architecture-" + str(index))
+
     def test_corruption_is_rejected_before_build(self):
         self.original.write_bytes(b"corrupted archive")
         with self.assertRaisesRegex(ValueError, "SHA256 mismatch"):

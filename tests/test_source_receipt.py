@@ -7,7 +7,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from karyo_builder.source_package import validate_receipt
+from karyo_builder.source_package import validate_receipt, validate_source_image
 
 
 class SourceReceiptTest(unittest.TestCase):
@@ -35,6 +35,32 @@ class SourceReceiptTest(unittest.TestCase):
         artifacts, distro = validate_receipt(self.receipt, self.spec, self.root)
         self.assertEqual(artifacts, self.receipt["artifacts"])
         self.assertEqual(distro["ID"], "debian")
+
+    def test_native_i386_receipt_cannot_substitute_amd64_packages(self):
+        self.spec["build"]["architecture"] = "i386"
+        with self.assertRaisesRegex(ValueError, "architecture"):
+            validate_receipt(self.receipt, self.spec, self.root)
+        self.receipt["architecture"] = "i386"
+        with self.assertRaisesRegex(ValueError, "architecture"):
+            validate_receipt(self.receipt, self.spec, self.root)
+        self.receipt["artifacts"][0]["architecture"] = "amd64"
+        with self.assertRaisesRegex(ValueError, "architecture"):
+            validate_receipt(self.receipt, self.spec, self.root)
+        self.receipt["artifacts"][0]["architecture"] = "i386"
+        validate_receipt(self.receipt, self.spec, self.root)
+        self.receipt["artifacts"][0]["architecture"] = "all"
+        validate_receipt(self.receipt, self.spec, self.root)
+
+    def test_source_image_must_match_native_recipe_architecture(self):
+        image = {"Id": "sha256:" + "a" * 64, "Os": "linux", "Architecture": "386"}
+        self.assertEqual(validate_source_image(image, "i386"), image["Id"])
+        for architecture in ("amd64", "arm64", "all"):
+            with self.subTest(architecture=architecture), self.assertRaises(ValueError):
+                validate_source_image(image, architecture)
+        image["Architecture"] = "amd64"
+        self.assertEqual(validate_source_image(image, "amd64"), image["Id"])
+        image["Os"] = "windows"
+        with self.assertRaises(ValueError):validate_source_image(image, "amd64")
 
     def test_inconsistent_receipts_are_rejected(self):
         variants = []

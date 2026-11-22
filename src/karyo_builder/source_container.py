@@ -28,8 +28,10 @@ def main():
     packages = run(["dpkg-query", "-W", query_format],
                    text=True, stdout=subprocess.PIPE).stdout.splitlines()
     (output / "environment.json").write_text(json.dumps(sorted(packages), indent=2) + "\n")
-    if run(["dpkg", "--print-architecture"], text=True, stdout=subprocess.PIPE).stdout.strip() != "amd64":
-        raise ValueError("Source packages require native amd64")
+    architecture = build.get("architecture", "amd64")
+    native_architecture = run(["dpkg", "--print-architecture"], text=True, stdout=subprocess.PIPE).stdout.strip()
+    if architecture not in {"amd64", "i386"} or native_architecture != architecture:
+        raise ValueError("Source packages require the requested native architecture")
     for group, entries in (("sources", [source["dsc"], *source["archives"]]), ("patches", spec["patches"])):
         for item in entries:
             path = Path("/input") / group / item["file"]
@@ -90,12 +92,13 @@ def main():
             control = Parser().parsestr(run(["dpkg-deb", "--field", path],
                 text=True, stdout=subprocess.PIPE).stdout)
             name = control.get("Package")
-            if control.get("Version") != version or control.get("Architecture") not in {"amd64", "all"}:
+            if control.get("Version") != version or control.get("Architecture") not in {architecture, "all"}:
                 raise ValueError("Unexpected binary package version/architecture")
             if name in binaries:
                 raise ValueError("Duplicate binary package: " + name)
             binaries[name] = record["file"]
             record["package"] = name
+            record["architecture"] = control.get("Architecture")
         artifacts.append(record)
     if not set(build["binaries"]).issubset(binaries):
         raise ValueError("Build did not produce all declared binary packages")
@@ -103,7 +106,7 @@ def main():
             item["file"].endswith(".changes") for item in artifacts):
         raise ValueError("Build is missing its native buildinfo or changes record")
     (output / "result.json").write_text(json.dumps({
-        "version": version, "binaries": binaries, "artifacts": artifacts,
+        "version": version, "architecture": architecture, "binaries": binaries, "artifacts": artifacts,
         "patch_order": names}, indent=2) + "\n")
 
 
