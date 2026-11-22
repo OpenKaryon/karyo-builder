@@ -280,3 +280,8 @@ The later [unmapped-owner validation](docs/VALIDATION_WIN32_UNMAPPED_OWNERS.md)
 records both framework layouts, exact native compositor/library pairing and
 actual refusal/recovery of an unpaired dpkg installation. The optional
 `--verify-library-dependency` gate uses the driver's copied native installer.
+
+
+The installed launcher also preserves existing native prefix architecture;
+[the before/after report](docs/VALIDATION_WIN32_EXISTING_PREFIX.md) distinguishes
+Debian win32 reuse from Ubuntu PE32-on-WoW64 and from pending legacy import.

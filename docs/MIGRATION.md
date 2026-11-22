@@ -446,3 +446,13 @@ alongside ten X11 models, protocol/lock gates and unchanged exported ABI. See
 [VALIDATION_WIN32_UNMAPPED_OWNERS.md](VALIDATION_WIN32_UNMAPPED_OWNERS.md).
 Styling, legacy imports, third-party apps, existing-user upgrade and remaining
 system/runtime integrations still need their own acceptance.
+
+
+## Existing native Wine prefix architecture accepted
+
+New prefixes retain the win64 default, while existing registries remain Wine's
+architecture authority. Real Debian win32 before/after and Ubuntu WoW64 PE32
+reuse pass with installed source236dd5a packages and preserved data markers.
+See [VALIDATION_WIN32_EXISTING_PREFIX.md](VALIDATION_WIN32_EXISTING_PREFIX.md).
+This does not close legacy import/conversion, pure win32 Ubuntu compatibility,
+new caption-engine validation or complete current-HEAD desktop deployment.
