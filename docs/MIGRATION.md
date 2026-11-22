@@ -276,3 +276,19 @@ The actual long-lived host now supervises observed logout/compositor crash witho
 
 
 Schema4 forwarding ownership now passes native live reattachment, all seven interrupted delete ACKs and actual host recovery on Debian/Ubuntu. Joined private mounted DNS/NSS, NAT and GUI lifecycle also pass with a synthetic blocking Home policy. See VALIDATION_PROFILE_FORWARDING_JOURNAL.md, including the preserved cold-UDP failure and bounded diagnostic limitation. Explicit forwarding setup/public startup and the remaining runtime/provider integrations stay open.
+
+
+## Accepted optional Home/Work visibility
+
+The generic optional application-role mechanism now belongs to DE accounts and
+session components; the recipe selects its standalone session CMake entry.
+Debian 13 and Ubuntu 26.04 passed447 profile source checks,13 session contracts,
+native package installation, an ordinary Home resolver/cache check and a cold
+public Work graphical/autostart gate. Shared binaries are not duplicated and no
+private Workstation configuration is migrated. See
+[VALIDATION_APPLICATION_ROLES.md](VALIDATION_APPLICATION_ROLES.md) for exact source,
+package hashes, actual client/activation environment checks, retained fixture
+cleanup failure and restored host state. Actual vendor clients and simultaneous real Home tunnels remain distinct
+pending gates. Fresh graphical Home role startup and removal are now accepted
+through real LightDM on both bases; see
+[VALIDATION_COLD_HOME_ROLES.md](VALIDATION_COLD_HOME_ROLES.md).

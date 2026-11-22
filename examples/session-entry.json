@@ -19,7 +19,7 @@
     ]
   },
   "build": {
-    "directory": ".",
+    "directory": "session",
     "component": "session-runtime"
   }
 }
