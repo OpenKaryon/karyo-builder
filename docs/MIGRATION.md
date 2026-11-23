@@ -613,3 +613,17 @@ packages, receipts and retained controls. This closes the system HGFS slice;
 enabled clipboard payloads, drag/drop, actual resize/multi-monitor behavior,
 actual Home/Work GUI integration, VPN lifecycle, Darling and final joined HEAD
 still need their own applicable gates.
+
+
+## Live Home VPN replacement accepted with connected Work
+
+On both native kernels the same public Work session/provider survives two
+actual Home WireGuard interface removals and recreations. Work retains private
+network/resolver identity, Connected state and ordinary external DNS/HTTPS in
+each phase; renewed Home handshakes/private DNS/encrypted payload and subsequent
+reciprocal NetBird TCP/UDP by IP/FQDN pass. Connected logout and captured cleanup
+restore Home/account/PAM/network/forwarding baselines with fresh final postchecks.
+See [VALIDATION_HOME_VPN_RECONNECT.md](VALIDATION_HOME_VPN_RECONNECT.md) for exact
+actors, packages, evidence and retained preparation mistakes. External ExternalProvider,
+simultaneous Work exit nodes, physical DHCP changes and onward GUI/tray remain
+separate boundaries; the broader migration remains active.

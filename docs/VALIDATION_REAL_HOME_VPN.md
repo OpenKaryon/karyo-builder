@@ -1,5 +1,9 @@
 # Real Home WireGuard alongside public Work NetBird
 
+Live Home disconnect/reconnect is accepted separately by the later
+[installed lifecycle gate](VALIDATION_HOME_VPN_RECONNECT.md). The limits below
+retain the scope of this earlier simultaneous-tunnel gate.
+
 This gate replaces the earlier synthetic blocking-Home policy with an actual
 Home kernel WireGuard tunnel, private DNS and packet service. It then launches
 real Work NetBird through the installed public runtime on both Debian13 and
