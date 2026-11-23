@@ -1,8 +1,8 @@
 # Current Darling source and native build status
 
 The current reviewed series contains29 common patches. The joined gate
-out/migration/darling-current-inputs-accepted-v4/acceptance.json passes on both
-native SDKs:28 source/packaging cases, all44 verified Swift inputs, zero-fuzz
+out/migration/darling-current-inputs-accepted-v5/acceptance.json passes on both
+native SDKs:29 source/packaging cases, all44 verified Swift inputs, zero-fuzz
 quilt plus Git application/reversal of29 patches and71 byte-identical restored
 source files. Native tool versions are recorded independently; source effects
 must agree. Log hashes were checked after both SDK jobs completed. Earlier
@@ -20,6 +20,7 @@ and emits per-base source-package recipes. Sequential full Debian builds found:
 |5|Ruby self-included remapped __FILE__|0026 uses the adjacent header, retaining reproducible path maps|
 |6|Screen forwarded an existing message as a format|0027 treats it as literal data; collect independent Ninja errors|
 |7|Thirty additional Screen diagnostics and dyld's relative libunwind lookup table|0028 fixes every observed diagnostic;0029 confines no-jump-tables to static bootstrap unwind|
+|8|Complete compilation/install passed; dwz rejected Clang .debug_addr|Skip optional DWZ compaction, retain ordinary stripping/separate debug packages and native audit|
 
 The seventh build reached26425/26426 Ninja steps and correctly failed. Both
 native compiler suites reject all thirty original Screen calls and execute the
@@ -29,11 +30,23 @@ Mach-O LLVM IR shows the default relative table and its absence with the option.
 Optimized compilation, native hardening and dyld chained fixups stay enabled.
 Exact extra module pins include libunwind alongside objc4/Foundation/Ruby/Screen.
 
-The eighth complete Debian engine build is running with the29-patch DSC. No
-completed engine package, staged ELF/bridge audit or real Mac execution has been
-accepted. The complete Ubuntu engine build remains subsequent work. Source
-preparation and isolated compiler controls do not establish successful dyld
-linking or runtime compatibility.
+The eighth full Debian attempt successfully compiled and linked all targets,
+including dyld, and installed the stage. Packaging then failed when dwz did not
+understand Clang .debug_addr sections; the staged native audit was not reached.
+The common rule now bypasses only optional DWZ compaction. Standard dh_strip,
+separate debug packages, native hardening and the later ELF/dependency audit
+remain enabled. The new real-Clang small-package control executes the stripped
+ELF and verifies its debug link and retained DWARF5 in Debian .deb or Ubuntu
+.ddeb symbol output. See the native
+[dh_dwz](https://manpages.debian.org/trixie/debhelper/dh_dwz.1.en.html) and
+[dh_strip](https://manpages.debian.org/trixie/debhelper/dh_strip.1.en.html) roles.
+
+The ninth complete Debian engine build is running with the same29-patch stack
+and corrected packaging. No completed engine package, staged ELF/bridge audit
+or real Mac execution has been accepted. The complete Ubuntu engine build
+remains subsequent work. Successful Debian compilation and the tiny native
+packaging control do not establish a working engine package or application
+runtime compatibility.
 
 Real Intel64 Mach-O CLI, Cocoa and static Qt Widgets probes compile from clean
 DE sources in a separate immutable cross SDK; see
