@@ -1,5 +1,8 @@
 # Installed53 Ubuntu: ordinary applications and the CPU backing directory
 
+Historical checkpoint434 result. Debian53 has since completed; see
+[the installed54 follow-up](VALIDATION_INSTALLED54_BOTH.md) for the newer state.
+
 The full53 Darling runtime built and was explicitly installed into the separate
 Ubuntu26.04 QA guest. This report is limited to that base. Debian53 is still in
 its original full-build queue; its ordinary pipeline has not run. The overall DE

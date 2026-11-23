@@ -681,3 +681,16 @@ See [VALIDATION_HOME_VPN_RECONNECT.md](VALIDATION_HOME_VPN_RECONNECT.md) for exa
 actors, packages, evidence and retained preparation mistakes. External ExternalProvider,
 simultaneous Work exit nodes, physical DHCP changes and onward GUI/tray remain
 separate boundaries; the broader migration remains active.
+
+## Installed54 CPU surfaces and joined-head MIME coexistence
+
+Both native54 engines now pass ordinary CPU IOSurface allocation/pixel access;
+owner/reader lifetime and layer-hosted presentation remain failures. Original
+UGENE53.1 has no accepted GUI. Common caller fix55 is source/compiler-verified
+with installed checks queued. See [installed54 evidence](VALIDATION_INSTALLED54_BOTH.md).
+
+The clean joined graph builds41 components per base. Fresh22-package Xfce QA
+installations preserve their baseline except implicit folder association, now
+fixed by session-scoped metadata with positive native checks on six handlers and
+explicit user choices. Real rebuilt-package/session activation checks remain
+pending. See [joined-head coexistence evidence](VALIDATION_JOINED434_ASSOCIATIONS.md).
