@@ -10,32 +10,31 @@ validation report for exact source/package/image revisions. A component pass is
 not proof of a joined current-HEAD desktop or completion of the whole migration.
 Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
-The [installed Darling milestone on both bases](VALIDATION_INSTALLED43_BOTH.md)
-records real loader, Cocoa and Qt execution with reviewed frames and UTF-8 titles
-on Debian and Ubuntu. The unchanged upstream TextEditor opens a document, accepts
-ordinary X11 input, saves exact file data and exits normally on both systems.
-The [installed45 checkpoint on both bases](VALIDATION_INSTALLED45_BOTH.md) now
-confirms common event-deadline and glyph-origin fixes with actual timings and
-reviewed frames. Debian's first stock uname launch failed despite two successful
-targeted rechecks; its cold-start reliability remains open. Original UGENE53.1
-attempts are unaccepted on both systems. Its dynamic Qt client exposes a common
-[system-color lifetime bug](VALIDATION_SYSTEM_COLOR_LIFETIME.md). The complete
-[48-patch input and optional window/menu APIs](VALIDATION_COMMON_COCOA48.md) pass
-source preparation on both bases; installed checks remain queued. A further
-original-app diagnostic identifies missing color-space serialization metadata,
-without claiming that a temporary missing-symbol helper fixes rendering.
-Broader compatibility and joined DE
-lifecycle remain open.
-Work uses local commits and ordinary functional checks.
+The [installed48 checkpoint on both bases](VALIDATION_INSTALLED48_BOTH.md)
+confirms real loader, Cocoa and Qt execution with reviewed frames, actual editor
+save/quit, common event deadlines, persistent data and original macOS MUSCLE
+alignment. The [installed49 engines on both bases](VALIDATION_INSTALLED49_BOTH.md) repeat
+those ordinary scenarios and the unchanged dynamic Qt framework client
+successfully.
+Debian45's first cold stock uname failure remains unexplained despite successful
+later runs. A successful recheck is not proof that its cause was fixed.
+
+Original UGENE53.1 and layer-backed drawing remain unaccepted. The
+[IOSurface boundary](VALIDATION_IOSURFACE_BOUNDARY.md) distinguishes the failed
+ordinary installed-buffer contract from new source implementations. Common0050
+fixes IOKit method selection and has both-base source-only and ordinary dispatcher
+checks. Common0051 implements coherent packed CPU storage, caller references,
+process usage counts and real accessors; all five changed units compile with
+Clang19 and Clang21. Its source-stack check passes on both bases with97 restored source files; no
+installed51 buffer or layer presentation has been accepted. No application-specific selection or
+changes to UGENE's original binaries are involved.
 
 The [original macOS MUSCLE bioinformatics calculation](VALIDATION_MACOS_BIOINFORMATICS.md)
-passes on both installed45 bases with its official GNU runtime dependencies,
-including the upstream default two-thread scenario. UGENE GUI acceptance remains
-open; the later nullable CoreGraphics export has source-only49 acceptance.
-The [installed48 checkpoint on both bases](VALIDATION_INSTALLED48_BOTH.md)
-confirms common color lifetime, window/menu APIs, actual editor save/quit and
-MUSCLE after upgrade. The original UGENE GUI and layer-backed drawing remain
-unaccepted; the next49 engine and graphics checks are queued separately.
+passes on both installed45/48 engines with official GNU dependencies and the
+upstream default two-thread scenario. It also passes on both49 engines after their own
+prefix restarts. This CLI result does not establish UGENE GUI compatibility.
+Broader joined DE lifecycle and compatibility gates remain open. Work uses local
+commits and ordinary functional checks, without pushes or shared/security suites.
 
 The earlier [CLI/libm](VALIDATION_LIBM_CALLS.md) and
 [dyld entry](VALIDATION_DYLD_BOOTSTRAP.md) reports document the bootstrap failures

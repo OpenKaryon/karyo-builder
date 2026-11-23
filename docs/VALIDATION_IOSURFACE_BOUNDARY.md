@@ -1,5 +1,37 @@
 # Installed IOSurface allocation boundary
 
+## Source implementation prepared, installed graphics still pending
+
+DE common0050 fixes the dispatcher that otherwise cached its first selector.
+An ordinary create/lock/lookup/unlock/release sequence with two service objects
+fails on the original body and passes on the changed body using both compilers.
+The actual component compiles with Clang19 and Clang21 against the exact generated
+header closure. Both native source-only50 stacks apply/reverse all patches with
+Git and zero-fuzz quilt, restoring89 files. No shared/security unit suite ran.
+
+DE common0051 adds real IOKit-owned CPU backing files, per-process mappings and
+an explicit versioned response. It implements ordinary layout queries, public
+sizes and IDs, create/lookup, references, usage counts and modification seeds.
+Allocation no longer requires an EGL context. The original notices are retained.
+All five changed units compile with both compilers using recorded input hashes.
+That is not a linked or installed51 engine. Its source-only stack passes both
+bases, applying/reversing51 patches and restoring97 files.
+
+Apple's process usage query remains distinct from the global in-use boolean.
+The service tracks every caller increment/decrement, while each framework handle
+balances its own outstanding increments. Lock/unlock provide CPU visibility and
+modification seeds, without claiming exclusive locking or GPU synchronization.
+Shared attachments, planar storage, Mach-port transfer and GPU import remain
+unimplemented. The private protocol needs a matching framework and service;
+existing prefix upgrades require separate actual evidence.
+
+The next source boundary is layer presentation: the current renderer assumes
+CGImage contents and must explicitly consume IOSurface pixels. No installed51
+pixel round trip, cross-process lifecycle or original UGENE GUI is accepted yet.
+The installed48 failures below remain retained evidence rather than overwritten
+by source-only or compiler results. Ubuntu49's original UGENE also exits0 without
+a captured visible frame, and its ordinary dynamic layer client exits1.
+
 ## Observed on Debian and Ubuntu
 
 The product-owned positive client in Karyo DE's
@@ -69,3 +101,6 @@ Primary contracts:
 - [Apple IOSurfaceAlignProperty](https://developer.apple.com/documentation/iosurface/iosurfacealignproperty(_:_:))
 - [Apple IOSurfaceGetPropertyAlignment](https://developer.apple.com/documentation/iosurface/iosurfacegetpropertyalignment(_:))
 - [Qt Cocoa IOSurface graphics buffer](https://github.com/qt/qtbase/blob/5.15/src/plugins/platforms/cocoa/qiosurfacegraphicsbuffer.mm)
+
+- [Apple process-local usage count](https://developer.apple.com/documentation/iosurface/iosurfacegetusecount(_:))
+- [Apple CPU access boundaries and modification seed](https://developer.apple.com/documentation/iosurface/iosurfacelock(_:_:_:))
