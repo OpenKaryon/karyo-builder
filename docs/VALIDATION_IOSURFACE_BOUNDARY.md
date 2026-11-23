@@ -35,8 +35,11 @@ application-name selection, method replacements or modified UGENE libraries.
 The three changed QuartzCore units compile with Clang19 and21 against recorded
 generated headers. The complete52 source stack passes zero-fuzz Git/quilt
 apply/reverse on both bases, restoring103 source files. This is source and
-compilation evidence only. A full Ubuntu52 engine is building, with Debian52
-queued behind its verified artifacts. No installed52 pixel round trip,
+compilation evidence only. The full Ubuntu52 engine is now installed and its
+ordinary buffer stops at service lookup; Debian52 is building. The
+[actual Ubuntu52 report](VALIDATION_INSTALLED52_UBUNTU.md) records the valid
+enumeration versus failed single-service query, the empty UGENE compositor frame
+and the next common0053 source fix. No installed52 pixel round trip,
 cross-process lifecycle or original UGENE GUI is accepted yet.
 The installed48 failures below remain retained evidence rather than overwritten
 by source-only or compiler results. Ubuntu49's original UGENE also exits0 without
