@@ -25,9 +25,19 @@ Shared attachments, planar storage, Mach-port transfer and GPU import remain
 unimplemented. The private protocol needs a matching framework and service;
 existing prefix upgrades require separate actual evidence.
 
-The next source boundary is layer presentation: the current renderer assumes
-CGImage contents and must explicitly consume IOSurface pixels. No installed51
-pixel round trip, cross-process lifecycle or original UGENE GUI is accepted yet.
+Common0052 now distinguishes IOSurface contents from CGImage and uploads packed
+BGRA/RGBA pixels using the actual row stride. It restores OpenGL unpack state,
+checks the real texture limit and invalidates successful uploads when the surface
+seed changes. Layer contents and render-tree ownership are balanced explicitly;
+the default contents scale is one. These are common framework changes, without
+application-name selection, method replacements or modified UGENE libraries.
+
+The three changed QuartzCore units compile with Clang19 and21 against recorded
+generated headers. The complete52 source stack passes zero-fuzz Git/quilt
+apply/reverse on both bases, restoring103 source files. This is source and
+compilation evidence only. A full Ubuntu52 engine is building, with Debian52
+queued behind its verified artifacts. No installed52 pixel round trip,
+cross-process lifecycle or original UGENE GUI is accepted yet.
 The installed48 failures below remain retained evidence rather than overwritten
 by source-only or compiler results. Ubuntu49's original UGENE also exits0 without
 a captured visible frame, and its ordinary dynamic layer client exits1.
@@ -38,6 +48,14 @@ The product-owned positive client in Karyo DE's
 `integrations/macos/tests/iosurface` requests a 17 by 9 BGRA buffer through public
 macOS APIs. Build it with `tests/acceptance/build-macos-probes.py --suite iosurface`
 and an external Mac cross SDK. The default applications suite is unchanged.
+
+The suite now also builds two ordinary clients. The lifecycle client coordinates
+an owner and a separate reader through ordinary files, checking process-local
+use counts, shared pixels and final release. The Cocoa layer client assigns one
+odd-width surface once, then changes its pixels and seed while its window runs.
+The clean cross-build records three Intel Mach-O binaries. Runtime acceptance
+still requires actual reports plus two compositor frames showing the expected
+colors; compilation or an application's own visible-window flag is insufficient.
 
 The exact same Intel Mach-O ran as the ordinary QA user on both installed
 48-patch Darling engines. Both returned exit 1 and this report:
