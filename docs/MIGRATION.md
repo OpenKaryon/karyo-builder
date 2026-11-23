@@ -10,6 +10,14 @@ validation report for exact source/package/image revisions. A component pass is
 not proof of a joined current-HEAD desktop or completion of the whole migration.
 Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
+The [Libsystem bootstrap diagnosis](VALIDATION_LIBSYSTEM_BOOTSTRAP.md) now
+identifies guard seeding in a protected initializer; both SDK source/compiler
+controls pass, with corrected full native runtime acceptance still pending.
+
+The [first native Darling package](VALIDATION_DARLING_NATIVE_PACKAGE.md) now
+passes Debian build/audit/install; its first actual Mac bootstrap still fails.
+The corrected Ubuntu mixed-format build is being repeated separately.
+
 The [public Work exit-node packet gate](VALIDATION_HOME_VPN_EXIT.md) now also
 passes both routing roles alongside live Home WireGuard with full restoration.
 
