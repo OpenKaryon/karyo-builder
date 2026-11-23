@@ -20,6 +20,12 @@ Debian45's first cold stock uname failure remains unexplained despite successful
 later runs. A successful recheck is not proof that its cause was fixed.
 
 Original UGENE53.1 and layer-backed drawing remain unaccepted. The
+[installed52 engines on both bases](VALIDATION_INSTALLED52_BOTH.md) retain the
+ordinary application results, the directly reproduced single-service IOKit
+failure and the corrected compositor-coordinate observer. The [installed53 Ubuntu checkpoint](VALIDATION_INSTALLED53_UBUNTU.md) confirms
+its direct IOSurface service lookup and ordinary applications, then isolates an
+absent backing directory. Debian53 is still building. Common0054 uses the existing
+Darling temporary directory; installed54 acceptance remains pending. The
 [IOSurface boundary](VALIDATION_IOSURFACE_BOUNDARY.md) distinguishes the failed
 ordinary installed-buffer contract from new source implementations. Common0050
 fixes IOKit method selection and has both-base source-only and ordinary dispatcher
