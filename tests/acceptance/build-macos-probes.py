@@ -73,11 +73,11 @@ def main():
     parser.add_argument("--de-source", required=True)
     parser.add_argument("--image", required=True)
     parser.add_argument("--output", required=True)
-    parser.add_argument("--suite", choices=("applications", "cocoa-properties"), default="applications")
+    parser.add_argument("--suite", choices=("applications", "cocoa-properties", "iosurface"), default="applications")
     args = parser.parse_args()
     source = Path(args.de_source).resolve(strict=True)
-    properties = args.suite == "cocoa-properties"
-    probes = source / "integrations/macos/tests" / ("cocoa-properties" if properties else "probes")
+    standalone = args.suite != "applications"
+    probes = source / "integrations/macos/tests" / (args.suite if standalone else "probes")
     files = sorted(probes.iterdir())
     if not files or any(not path.is_file() or path.is_symlink() for path in files):
         raise ValueError("Expected regular product-owned probe sources")
@@ -111,12 +111,12 @@ def main():
             raise
     if result.returncode:
         raise RuntimeError("Mac cross compilation failed; see " + str(output / "build.log"))
-    executables = ({"karyo-macos-window-properties-probe", "karyo-macos-menu-view-probe"}
-                   if properties else None)
+    executables = {"cocoa-properties": {"karyo-macos-window-properties-probe", "karyo-macos-menu-view-probe"},
+                   "iosurface": {"karyo-macos-iosurface-probe"}}.get(args.suite)
     members = inspect_archive(output / "probes.tar.gz", executables)
     if inputs != {path.name: digest(path) for path in files}:
         raise ValueError("Source inputs changed while building")
-    log_names = ("build.log", "compiler-version.txt") if properties else (
+    log_names = ("build.log", "compiler-version.txt") if standalone else (
         "build.log", "qmake-query.txt", "compiler-version.txt")
     record = {"schema": 1, "kind": "real-macos-probes", "suite": args.suite,
         "target": "macos-x86_64", "compiled": True,
