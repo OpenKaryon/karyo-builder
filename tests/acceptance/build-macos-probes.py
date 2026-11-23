@@ -25,9 +25,10 @@ def bind(path, target):
     return "type=bind,source=" + text + ",target=" + target
 
 
-def inspect_archive(path):
-    executables = {"karyo-macos-loader-probe", "KaryoCocoaProbe.app/Contents/MacOS/KaryoCocoaProbe",
-                   "KaryoQtProbe.app/Contents/MacOS/KaryoQtProbe"}
+def inspect_archive(path, executables=None):
+    if executables is None:
+        executables = {"karyo-macos-loader-probe", "KaryoCocoaProbe.app/Contents/MacOS/KaryoCocoaProbe",
+                       "KaryoQtProbe.app/Contents/MacOS/KaryoQtProbe"}
     found, seen, records = set(), set(), []
     with tarfile.open(path, "r:gz") as archive:
         for member in archive:
@@ -63,7 +64,7 @@ def inspect_archive(path):
                     found.add(name)
             records.append(record)
     if found != executables:
-        raise ValueError("The three real Mac executables are missing")
+        raise ValueError("Required real Mac executables are missing: " + ", ".join(sorted(executables - found)))
     return records
 
 
@@ -72,9 +73,11 @@ def main():
     parser.add_argument("--de-source", required=True)
     parser.add_argument("--image", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--suite", choices=("applications", "cocoa-properties"), default="applications")
     args = parser.parse_args()
     source = Path(args.de_source).resolve(strict=True)
-    probes = source / "integrations/macos/tests/probes"
+    properties = args.suite == "cocoa-properties"
+    probes = source / "integrations/macos/tests" / ("cocoa-properties" if properties else "probes")
     files = sorted(probes.iterdir())
     if not files or any(not path.is_file() or path.is_symlink() for path in files):
         raise ValueError("Expected regular product-owned probe sources")
@@ -108,14 +111,19 @@ def main():
             raise
     if result.returncode:
         raise RuntimeError("Mac cross compilation failed; see " + str(output / "build.log"))
-    members = inspect_archive(output / "probes.tar.gz")
+    executables = ({"karyo-macos-window-properties-probe", "karyo-macos-menu-view-probe"}
+                   if properties else None)
+    members = inspect_archive(output / "probes.tar.gz", executables)
     if inputs != {path.name: digest(path) for path in files}:
         raise ValueError("Source inputs changed while building")
-    record = {"schema": 1, "kind": "real-macos-probes", "target": "macos-x86_64", "compiled": True,
+    log_names = ("build.log", "compiler-version.txt") if properties else (
+        "build.log", "qmake-query.txt", "compiler-version.txt")
+    record = {"schema": 1, "kind": "real-macos-probes", "suite": args.suite,
+        "target": "macos-x86_64", "compiled": True,
         "runtime_tested": False, "source_revision": revision, "source_dirty": dirty, "inputs": inputs,
         "toolchain_image": image_id, "driver_sha256": digest(Path(__file__)), "members": members,
         "archive": {"file": "probes.tar.gz", "sha256": digest(output / "probes.tar.gz")},
-        "logs": {name: digest(output / name) for name in ("build.log", "qmake-query.txt", "compiler-version.txt")}}
+        "logs": {name: digest(output / name) for name in log_names}}
     (output / "manifest.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     print("Compiled real Intel Mach-O probes; not yet runtime-tested: " + str(output))
 
