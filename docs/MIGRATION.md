@@ -18,6 +18,9 @@ The [first native Darling package](VALIDATION_DARLING_NATIVE_PACKAGE.md) now
 passes Debian build/audit/install; its first actual Mac bootstrap still fails.
 The corrected Ubuntu mixed-format build is being repeated separately.
 
+The [selected-exit DNS/TLS gate](VALIDATION_HOME_VPN_EXIT_DNS.md) also passes
+ordinary Work lookups and HTTPS while both Home tunnels remain operational.
+
 The [public Work exit-node packet gate](VALIDATION_HOME_VPN_EXIT.md) now also
 passes both routing roles alongside live Home WireGuard with full restoration.
 
