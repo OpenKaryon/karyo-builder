@@ -10,6 +10,9 @@ validation report for exact source/package/image revisions. A component pass is
 not proof of a joined current-HEAD desktop or completion of the whole migration.
 Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
+The [complete logind inventory regression](VALIDATION_LOGIND_INVENTORY.md) also
+passes a paired before/after disappearing SSH login on both native QA guests.
+
 Current runtime checkpoints include
 [unmapped Win32 owners](VALIDATION_WIN32_UNMAPPED_OWNERS.md),
 [existing Wine prefixes](VALIDATION_WIN32_EXISTING_PREFIX.md),
