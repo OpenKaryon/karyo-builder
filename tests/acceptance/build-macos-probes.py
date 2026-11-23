@@ -112,7 +112,8 @@ def main():
     if result.returncode:
         raise RuntimeError("Mac cross compilation failed; see " + str(output / "build.log"))
     executables = {"cocoa-properties": {"karyo-macos-window-properties-probe", "karyo-macos-menu-view-probe"},
-                   "iosurface": {"karyo-macos-iosurface-probe"}}.get(args.suite)
+                   "iosurface": {"karyo-macos-iosurface-probe", "karyo-macos-iosurface-lifecycle",
+                                 "karyo-macos-iosurface-layer"}}.get(args.suite)
     members = inspect_archive(output / "probes.tar.gz", executables)
     if inputs != {path.name: digest(path) for path in files}:
         raise ValueError("Source inputs changed while building")
