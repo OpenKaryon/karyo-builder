@@ -130,6 +130,8 @@ def package(args):
                 "--entrypoint", "python3", image_id, "/input/container.py",
                 "--jobs", str(args.jobs),
             ]
+            if args.test_regex is not None:
+                invocation.extend(["--test-regex", args.test_regex])
             with (staged / "build.log").open("wb") as log:
                 result = subprocess.run(invocation, stdout=log, stderr=subprocess.STDOUT)
             if result.returncode:
@@ -160,7 +162,8 @@ def package(args):
                     "dependencies": json.loads((folder / "dependencies.json").read_text(encoding="utf-8")),
                     "maintainer_scripts": json.loads((folder / "maintainer-scripts.json").read_text(encoding="utf-8")),
                     "artifact": {"file": filename, "sha256": artifact_hash, "bytes": artifact.stat().st_size},
-                    "validation": {"ctest": "passed", "dpkg_deb": "passed"},
+                    "validation": {**json.loads((staged / "validation.json").read_text(encoding="utf-8")),
+                                   "dpkg_deb": "passed"},
                 }
                 if batch:
                     manifest["shared_build_log"] = {"file": "../build.log", "sha256": sha256(staged / "build.log")}
@@ -206,6 +209,7 @@ def main():
         build.add_argument("--image", default="karyo-builder:trixie",
                            help="An existing local Docker image (resolved to its immutable ID)")
         build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
+        build.add_argument("--test-regex", help="Run only matching CTest names and record the selected scope")
     source_build = subcommands.add_parser("source-package",
         help="Rebuild checksummed Debian quilt source with ordered downstream patches")
     source_build.add_argument("recipe")

@@ -36,6 +36,12 @@ Package builds use the source repository's current `HEAD` by default. A release
 tag can be selected later with `--revision`. The manifest records the resolved
 commit for each build.
 
+For focused functional builds, `package` and `package-set` accept
+`--test-regex '^macos-process-streams$'`. CTest still fails when no tests match.
+The package manifest records `ctest_scope: selected` and the exact expression;
+this is a selected-test result, not a full-suite pass. Omitting the option keeps
+the complete CTest run.
+
 Own executable code is GPL-3.0-or-later. Working prototype code is reused after
 review and adapted to the product boundaries described in CONTRIBUTING.md.
 

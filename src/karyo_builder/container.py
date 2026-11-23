@@ -138,6 +138,7 @@ def build_package(recipe, source, build, output, architecture, owners):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--jobs", type=int, required=True)
+    parser.add_argument("--test-regex")
     args = parser.parse_args()
     batch = Path("/input/recipes.json").is_file()
     recipes = json.loads(Path("/input/recipes.json" if batch else "/input/recipe.json").read_text(encoding="utf-8"))
@@ -164,7 +165,13 @@ def main():
          "-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu",
          "-DCMAKE_INSTALL_SYSCONFDIR=/etc", "-DBUILD_TESTING=ON"])
     run(["cmake", "--build", build, "--parallel", args.jobs])
-    run(["ctest", "--test-dir", build, "--no-tests=error", "--output-on-failure"])
+    tests = ["ctest", "--test-dir", build, "--no-tests=error", "--output-on-failure"]
+    if args.test_regex is not None:
+        tests.extend(["-R", args.test_regex])
+    run(tests)
+    validation = {"ctest": "passed", "ctest_scope": "all" if args.test_regex is None else "selected",
+                  "ctest_regex": args.test_regex}
+    Path("/output/validation.json").write_text(json.dumps(validation, indent=2) + "\n", encoding="utf-8")
     owners = {}
     for recipe in recipes:
         output = Path("/output") / recipe["package"]["name"] if batch else Path("/output")
