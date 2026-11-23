@@ -10,27 +10,44 @@ validation report for exact source/package/image revisions. A component pass is
 not proof of a joined current-HEAD desktop or completion of the whole migration.
 Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
-The [actual native CLI and libm follow-up](VALIDATION_LIBM_CALLS.md) now records
-real Debian and Ubuntu Mach-O main/file-I/O/exit-code execution. Graphical startup reaches
-a confirmed recursive math helper; its general source/compiler fix passes both
-SDKs, with complete32 engines and real Cocoa/Qt execution still pending.
+The [installed Darling milestone on both bases](VALIDATION_INSTALLED43_BOTH.md)
+records real loader, Cocoa and Qt execution with reviewed frames and UTF-8 titles
+on Debian and Ubuntu. The unchanged upstream TextEditor opens a document, accepts
+ordinary X11 input, saves exact file data and exits normally on both systems.
+The [installed45 checkpoint on both bases](VALIDATION_INSTALLED45_BOTH.md) now
+confirms common event-deadline and glyph-origin fixes with actual timings and
+reviewed frames. Debian's first stock uname launch failed despite two successful
+targeted rechecks; its cold-start reliability remains open. Original UGENE53.1
+attempts are unaccepted on both systems. Its dynamic Qt client exposes a common
+[system-color lifetime bug](VALIDATION_SYSTEM_COLOR_LIFETIME.md). The complete
+[48-patch input and optional window/menu APIs](VALIDATION_COMMON_COCOA48.md) pass
+source preparation on both bases; installed checks remain queued. A further
+original-app diagnostic identifies missing color-space serialization metadata,
+without claiming that a temporary missing-symbol helper fixes rendering.
+Broader compatibility and joined DE
+lifecycle remain open.
+Work uses local commits and ordinary functional checks.
 
-The [dyld entry follow-up](VALIDATION_DYLD_BOOTSTRAP.md) records both native30
-engine builds and the next actual Debian loader failure. The31-patch function
-and source-only preparation checks pass on both bases; real application startup
-and rebuilt31 native engines remain pending. Current priority is normal Darling
-applications on both bases, with local commits and no security-test scenarios.
+The [original macOS MUSCLE bioinformatics calculation](VALIDATION_MACOS_BIOINFORMATICS.md)
+passes on both installed45 bases with its official GNU runtime dependencies,
+including the upstream default two-thread scenario. UGENE GUI acceptance remains
+open; the later nullable CoreGraphics export has source-only49 acceptance.
+The [installed48 Ubuntu checkpoint](VALIDATION_INSTALLED48_UBUNTU.md) confirms
+the common color-lifetime and optional window/menu APIs without prototypes;
+Debian48 is still pending, and the actual UGENE frame remains an empty desktop.
+
+The earlier [CLI/libm](VALIDATION_LIBM_CALLS.md) and
+[dyld entry](VALIDATION_DYLD_BOOTSTRAP.md) reports document the bootstrap failures
+and fixes leading to this milestone; their pending engine labels are historical.
 
 The [physical-route metric gate](VALIDATION_PHYSICAL_METRIC.md) also passes paired
 before/after public Work checks on both native bases with complete restoration.
 
-The [Libsystem bootstrap diagnosis](VALIDATION_LIBSYSTEM_BOOTSTRAP.md) now
-identifies guard seeding in a protected initializer; both SDK source/compiler
-controls pass, with corrected full native runtime acceptance still pending.
+The [Libsystem bootstrap diagnosis](VALIDATION_LIBSYSTEM_BOOTSTRAP.md)
+documents the initializer fix included in the installed43 application milestone.
 
-The [first native Darling package](VALIDATION_DARLING_NATIVE_PACKAGE.md) now
-passes Debian build/audit/install; its first actual Mac bootstrap still fails.
-The corrected Ubuntu mixed-format build is being repeated separately.
+The [first native Darling package](VALIDATION_DARLING_NATIVE_PACKAGE.md)
+records the earlier mixed-format packaging and initial bootstrap investigation.
 
 The [selected-exit DNS/TLS gate](VALIDATION_HOME_VPN_EXIT_DNS.md) also passes
 ordinary Work lookups and HTTPS while both Home tunnels remain operational.
