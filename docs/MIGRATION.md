@@ -10,6 +10,9 @@ validation report for exact source/package/image revisions. A component pass is
 not proof of a joined current-HEAD desktop or completion of the whole migration.
 Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
+The [public Work exit-node packet gate](VALIDATION_HOME_VPN_EXIT.md) now also
+passes both routing roles alongside live Home WireGuard with full restoration.
+
 The [complete logind inventory regression](VALIDATION_LOGIND_INVENTORY.md) also
 passes a paired before/after disappearing SSH login on both native QA guests.
 
