@@ -32,9 +32,10 @@ The [original macOS MUSCLE bioinformatics calculation](VALIDATION_MACOS_BIOINFOR
 passes on both installed45 bases with its official GNU runtime dependencies,
 including the upstream default two-thread scenario. UGENE GUI acceptance remains
 open; the later nullable CoreGraphics export has source-only49 acceptance.
-The [installed48 Ubuntu checkpoint](VALIDATION_INSTALLED48_UBUNTU.md) confirms
-the common color-lifetime and optional window/menu APIs without prototypes;
-Debian48 is still pending, and the actual UGENE frame remains an empty desktop.
+The [installed48 checkpoint on both bases](VALIDATION_INSTALLED48_BOTH.md)
+confirms common color lifetime, window/menu APIs, actual editor save/quit and
+MUSCLE after upgrade. The original UGENE GUI and layer-backed drawing remain
+unaccepted; the next49 engine and graphics checks are queued separately.
 
 The earlier [CLI/libm](VALIDATION_LIBM_CALLS.md) and
 [dyld entry](VALIDATION_DYLD_BOOTSTRAP.md) reports document the bootstrap failures

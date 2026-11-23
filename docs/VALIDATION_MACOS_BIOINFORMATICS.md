@@ -1,8 +1,8 @@
 # Original macOS bioinformatics programs on native Darling
 
 The original Intel macOS MUSCLE 5.3 executable now performs a real sequence
-alignment on both native Debian 13 and Ubuntu 26.04 with the installed45
-Darling runtime. Version reporting and alignment return 0 without a timeout or
+alignment on both native Debian 13 and Ubuntu 26.04 with the installed48
+Darling runtime, following the earlier45 baseline. Version reporting and alignment return 0 without a timeout or
 forced application cleanup. The accepted cases cover both one requested
 thread and the upstream default, which reports two threads on these QA VMs.
 UGENE's graphical interface remains a separate, unaccepted target.
@@ -81,6 +81,12 @@ Receipts are out/migration/muscle-macos53/base-deps-v3.json and
 base-default-v4.json. Each records actual runtime provenance, full commands,
 exit statuses, output data and hashes. All successful root cleanup records are
 null. Earlier missing-dependency attempts remain in base-v1.json.
+
+The installed48 regression is retained separately in base-installed48-v5.json.
+Each test normally restarts only its own existing MUSCLE prefix before running
+with the new shared engine, so an old resident server cannot supply the result.
+Ubuntu server 16937 becomes 20845; Debian 22076 becomes 23651. Both default-thread
+calculations return 0, require no cleanup, and produce the same output SHA256.
 
 The second attempt, base-deps-v2.json, retains a QA installation error: files
 were copied into the physical overlay upper directory while its own Darling
