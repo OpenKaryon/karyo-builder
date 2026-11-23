@@ -86,7 +86,8 @@ def check(args):
         sdk = read(run("sdk", ["/sdk.py"]))
         if sdk["distribution"]["ID"] != base:
             raise ValueError("SDK distribution differs from its selected native base")
-        run("unit", ["-m", "unittest", "discover", "-s", "/recipe/tests", "-v"])
+        if not args.source_only:
+            run("unit", ["-m", "unittest", "discover", "-s", "/recipe/tests", "-v"])
         run("swift", ["/recipe/prepare_swift.py", "/inventory", "--archive", "/archive.deb",
                       "--objects", "/output/objects", "--output", "/output/swift-provenance"])
         run("patches", ["/recipe/verify_patches.py", "/complete", "--output", "/output/patch-stack.json"])
@@ -104,6 +105,7 @@ def check(args):
               "complete": {"manifest_sha256": digest(complete / "manifest.json"), "archive": ready["archive"],
                            "build_ready": True, "modules": len(ready["modules"]), "members": ready["members"]},
               "native": results, "driver_sha256": digest(Path(__file__)),
+              "unit_tests_executed": not args.source_only,
               "engine_compiled": False, "engine_installed": False, "mac_application_executed": False}
     (output / "acceptance.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
     print("Verified source preparation on both bases: " + str(output), flush=True)
@@ -113,6 +115,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("inventory", "complete", "de-source", "archive", "output", "debian-image", "ubuntu-image"):
         parser.add_argument("--" + name, required=True)
+    parser.add_argument("--source-only", action="store_true",
+                        help="Verify native SDK, Swift inputs and patch application without running the unit suite")
     try:
         check(parser.parse_args())
         return 0

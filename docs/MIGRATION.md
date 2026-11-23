@@ -10,6 +10,20 @@ validation report for exact source/package/image revisions. A component pass is
 not proof of a joined current-HEAD desktop or completion of the whole migration.
 Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
+The [actual native CLI and libm follow-up](VALIDATION_LIBM_CALLS.md) now records
+real Debian and Ubuntu Mach-O main/file-I/O/exit-code execution. Graphical startup reaches
+a confirmed recursive math helper; its general source/compiler fix passes both
+SDKs, with complete32 engines and real Cocoa/Qt execution still pending.
+
+The [dyld entry follow-up](VALIDATION_DYLD_BOOTSTRAP.md) records both native30
+engine builds and the next actual Debian loader failure. The31-patch function
+and source-only preparation checks pass on both bases; real application startup
+and rebuilt31 native engines remain pending. Current priority is normal Darling
+applications on both bases, with local commits and no security-test scenarios.
+
+The [physical-route metric gate](VALIDATION_PHYSICAL_METRIC.md) also passes paired
+before/after public Work checks on both native bases with complete restoration.
+
 The [Libsystem bootstrap diagnosis](VALIDATION_LIBSYSTEM_BOOTSTRAP.md) now
 identifies guard seeding in a protected initializer; both SDK source/compiler
 controls pass, with corrected full native runtime acceptance still pending.
