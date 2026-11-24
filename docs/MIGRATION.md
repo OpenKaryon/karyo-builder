@@ -30,7 +30,9 @@ below are historical and do not replace these current observations.
 Menu/Shift+F10 selection menus, empty-selection folder menus and inline-rename
 editing menus in installed Details mode on both bases. The initial native
 double-popup failure is preserved; the final focused source group passes all13
-cases on each base. Actual Icons-mode UI and an earlier remote-pointer ambiguity
+cases on each base. The installed Icons-mode follow-up now passes the same four
+keyboard scenarios, with its initial per-user mode preference restored exactly.
+The View toolbar mode-switch action and an earlier remote-pointer ambiguity
 remain separate limits. Both own joined QA systems returned through normal
 LightDM login to fresh Xfce with unchanged configuration/data and the intended
 Files update installed.

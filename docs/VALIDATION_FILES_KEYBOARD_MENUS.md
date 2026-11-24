@@ -50,7 +50,8 @@ Selection was established through the ordinary public `karyo-files --select`
 entrypoint. Earlier remote-pointer attempts hit the toolbar or background
 instead of the intended row; adding a motion delay did not resolve that
 observation. This report does not accept a pointer-input fix. Actual Icons-mode
-UI was not exercised in this follow-up; its evidence is the focused source test.
+UI was not exercised in the initial follow-up; the later installed check below
+adds that evidence.
 
 ## Session return and evidence
 
@@ -70,3 +71,31 @@ frames. This accepts only the described keyboard menus and session roundtrip,
 not every menu action, profile, VMware channel or the complete DE migration.
 No authentication policy changed, and no user VM, Acer, Forge or distro was
 modified. All commits remain local.
+
+## Installed Icons-mode follow-up
+
+The same native Files packages now pass the four visible keyboard scenarios in
+Icons mode on both QA systems: selected Menu, selected Shift+F10, empty-selection
+folder menu and F2 line-editor Menu. Each opens one appropriate popup, anchored
+to the selected icon or folder viewport. The eight menu frames were captured,
+hashed and viewed; the original note and ZIP hashes and names remain unchanged.
+
+The initial opener stopped on an incorrect QA assumption that Files would not
+already be running. Independent observation instead confirms the session's fresh
+native `karyo-files --dbus-service`, matching the installed ELF and Karyo Wayland
+environment. The ordinary public --select call opens the actual tested window.
+The failed precondition log remains in the evidence and is not a product failure.
+
+Icons is initialized with a reversible ordinary View/mode preference at LightDM.
+This does not exercise the View toolbar's mode-switch action. After normal exit,
+the exact verified fixture preference is reverted: the original file was absent
+on both systems, and that absence is restored. Both new normal Xfce logins retain
+configuration, MIME and user-data hashes, have no Karyo Files service or Qt
+overrides, and pass dpkg audit. Both final Xfce frames were also hashed and viewed.
+
+The ten-frame index is `out/migration/files-icons468-both-evidence-v1.json`,
+SHA256 `6f02102c830b2c48840f8ce0c8e7e2f24070136520d7bd165d8fb566b38c6165`.
+Root receipts are under `/var/lib/karyo-qa/files-icons468`. No application source
+or package changed for this follow-up, and the earlier remote-pointer ambiguity
+remains unresolved. No shared/security suite or authentication-policy change
+was involved, and nothing was pushed.
