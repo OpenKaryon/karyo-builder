@@ -58,7 +58,7 @@ def check(args):
     if len(expected) != 44 or actual != expected or not all(item["materialized"] for item in ready["lfs"]):
         raise ValueError("Materialized Swift identities differ from the complete inventory")
     expected_patches = len(read(recipe / "patches/series.json")["patches"])
-    if not 21 <= expected_patches <= 64:
+    if not 21 <= expected_patches <= 65:
         raise ValueError("Unexpected reviewed patch count")
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=False)

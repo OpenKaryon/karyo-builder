@@ -21,7 +21,12 @@ Darwin thread masks and same-prefix Z-server restart now pass, with nine real
 frames viewed and installed payloads matched to the verified DEB. Original UGENE
 remains on its splash during a45-second observation; startup preferences record
 20/51 tool checks, but its main GUI is not accepted. The same immutable64 source
-now builds independently for Debian; its earlier62 failure remains unresolved.
+also builds independently for Debian. Its [installed64 boundary](VALIDATION_DARLING64_DEBIAN_BOUNDARY.md)
+passes four stages, but nested-layer lifetime fails139 despite correct frames;
+the earlier62 failure remains unresolved. Two ordinary diagnostic reproductions
+capture a guard-page fault and accumulated workqueue frames. A separate
+[candidate65](VALIDATION_DARLING65_WORKQUEUE.md) restores the raw entry stack;
+positive native ABI replay passes both bases, while full/installed65 gates remain.
 An additional120-second UGENE observer confirms no progress between10/45/100
 seconds despite a live app; exact failure cause remains open. Upstream editor
 open/edit/save/normal quit, original MUSCLE alignment and a positive seven-child
