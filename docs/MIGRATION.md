@@ -12,6 +12,13 @@ Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
 ## Latest ordinary native and joined checkpoint
 
+[Installed Ubuntu58](VALIDATION_DARLING58_LAYER_BOUNDARY.md) now confirms real
+root and nested2D painter-order pixels plus public backing-view callbacks.
+Implicit backing presentation still fails, with inherited getter return-length0
+reproduced separately. Common0059 addresses that general signature contract;
+changed-runtime acceptance remains pending. This bounded failure deliberately
+holds the next Debian full engine and further58 GUI retries.
+
 [Installed Darling56](VALIDATION_DARLING56_HOSTED_SURFACES.md) now accepts both
 complete native builds, installed baseline, real hosted-root surface pixels and
 owner/reader/release lifecycle. Cocoa/static Qt and unchanged upstream editor

@@ -53,6 +53,17 @@ host originals and exact guest SHA256/size are verified, reclaiming523,890,653
 bytes. Extracted original applications, prefixes, results and data are retained.
 Readiness logs are under the local native58-{debian,ubuntu}-readiness directories.
 
+A separate positive retry after that preparation rechecks all12,185 original
+regular hashes and starts the unchanged app with the unchanged FASTA on both
+bases. The original ugeneui now creates a viewable600x320 window, captured at
+10 and25 seconds on each system. All four actual frames are exported, hashed
+and viewed: the content is black, with no document text or usable controls.
+The ordinary45-second run deadline expires, and the exact owned mldr process
+is captured and cleaned through its pidfd. Neither a successful wrapper exit
+nor a viewable window is accepted as a usable UGENE GUI. The earlier90-second
+Debian bootstrap timeout and Ubuntu early exit remain separate retained results.
+The paired retry evidence is out/migration/ugene56-readiness-both-evidence-v1.json.
+
 Two additional ordinary positive clients identify common graphics defects in
 the installed 56 runtime. A grandchild surface is clipped while the same
 surface renders when reparented at unchanged visible coordinates; a later
