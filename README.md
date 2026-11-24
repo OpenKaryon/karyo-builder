@@ -272,6 +272,13 @@ for accepted source and installed Home/Work coordinator checks and the remaining
 host-payload and privileged file-transfer gates. Actual joined GUI lock acceptance
 is recorded separately in [VMware lock validation](docs/VALIDATION_VMWARE_LOCK.md).
 
+`examples/vmware-shutdown.json` packages the optional system guard separately.
+It releases a verified vmblock FUSE connection before session teardown only
+during shutdown. The coordinator remains an ordinary-user component; its
+0.1.1 package also reports sustained kernel waits without restarting transfers.
+See [shutdown validation](docs/VALIDATION_VMWARE_SHUTDOWN.md) for Debian and Ubuntu
+source checks, native package identities and isolated kernel/systemd acceptance.
+
 The optional VMware display worker's installed activation-time acceptance and
 remaining host-resize boundaries are documented in
 [VALIDATION_VMWARE_DISPLAY.md](docs/VALIDATION_VMWARE_DISPLAY.md).

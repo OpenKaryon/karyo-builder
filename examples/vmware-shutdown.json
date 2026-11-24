@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-vmware-shutdown",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Optional VMware file-transfer release before session shutdown",
+    "section": "admin",
+    "depends": ["python3", "systemd", "init-system-helpers", "open-vm-tools-desktop", "fuse3"],
+    "maintainer_scripts": {
+      "postinst": "integrations/vmware/vmblock/package/postinst",
+      "prerm": "integrations/vmware/vmblock/package/prerm",
+      "postrm": "integrations/vmware/vmblock/package/postrm"
+    }
+  },
+  "build": {
+    "directory": "integrations/vmware/vmblock",
+    "component": "vmware-shutdown-runtime"
+  }
+}
