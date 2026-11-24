@@ -699,3 +699,6 @@ Native55 lifecycle and scoped MIME upgrade evidence is recorded in
 [installed55](VALIDATION_INSTALLED55_BOTH.md) and
 [installed MIME associations](VALIDATION_INSTALLED_MIME_ASSOCIATIONS.md).
 These accept component slices only; GUI/session/profile gates remain open.
+
+Real native session follow-up: [login, activation and logout](VALIDATION_SESSION441_ROUNDTRIP.md).
+The documented standalone CMake QA payload is distinct from Builder package-stage acceptance.

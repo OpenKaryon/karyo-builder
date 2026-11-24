@@ -54,3 +54,6 @@ The detailed local evidence index is
 out/migration/joined-mime436-installed-both-evidence-v1.json (SHA256
 `911d6e23851390f469e9f7385038320d3b121299cb71227255a0a8cf257d5018`). The package receipts live in external QA output
 joined-head434-vms/{debian,ubuntu}/mime436-upgraded.json.
+
+Real native session follow-up: [login, activation and logout](VALIDATION_SESSION441_ROUNDTRIP.md).
+The documented standalone CMake QA payload is distinct from Builder package-stage acceptance.
