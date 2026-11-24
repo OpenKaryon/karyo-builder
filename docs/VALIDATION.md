@@ -89,3 +89,12 @@ The shell, PAM/Wayland lock and runtime bundle are now implemented and tested.
 See [VALIDATION_SESSION.md](VALIDATION_SESSION.md) for package, clean runtime,
 configuration upgrade and actual headless compositor acceptance, plus retained
 hardware/display-manager gates.
+
+## Actual native session and application choice
+
+Normal LightDM/Xfce/Karyo coexistence is recorded in
+[the native roundtrip report](VALIDATION_SESSION441_ROUNDTRIP.md).
+[Standalone Builder packaging and removal](VALIDATION_STANDALONE_SESSION_REMOVAL.md)
+and [the visible Files chooser](VALIDATION_FILES_CHOOSER_NATIVE.md) add their
+own bounded Debian/Ubuntu results. These reports retain remaining profile,
+hardware and integration gates; they do not accept the whole migration.

@@ -1,5 +1,9 @@
 # Actual native desktop roundtrip and session-local agent coexistence
 
+Later Builder packaging and removal results: see
+VALIDATION_STANDALONE_SESSION_REMOVAL.md. The current joined QA state there
+supersedes the historical running-state statements below.
+
 Separate Debian13 and Ubuntu26.04 QA guests each completed two normal
 Xfce -> LightDM -> Karyo -> LightDM -> Xfce roundtrips. Karyo was selected in the
 ordinary greeter and the correct fixture password was entered; no autologin,

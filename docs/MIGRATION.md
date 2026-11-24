@@ -10,6 +10,34 @@ validation report for exact source/package/image revisions. A component pass is
 not proof of a joined current-HEAD desktop or completion of the whole migration.
 Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
+## Latest ordinary native and joined checkpoint
+
+[Installed Darling56](VALIDATION_DARLING56_HOSTED_SURFACES.md) now accepts both
+complete native builds, installed baseline, real hosted-root surface pixels and
+owner/reader/release lifecycle. Cocoa/static Qt and unchanged upstream editor
+open/edit/save have reviewed actual frames. Dynamic Qt5.15.10 still has a blank
+layer-backed viewport. Original UGENE53.1 has no accepted GUI: Ubuntu early-exits;
+Debian's timed attempt remains a prefix/bootstrap observation under QA memory
+pressure, not an established application defect. Common57/58 layer-tree and
+backing-view display fixes are source/compiler-verified; installed58 and new
+original-app checks are separately queued. This supersedes the older53/54
+pending-state overview below, not the retained historical failure evidence.
+
+[Normal session roundtrips](VALIDATION_SESSION441_ROUNDTRIP.md),
+[actual standalone Builder session packaging and removal](VALIDATION_STANDALONE_SESSION_REMOVAL.md)
+and [the visible Files chooser](VALIDATION_FILES_CHOOSER_NATIVE.md) accept their
+bounded Debian/Ubuntu slices. The actual 11-file Builder session payload matches
+the earlier tested standalone payload; build-only is explicitly CTest not-run.
+Exact22-package removal preserves Xfce/data/configuration and fresh normal login.
+Reinstallation then tests real menu selection of Karyo Editor, native Mousepad
+and Karyo Archive with unchanged fixtures and clean normal return to Xfce.
+Own joined QA systems currently run Xfce with the22 packages installed again.
+These passes do not cover every MIME choice, concurrent same-user sessions,
+optional joined profiles, full privilege prompts or the whole migration.
+Enabled VMware channels/resize/Home-Work, external ExternalProvider broker lifecycle,
+physical network/hardware boundaries and original UGENE GUI remain open.
+No security/shared suite is run for these ordinary functional follow-ups.
+
 The [installed48 checkpoint on both bases](VALIDATION_INSTALLED48_BOTH.md)
 confirms real loader, Cocoa and Qt execution with reviewed frames, actual editor
 save/quit, common event deadlines, persistent data and original macOS MUSCLE
