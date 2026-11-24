@@ -245,6 +245,14 @@ an explicit administrator integration; its example and instructions install unde
 
 The optional examples/profile-host.json recipe packages the root-only systemd
 host profile transport separately from account helpers and controlled PAM entry.
+
+The seven profile recipes form a consistent 0.1.2 package family. The
+[carrier checkpoint](docs/VALIDATION_CARRIER_REFRESH.md) records native builds
+and the remaining changed-carrier packet gate. The earlier 0.1.1 bounded-startup
+and live-DNS baseline has both-base upgrade and installed-runtime acceptance in
+[live DNS validation](docs/VALIDATION_LIVE_DNS.md). The native fixture accepts an
+exact version and supports staged-DEB execution without replacing installed files.
+
 It starts/enables nothing on installation. Current public helpers are unchanged;
 see docs/VALIDATION_PROFILE_HOST.md for the accepted native peer gate and remaining
 persistent runtime/startup integration.

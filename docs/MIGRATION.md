@@ -1,5 +1,22 @@
 # Migration inventory
 
+## Current resumed DE and Builder stage
+
+The current stage is restricted to DE and Builder. Wine and Darling are accepted
+at their existing documented boundary; further compatibility polishing is not
+a completion gate. Distribution images and Forge are outside this work.
+
+[Live physical DNS](VALIDATION_LIVE_DNS.md) now passes focused source checks,
+fourteen native profile package builds, consistent seven-package upgrades and
+actual installed-runtime DNS lifecycle on both bases. The
+[carrier replacement checkpoint](VALIDATION_CARRIER_REFRESH.md) now passes
+34 focused source cases and fourteen native 0.1.2 package builds; native packet
+delivery through the changed carrier is not yet accepted. That runtime gate,
+external provider integration, remaining real VMware channels
+and joined current-source graphical acceptance remain open. The separate
+[VMware shutdown guard](VALIDATION_VMWARE_SHUTDOWN.md) is already ported and
+accepted within its documented isolated-kernel shutdown scope.
+
 The reviewed donor is the Karyo prototype at revision
 `716d515b765319981b124fb1812a1e3edb9e0ffd`. Paths below are relative to
 that source tree. This map assigns responsibility to reviewed components.
