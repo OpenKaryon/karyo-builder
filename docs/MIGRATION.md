@@ -11,6 +11,12 @@ on independent Debian/Ubuntu copies. This is source-layer evidence, not installe
 graphical or VPN acceptance. Main login/user-manager entry, service views,
 upstream adapters and the complete simultaneous-tunnel matrix remain open.
 
+The [inactive main-login package](VALIDATION_MAIN_ENTRY.md) now has two native
+artifacts and installed-library acceptance on both bases: real temporary-account
+PAM entry before user-manager startup, direct/activated DNS and TCP/UDP,
+reinstallation/removal and unchanged existing PAM/LightDM configuration. The
+production main-session broker and actual login-manager entry remain open.
+
 ## Current resumed DE and Builder stage
 
 The current stage is restricted to DE and Builder. Wine and Darling are accepted

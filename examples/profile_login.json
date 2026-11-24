@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "source": {
+    "path": "../../karyo-de"
+  },
+  "package": {
+    "name": "karyo-profile-login",
+    "version": "0.1.0-1",
+    "architecture": "amd64",
+    "maintainer": "Karyo Developers <developers@openkaryon.invalid>",
+    "description": "Inactive Karyo main-login PAM network handoff",
+    "section": "admin",
+    "depends": []
+  },
+  "build": {
+    "directory": "profiles/pam",
+    "component": "profile-login-runtime"
+  }
+}
