@@ -12,6 +12,18 @@ Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
 ## Latest ordinary native and joined checkpoint
 
+[Installed Ubuntu59](VALIDATION_DARLING59_BACKING_BOUNDARY.md) confirms the
+inherited backing signatures32/16/4, callbacks and retained root/nested pixels,
+but its early backing frame remains gray. An ordinary initialization-order
+comparison identifies the missing native child; common0060 uses the existing
+lazy backend accessor. Installed60 acceptance is still required. All six59
+controllers are terminal, with Debian59 and further GUI retries held by the
+actual Ubuntu pixel failure. Original56 UGENE readiness rechecks show black
+windows on both bases, without an accepted GUI.
+
+External tunnel integrations must follow the [DE ownership contract](https://github.com/OpenKaryon/karyo-de/blob/main/docs/EXTERNAL_TUNNEL_CONTRACT.md).
+Provider-specific package inspections are kept outside the public source; ordinary runtime compatibility still requires separate acceptance.
+
 [Installed Ubuntu58](VALIDATION_DARLING58_LAYER_BOUNDARY.md) now confirms real
 root and nested2D painter-order pixels plus public backing-view callbacks.
 Implicit backing presentation still fails, with inherited getter return-length0
