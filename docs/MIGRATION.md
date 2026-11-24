@@ -12,6 +12,23 @@ Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
 ## Latest ordinary native and joined checkpoint
 
+[Installed62 on Ubuntu](VALIDATION_DARLING62_UBUNTU.md) now accepts retained
+rendering, ordinary editor save, original-framework Qt text and an actual
+same-prefix restart after the old server remains Z, with saved data retained.
+All five targeted stages pass. The [Debian62 boundary](VALIDATION_DARLING62_DEBIAN_BOUNDARY.md)
+records its complete engine and four passing stages, but initial backing-view
+exit1 has no program report despite correct pixels. Separate same-prefix normal
+and debugger repeats pass; the initial cause remains unresolved and later62
+application checks were stopped. Nine Debian frames were viewed.
+Original UGENE still exits134 without an accepted GUI; Darling now reports the
+natural signal correctly. Matching symbols and an ordinary GDB observation
+identify SIGCHLD entering the Darwin RPC wrapper on a native Vulkan worker.
+Common0063 adds a native thread-mask boundary with positive native DSO checks,
+complete C-unit compilation and a separate Debian link/export replay. All63
+patches apply/reverse on both bases. Its sole Ubuntu full build is running;
+installed signal-thread correction or further app compatibility is not accepted.
+The report preserves the failed pointer-sync and debugger-controller attempts.
+
 [Installed60 on Ubuntu](VALIDATION_DARLING60_UBUNTU.md) and
 [installed60 on Debian](VALIDATION_DARLING60_DEBIAN.md) now confirm both complete
 native engines, ordinary Cocoa/static Qt, public/nested rendering and actual
