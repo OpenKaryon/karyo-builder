@@ -6,6 +6,14 @@ The current stage is restricted to DE and Builder. Wine and Darling are accepted
 at their existing documented boundary; further compatibility polishing is not
 a completion gate. Distribution images and Forge are outside this work.
 
+[Current joined core acceptance](VALIDATION_CURRENT_JOINED.md) builds 39 components
+per native base, verifies all 78 artifacts, and accepts actual 22-package
+reinstallation, ordinary Karyo login, a real harmless authorization prompt,
+Files text Open With and GUI Sign out back to fresh Xfce. A native follow-up
+also accepts the actual foreign-editor and ZIP menu choices without changing
+defaults. Original account/PAM/display-manager/data state is preserved. This
+closes those named core scenarios; optional profile integration remains open.
+
 [Live physical DNS](VALIDATION_LIVE_DNS.md) now passes focused source checks,
 fourteen native profile package builds, consistent seven-package upgrades and
 actual installed-runtime DNS lifecycle on both bases. The
@@ -13,7 +21,7 @@ actual installed-runtime DNS lifecycle on both bases. The
 34 focused source cases and fourteen native 0.1.2 package builds; native packet
 delivery through the changed carrier is not yet accepted. That runtime gate,
 external provider integration, remaining real VMware channels
-and joined current-source graphical acceptance remain open. The separate
+and joined optional-profile acceptance remain open. The separate
 [VMware shutdown guard](VALIDATION_VMWARE_SHUTDOWN.md) is already ported and
 accepted within its documented isolated-kernel shutdown scope.
 
