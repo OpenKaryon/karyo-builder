@@ -73,7 +73,7 @@ def main():
     parser.add_argument("--de-source", required=True)
     parser.add_argument("--image", required=True)
     parser.add_argument("--output", required=True)
-    parser.add_argument("--suite", choices=("applications", "cocoa-properties", "iosurface"), default="applications")
+    parser.add_argument("--suite", choices=("applications", "cocoa-properties", "iosurface", "threads"), default="applications")
     args = parser.parse_args()
     source = Path(args.de_source).resolve(strict=True)
     standalone = args.suite != "applications"
@@ -111,7 +111,8 @@ def main():
             raise
     if result.returncode:
         raise RuntimeError("Mac cross compilation failed; see " + str(output / "build.log"))
-    executables = {"cocoa-properties": {"karyo-macos-window-properties-probe", "karyo-macos-menu-view-probe"},
+    executables = {"threads": {"karyo-macos-pthread-mask"},
+                   "cocoa-properties": {"karyo-macos-window-properties-probe", "karyo-macos-menu-view-probe"},
                    "iosurface": {"karyo-macos-iosurface-matching", "karyo-macos-iosurface-probe", "karyo-macos-iosurface-lifecycle",
                                  "karyo-macos-iosurface-layer", "karyo-macos-iosurface-tree",
                                  "karyo-macos-iosurface-backing-view"}}.get(args.suite)
