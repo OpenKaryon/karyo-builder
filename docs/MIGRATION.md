@@ -12,6 +12,36 @@ Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
 ## Latest ordinary native and joined checkpoint
 
+[Candidate64 signal replay](VALIDATION_DARLING64_PROCESS_SIGNALS.md) corrects a
+process-group target in the default signal trampoline after an actual original
+app launch loses its shellspawn helper and client control connection. Both bases
+apply/reverse all64 patches and compile both complete C units with their native
+Clang versions. The complete Ubuntu64 engine, all five installed stages, actual
+Darwin thread masks and same-prefix Z-server restart now pass, with nine real
+frames viewed and installed payloads matched to the verified DEB. Original UGENE
+remains on its splash during a45-second observation; startup preferences record
+20/51 tool checks, but its main GUI is not accepted. The same immutable64 source
+now builds independently for Debian; its earlier62 failure remains unresolved.
+An additional120-second UGENE observer confirms no progress between10/45/100
+seconds despite a live app; exact failure cause remains open. Upstream editor
+open/edit/save/normal quit, original MUSCLE alignment and a positive seven-child
+QtCore process scenario all pass separately on installed64. Diagnostics and
+incomplete observer attempts remain linked in the same validation report.
+
+[Original MUSCLE53](VALIDATION_MUSCLE53_FRESH.md) independently performs a real
+three-sequence alignment at its default two threads in a fresh installed63
+Ubuntu prefix, then shuts down normally. Its exact output and original QA-only
+dependencies are retained. This scientific CLI pass does not substitute for the
+UGENE document workflow or completion of the full DE migration.
+
+[Actual Darwin pthread baseline](VALIDATION_DARWIN_THREAD_MASK.md) now verifies
+all four public SIGCHLD/SIGTTOU inheritance combinations, normal join, distinct
+Mach thread ports and parent-mask preservation on both installed62 systems.
+The same clean Mach-O client now passes on [installed Ubuntu63](VALIDATION_DARLING63_UBUNTU.md),
+after all five targeted stages. Actual native graphics workers also retain both
+blocked Linux signals; native DSO checks alone did not establish these results. A separate
+fresh-prefix Debian backing v2 also passes; the initial exit1 remains unexplained.
+
 [Installed62 on Ubuntu](VALIDATION_DARLING62_UBUNTU.md) now accepts retained
 rendering, ordinary editor save, original-framework Qt text and an actual
 same-prefix restart after the old server remains Z, with saved data retained.
@@ -25,8 +55,13 @@ natural signal correctly. Matching symbols and an ordinary GDB observation
 identify SIGCHLD entering the Darwin RPC wrapper on a native Vulkan worker.
 Common0063 adds a native thread-mask boundary with positive native DSO checks,
 complete C-unit compilation and a separate Debian link/export replay. All63
-patches apply/reverse on both bases. Its sole Ubuntu full build is running;
-installed signal-thread correction or further app compatibility is not accepted.
+patches apply/reverse on both bases. Its complete Ubuntu engine and installed
+thread/rendering boundaries pass. Original UGENE shows its loading screen then
+loses its windows with launcher status1; its document workflow is not accepted.
+The ordinary editor now passes exact saving and normal quitting through focused
+XTest input, with both frames reviewed and no forced cleanup. The earlier
+targeted synthetic-input quit timeout remains a separate failed observation.
+Debian63 is not built or installed while these follow-ups remain under review.
 The report preserves the failed pointer-sync and debugger-controller attempts.
 
 [Installed60 on Ubuntu](VALIDATION_DARLING60_UBUNTU.md) and
