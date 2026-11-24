@@ -1,5 +1,16 @@
 # Migration inventory
 
+## Per-desktop networking implementation
+
+The new approved target is independent network/DNS/service contexts for Home,
+Work and other managed desktops, with unchanged upstream VPNs and owned launch
+adapters. A cooperative provider API is optional. The first
+[main-network checkpoint](VALIDATION_DESKTOP_NETWORKS.md) passes eight selected
+model cases per base and actual three-context DNS/TCP/UDP plus Home stop/recreate
+on independent Debian/Ubuntu copies. This is source-layer evidence, not installed
+graphical or VPN acceptance. Main login/user-manager entry, service views,
+upstream adapters and the complete simultaneous-tunnel matrix remain open.
+
 ## Current resumed DE and Builder stage
 
 The current stage is restricted to DE and Builder. Wine and Darling are accepted
