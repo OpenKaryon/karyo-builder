@@ -138,7 +138,9 @@ def build_package(recipe, source, build, output, architecture, owners):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--jobs", type=int, required=True)
-    parser.add_argument("--test-regex")
+    validation_options = parser.add_mutually_exclusive_group()
+    validation_options.add_argument("--test-regex")
+    validation_options.add_argument("--build-only", action="store_true")
     args = parser.parse_args()
     batch = Path("/input/recipes.json").is_file()
     recipes = json.loads(Path("/input/recipes.json" if batch else "/input/recipe.json").read_text(encoding="utf-8"))
@@ -163,14 +165,18 @@ def main():
     run(["cmake", "-S", source, "-B", build, "-G", "Ninja",
          "-DCMAKE_BUILD_TYPE=Release", "-DCMAKE_INSTALL_PREFIX=/usr",
          "-DCMAKE_INSTALL_LIBDIR=lib/x86_64-linux-gnu",
-         "-DCMAKE_INSTALL_SYSCONFDIR=/etc", "-DBUILD_TESTING=ON"])
+         "-DCMAKE_INSTALL_SYSCONFDIR=/etc",
+         "-DBUILD_TESTING=OFF" if args.build_only else "-DBUILD_TESTING=ON"])
     run(["cmake", "--build", build, "--parallel", args.jobs])
-    tests = ["ctest", "--test-dir", build, "--no-tests=error", "--output-on-failure"]
-    if args.test_regex is not None:
-        tests.extend(["-R", args.test_regex])
-    run(tests)
-    validation = {"ctest": "passed", "ctest_scope": "all" if args.test_regex is None else "selected",
-                  "ctest_regex": args.test_regex}
+    if args.build_only:
+        validation = {"ctest": "not-run", "ctest_scope": "none", "ctest_regex": None}
+    else:
+        tests = ["ctest", "--test-dir", build, "--no-tests=error", "--output-on-failure"]
+        if args.test_regex is not None:
+            tests.extend(["-R", args.test_regex])
+        run(tests)
+        validation = {"ctest": "passed", "ctest_scope": "all" if args.test_regex is None else "selected",
+                      "ctest_regex": args.test_regex}
     Path("/output/validation.json").write_text(json.dumps(validation, indent=2) + "\n", encoding="utf-8")
     owners = {}
     for recipe in recipes:

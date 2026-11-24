@@ -130,7 +130,9 @@ def package(args):
                 "--entrypoint", "python3", image_id, "/input/container.py",
                 "--jobs", str(args.jobs),
             ]
-            if args.test_regex is not None:
+            if args.build_only:
+                invocation.append("--build-only")
+            elif args.test_regex is not None:
                 invocation.extend(["--test-regex", args.test_regex])
             with (staged / "build.log").open("wb") as log:
                 result = subprocess.run(invocation, stdout=log, stderr=subprocess.STDOUT)
@@ -209,7 +211,10 @@ def main():
         build.add_argument("--image", default="karyo-builder:trixie",
                            help="An existing local Docker image (resolved to its immutable ID)")
         build.add_argument("--jobs", type=int, choices=range(1, 9), default=2)
-        build.add_argument("--test-regex", help="Run only matching CTest names and record the selected scope")
+        validation = build.add_mutually_exclusive_group()
+        validation.add_argument("--test-regex", help="Run only matching CTest names and record the selected scope")
+        validation.add_argument("--build-only", action="store_true",
+                                help="Build/package without CTest and record tests as not run")
     source_build = subcommands.add_parser("source-package",
         help="Rebuild checksummed Debian quilt source with ordered downstream patches")
     source_build.add_argument("recipe")

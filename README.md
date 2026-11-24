@@ -42,6 +42,11 @@ The package manifest records `ctest_scope: selected` and the exact expression;
 this is a selected-test result, not a full-suite pass. Omitting the option keeps
 the complete CTest run.
 
+For a compile/install-only result, use the explicit `--build-only` option.
+It disables CMake test targets and records `ctest: not-run`, `ctest_scope: none`.
+Native archive, dependency and package checks still run. This result supplies
+no functional-test evidence and cannot be combined with `--test-regex`.
+
 Own executable code is GPL-3.0-or-later. Working prototype code is reused after
 review and adapted to the product boundaries described in CONTRIBUTING.md.
 

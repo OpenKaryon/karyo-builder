@@ -40,7 +40,7 @@ read-only source and runner inputs and one writable result directory.
 Default limits are two CPUs, 4 GiB memory and 512 processes. Builds require
 container-local root for packaging, without privileged mode or Linux capabilities.
 
-CMake configures Release with tests enabled and an install prefix of /usr.
+CMake configures Release with tests enabled and an install prefix of /usr by default.
 CTest must pass and must discover tests before the selected component is
 installed into staging. The recipe declares additional dependencies. Installed native ELF executables
 and libraries are checked for the amd64 ABI and stripped; dpkg-shlibdeps adds
@@ -49,6 +49,15 @@ A missing dependency aborts the build and keeps its diagnostic log.
 Static archives and ordinary data do not acquire runtime dependencies.
 New shared-library packages still need their own shlibs/symbols policy before
 they can serve as dependencies of other packages.
+
+`package` and `package-set` also support explicit `--build-only`. In this mode
+CMake receives BUILD_TESTING=OFF, CTest is not invoked, and validation.json and
+each package manifest record `ctest: not-run`, `ctest_scope: none`, with no regex.
+This is useful for independently packaging session data or preparing native
+artifacts for a separate runtime acceptance workflow. It provides no test-pass
+claim. The option and `--test-regex` are mutually exclusive; default and selected
+CTest behavior remain unchanged. Source identity, file ownership, dependency,
+ELF and DEB checks are performed in all modes.
 
 Each successful invocation publishes a new result directory containing the
 Debian archive, SHA256SUMS, build.log and manifest.json. The manifest records
