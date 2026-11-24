@@ -12,6 +12,29 @@ Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
 ## Latest ordinary native and joined checkpoint
 
+[Installed60 on Ubuntu](VALIDATION_DARLING60_UBUNTU.md) and
+[installed60 on Debian](VALIDATION_DARLING60_DEBIAN.md) now confirm both complete
+native engines, ordinary Cocoa/static Qt, public/nested rendering and actual
+early-backing red/cyan pixels. Unchanged TextEditor open/edit/save passes on both.
+Original-framework dynamic Qt text is visible on Ubuntu; the Debian client times
+out before QApplication. Its one same-prefix retry after verified idle-QA memory
+recovery finds a zombie server with no mount namespace. The queue stops before
+original UGENE60 on Debian. Original Ubuntu UGENE naturally aborts with signal6,
+confirmed by an ordinary parent Bash; its earlier launcher status0 is not success.
+No original UGENE GUI is accepted. Common termination-status and terminated-server
+startup corrections have separate source/ordinary lifecycle gates, with installed
+changed-runtime acceptance still pending. Earlier runtime-pending paragraphs
+below are historical and do not replace these current observations.
+
+[Actual Files keyboard menus](VALIDATION_FILES_KEYBOARD_MENUS.md) now accept
+Menu/Shift+F10 selection menus, empty-selection folder menus and inline-rename
+editing menus in installed Details mode on both bases. The initial native
+double-popup failure is preserved; the final focused source group passes all13
+cases on each base. Actual Icons-mode UI and an earlier remote-pointer ambiguity
+remain separate limits. Both own joined QA systems returned through normal
+LightDM login to fresh Xfce with unchanged configuration/data and the intended
+Files update installed.
+
 [Installed Ubuntu59](VALIDATION_DARLING59_BACKING_BOUNDARY.md) confirms the
 inherited backing signatures32/16/4, callbacks and retained root/nested pixels,
 but its early backing frame remains gray. An ordinary initialization-order
