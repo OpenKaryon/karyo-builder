@@ -115,3 +115,5 @@ Apple reference for the ordinary hosting contract:
 [NSView.wantsLayer](https://developer.apple.com/documentation/appkit/nsview/wantslayer).
 Per-process usage semantics:
 [IOSurfaceGetUseCount](https://developer.apple.com/documentation/iosurface/iosurfacegetusecount(_:)).
+
+Installed55 follow-up: [both native lifecycle results](VALIDATION_INSTALLED55_BOTH.md).

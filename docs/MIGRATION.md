@@ -694,3 +694,8 @@ installations preserve their baseline except implicit folder association, now
 fixed by session-scoped metadata with positive native checks on six handlers and
 explicit user choices. Real rebuilt-package/session activation checks remain
 pending. See [joined-head coexistence evidence](VALIDATION_JOINED434_ASSOCIATIONS.md).
+
+Native55 lifecycle and scoped MIME upgrade evidence is recorded in
+[installed55](VALIDATION_INSTALLED55_BOTH.md) and
+[installed MIME associations](VALIDATION_INSTALLED_MIME_ASSOCIATIONS.md).
+These accept component slices only; GUI/session/profile gates remain open.

@@ -93,3 +93,5 @@ The broader goal remains active: latest joined session behavior, VMware enabled
 clipboard/drag-drop/resize and Home/Work integration, external ExternalProvider broker
 lifecycle, applicable real-hardware limits and actual Darling app compatibility
 are not closed by this component result. No security or shared unit suites ran.
+
+Actual rebuilt-package follow-up: [installed MIME upgrade results](VALIDATION_INSTALLED_MIME_ASSOCIATIONS.md).
