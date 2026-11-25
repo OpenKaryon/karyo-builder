@@ -1,0 +1,752 @@
+{
+  "schema": 1,
+  "de_revision": "3d7b5f4ade8bccbe6b510972ae666a7a9e1e14c4",
+  "builder_revision": "6e210edc1c5102b59af36407229bd8357be87216",
+  "scope": "Joined root packages and selected ordinary tests; separate native GUI, profile and reboot acceptance",
+  "bases": {
+    "debian": {
+      "distribution": {
+        "ID": "debian",
+        "VERSION_ID": "13",
+        "VERSION_CODENAME": "trixie"
+      },
+      "sdk_image_id": "sha256:35a4ae21b95d615c9c74a9a62b75d7cdcf341ffc7c9187b6cf70d9a13e1ad748",
+      "sdk_package_inventory_sha256": "ac76bea457e6c9a0114b36bebd70af967c7b4889c0b10932c1712e4b8868c27d",
+      "set_manifest_sha256": "ddf2ab254fee15953f1dac19454ac7940b2777c2538824cb93458f7b655dcc7d",
+      "build_log_sha256": "1e83aa88b45aeaea32008e139af4d0c85a73a6c0c71b4681519cd30fe1c40a9a",
+      "passed_ctest_groups": [
+        "tray-context-menu",
+        "start-search-filters",
+        "profile-live-dns",
+        "profile-network-budget",
+        "profile-carrier-refresh",
+        "profile-network-info",
+        "vmware-wait-diagnostics",
+        "camera-no-devices",
+        "calculator-expression-units",
+        "calculator-keyboard-history",
+        "snip-capture-save-clipboard",
+        "snip-canvas",
+        "files-inline-rename",
+        "files-folder-size-cache",
+        "files-keyboard-context-menu",
+        "settings-window-navigation",
+        "settings-network-observation",
+        "profile-login-module-abi"
+      ],
+      "additional_ctest_group": "desktop-entry-icons",
+      "additional_qt_reported_cases": 29,
+      "additional_test_log_sha256": "e787c571749d89315b5b54546fd0f74144433d2b8b7b711b31a8af335343411b",
+      "packages": [
+        {
+          "package": "karyo-appcenter-catalog",
+          "version": "0.1.0-1",
+          "file": "karyo-appcenter-catalog_0.1.0-1_amd64.deb",
+          "bytes": 33940,
+          "sha256": "f0d317607de4191b70d545c51117c200c3be170570cc5015c40a8de2c7dd27d6",
+          "manifest_sha256": "bf8167d5ad7864e871c39538746fa0a7fefbf1c43116411ba4ebecf2727369f6"
+        },
+        {
+          "package": "karyo-appcenter",
+          "version": "0.1.0-1",
+          "file": "karyo-appcenter_0.1.0-1_amd64.deb",
+          "bytes": 282136,
+          "sha256": "cce5af1388bd9d4b7f8db20ee14dea0529cd034785cc7a50c8a53ddae55d53ad",
+          "manifest_sha256": "fe1016ca11f23c175d8d0ee54eb10ce25b30d0e24e0348dd9a03ae45c52ba47e"
+        },
+        {
+          "package": "karyo-archive-rar",
+          "version": "0.1.0-1",
+          "file": "karyo-archive-rar_0.1.0-1_amd64.deb",
+          "bytes": 12496,
+          "sha256": "1d4e1b67316a05940fb08b740af1c8e9808761e803fcac705bf1963e95534970",
+          "manifest_sha256": "66ff831685e7f724a685214894f52ddfb8424b7252f93f184378af3e6e1338ca"
+        },
+        {
+          "package": "karyo-archive",
+          "version": "0.1.0-1",
+          "file": "karyo-archive_0.1.0-1_amd64.deb",
+          "bytes": 218984,
+          "sha256": "4587eca43b449b1130f3e6ec075db7187403c5f690d2f4fdf92139217dcaf423",
+          "manifest_sha256": "f857b12f8e0a307fdaf0fdcb4d89d73a1049cfeb9c21daa86c983f136ae36467"
+        },
+        {
+          "package": "karyo-calculator",
+          "version": "0.1.0-1",
+          "file": "karyo-calculator_0.1.0-1_amd64.deb",
+          "bytes": 184960,
+          "sha256": "15dd59c5790a477063dd72c17380ec99115d0c3fb8fa23e0e814894d740e91c5",
+          "manifest_sha256": "ec55fb8d58e9b4104fc880819fcb1d74c42dac8133d488c1ea9985d62e3eab4a"
+        },
+        {
+          "package": "karyo-camera",
+          "version": "0.1.0-1",
+          "file": "karyo-camera_0.1.0-1_amd64.deb",
+          "bytes": 133944,
+          "sha256": "f063a970d4b9e12dce6786085b8e1ed2c42324d3d9dd95194ad798b6e8b6441e",
+          "manifest_sha256": "db572a2072c419a72c7a73a1c93b9a158976317726fb07f0b382a35b68546b4b"
+        },
+        {
+          "package": "karyo-clock",
+          "version": "0.1.0-1",
+          "file": "karyo-clock_0.1.0-1_amd64.deb",
+          "bytes": 178288,
+          "sha256": "fea8b1a5c573601372e5f6788f07df330171a7cc9b3ee7a09db6c4e1f07ad4f0",
+          "manifest_sha256": "7b6088ddbc768bd246a7834ef82c2bb57ce6c8a18d5dfea1373dfba47fa38934"
+        },
+        {
+          "package": "karyo-desktop-integration-dev",
+          "version": "0.1.0-1",
+          "file": "karyo-desktop-integration-dev_0.1.0-1_amd64.deb",
+          "bytes": 80200,
+          "sha256": "bf75a761d17b47af5c896b9f2713a70faf23cdaf20d3d836b2b9a66d13a9e658",
+          "manifest_sha256": "a81acdae9f906196a6e8b926369598b453a7bafdf77ad6a1b5006632d6ba2a54"
+        },
+        {
+          "package": "karyo-editor",
+          "version": "0.1.0-1",
+          "file": "karyo-editor_0.1.0-1_amd64.deb",
+          "bytes": 208616,
+          "sha256": "9aa04d5a079ba1e27187416656d231c6302776d98bad882700b832c5c1e9f33d",
+          "manifest_sha256": "3ebf73d40d959515285475785c9071d2c91a5e9740eafde61682b3e6658c2e7a"
+        },
+        {
+          "package": "karyo-files",
+          "version": "0.1.0-1",
+          "file": "karyo-files_0.1.0-1_amd64.deb",
+          "bytes": 368420,
+          "sha256": "fe8d2c2a6b71216d0da84610b560e086640bef9fcef06ecc2752eacd40aa80f3",
+          "manifest_sha256": "7a6926ed5edda51d20695d987c30edda85e330ba31fbcb6e5a519f5aa4472398"
+        },
+        {
+          "package": "karyo-fonts",
+          "version": "0.1.0-1",
+          "file": "karyo-fonts_0.1.0-1_amd64.deb",
+          "bytes": 673408,
+          "sha256": "0f9de687c944cff75b62abdf2a87800c296f5c22b67b3139a976a30a7e819b64",
+          "manifest_sha256": "f9ec5c92a9f40404c9cb43c07422b4efda9e6f337d0657f0b0a1db028bef2d9b"
+        },
+        {
+          "package": "karyo-greeter",
+          "version": "0.1.0-1",
+          "file": "karyo-greeter_0.1.0-1_amd64.deb",
+          "bytes": 211824,
+          "sha256": "b1624e05eb58cafa21e2b53d4669c767672928a9a9106f807013088e6a810246",
+          "manifest_sha256": "fc2965951221fa49e4c69a41b9b64d2f6f4e4306ed9dfe0ef82e0bef06849730"
+        },
+        {
+          "package": "karyo-lock",
+          "version": "0.1.0-1",
+          "file": "karyo-lock_0.1.0-1_amd64.deb",
+          "bytes": 173980,
+          "sha256": "82e5121b32286d046ae531aaff2b4b20e0adfbc4c44880331eda4eb213e35b10",
+          "manifest_sha256": "62476babc123b4a67384386cb5cd587a22c03fe993a95c9455c21ee84a93ea05"
+        },
+        {
+          "package": "karyo-monitor",
+          "version": "0.1.0-1",
+          "file": "karyo-monitor_0.1.0-1_amd64.deb",
+          "bytes": 290508,
+          "sha256": "9b9cafd9dce2c5cbf73459fca0f73ee6c61a056a56754f072e93b591b421fad0",
+          "manifest_sha256": "aee02e157fe23e18771b51acaaf0c0187df4a5f6d018b7eb821731e567f1d0e7"
+        },
+        {
+          "package": "karyo-photos",
+          "version": "0.1.0-1",
+          "file": "karyo-photos_0.1.0-1_amd64.deb",
+          "bytes": 182076,
+          "sha256": "b9efb002e3e5dd81746969426d2db32a7c6f678a3dfde9dbdce591d5a37d0c62",
+          "manifest_sha256": "97b1aba39ea80a9b3c4fec7a025edadfe77fe15c9c6f1fb9077934e011aeb486"
+        },
+        {
+          "package": "karyo-player",
+          "version": "0.1.0-1",
+          "file": "karyo-player_0.1.0-1_amd64.deb",
+          "bytes": 190120,
+          "sha256": "4e6b0b08e1350c904e81cba34159bf7f06b60fd033a3d9a0051f90242c1d4e73",
+          "manifest_sha256": "8e2daeef20b3002ebf00d87933db3b97e19fcd6d4c250d03f167924bb60b01e0"
+        },
+        {
+          "package": "karyo-profile-accounts",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-accounts_0.1.3-1_amd64.deb",
+          "bytes": 160076,
+          "sha256": "0758da780c80f8ea3896670b833fb11b78f999ec771b83e5cc0f1918ba30a3a4",
+          "manifest_sha256": "d477e91fc091c45902f65293605d7c4c581a48212e9a4b315c43a4b7d8281ba9"
+        },
+        {
+          "package": "karyo-profile-clipboard",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-clipboard_0.1.3-1_amd64.deb",
+          "bytes": 50356,
+          "sha256": "d7eb559a415565e617aabffa47a90beef8e06f6b897692fa1ed0c3f8e29a9123",
+          "manifest_sha256": "88bbbffd215e3f2b09a13fd152ddbb378bbd91d3c24521037fa320dbc2ac85b5"
+        },
+        {
+          "package": "karyo-profile-host",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-host_0.1.3-1_amd64.deb",
+          "bytes": 45372,
+          "sha256": "e31077b6e69b0a46406d7dec7cba7d07fbd580fb715622ddfda39eb9a1aa395d",
+          "manifest_sha256": "da125bae30646276823de83b76889a155a134453f1ee6a85c3a5df2294466076"
+        },
+        {
+          "package": "karyo-profile-netbird-client",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-netbird-client_0.1.3-1_amd64.deb",
+          "bytes": 45528,
+          "sha256": "c0b77c189c4b1e0fa08507a9179549960443879192020e4eac52acff3ee4e0b5",
+          "manifest_sha256": "c19e966142df03e79d893f4404527b357f80962ec3e2652dc54707e1957b75c8"
+        },
+        {
+          "package": "karyo-profile-password-sync",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-password-sync_0.1.3-1_amd64.deb",
+          "bytes": 45808,
+          "sha256": "257d8ddb7adb4daee13bb9387fc55406f8a63929b534c36c40f25c9f63be2e0f",
+          "manifest_sha256": "9e28a60af298c4ce6349111a9fd16e27622ca39dd346c628cc484508968c1137"
+        },
+        {
+          "package": "karyo-profile-runtime",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-runtime_0.1.3-1_amd64.deb",
+          "bytes": 46616,
+          "sha256": "7fe4fc4af0491ee6c219962702e8047a824acd6c22ea852e33cd1c4c9201c523",
+          "manifest_sha256": "04dbf438c13132f3cb1eb805e72ba152c7526c6dcf7ab2ec60237ae3853d52ab"
+        },
+        {
+          "package": "karyo-profile-session",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-session_0.1.3-1_amd64.deb",
+          "bytes": 45420,
+          "sha256": "035eefa77668198d9d55ba75dd90617c6ccd62d60eff02f1973437213babdd52",
+          "manifest_sha256": "dd3642ad89f9aa0c447f1a5fa5f6981a5620d9fb2b8e2d87446af1098e5185a6"
+        },
+        {
+          "package": "karyo-profile-lightdm",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-lightdm_0.1.3-1_amd64.deb",
+          "bytes": 1272,
+          "sha256": "1e24fcc94e93dad2f82eea7f5a6fde81867116eff9bfef81cd338a9bc265ee94",
+          "manifest_sha256": "1da9f816068cd53bf9fb642799370746e8bde70b2710e4af05b3d85adfdb7d9b"
+        },
+        {
+          "package": "karyo-profile-login",
+          "version": "0.1.0-1",
+          "file": "karyo-profile-login_0.1.0-1_amd64.deb",
+          "bytes": 24532,
+          "sha256": "1912529f80f2a240caae72d1ca968b83d62fef5759badba11f11608e9731fcde",
+          "manifest_sha256": "af3629e5035ed87f9aae84e978d852be5abb5acfcf24d546312c9e7e36a72726"
+        },
+        {
+          "package": "karyo-profile-networkd",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-networkd_0.1.3-1_amd64.deb",
+          "bytes": 45260,
+          "sha256": "71f8f181106d4947ace5b96833ad0096a45c003a488e4ca51ff2c5c86d002019",
+          "manifest_sha256": "99813414ba2fb6ced2406c24dcbb5255f844e8fadaa8f37f7ee9aa600d6df7cf"
+        },
+        {
+          "package": "karyo-reader",
+          "version": "0.1.0-1",
+          "file": "karyo-reader_0.1.0-1_amd64.deb",
+          "bytes": 165076,
+          "sha256": "3b9c1cf1b535a810a2b57935d355b7b47cfacf25c8216cc5edcb49b20cc8c7a1",
+          "manifest_sha256": "8c6b63c7ff460864784f043bedad011bf618245f949ebafaf42710a4fbb6d3ef"
+        },
+        {
+          "package": "karyo-session-entry",
+          "version": "0.1.0-1",
+          "file": "karyo-session-entry_0.1.0-1_amd64.deb",
+          "bytes": 24920,
+          "sha256": "41908f5bf7b71b42dbfa34487f9d374ae1394fbf6b908c0cc1bdd6e16fd8c562",
+          "manifest_sha256": "c2147ba47528cd99910becb879f58d51edf0113ceb09a892419e09d8e65dc831"
+        },
+        {
+          "package": "karyo-session",
+          "version": "0.1.0-1",
+          "file": "karyo-session_0.1.0-1_amd64.deb",
+          "bytes": 20724,
+          "sha256": "21200cb51c3b414877c91716973bef32ed00adfaa05ee06bb19daab4a09c43a3",
+          "manifest_sha256": "a75323fb7cbcaab9947b6382315de51d38b21b811e055ced17c891a04ab51da0"
+        },
+        {
+          "package": "karyo-settings",
+          "version": "0.1.0-1",
+          "file": "karyo-settings_0.1.0-1_amd64.deb",
+          "bytes": 439592,
+          "sha256": "be87cd2b349662561ad32e69d7416f9a628c78e57d460d3e7e2055dffa7e9046",
+          "manifest_sha256": "bd440db9e2f189ed3b4115a4105d900e3dc8f69195f7b8970eb818200d490e6c"
+        },
+        {
+          "package": "karyo-shell",
+          "version": "0.1.0-1",
+          "file": "karyo-shell_0.1.0-1_amd64.deb",
+          "bytes": 577032,
+          "sha256": "31f9852385a541d56c1f06d55f90622eba9e6a9a04e4f487a0707fa0ef16a9c1",
+          "manifest_sha256": "4506089e4486b7acb1c3e235b164f61ecdd00937931a2b71a1354e89ff75d065"
+        },
+        {
+          "package": "karyo-snip",
+          "version": "0.1.0-1",
+          "file": "karyo-snip_0.1.0-1_amd64.deb",
+          "bytes": 227108,
+          "sha256": "cc15d202d3b7a73ed6e1fcf4210032b404857b0fe4ef625b37f551b2b2eee2b9",
+          "manifest_sha256": "af5df7790904598df540f6a3147907e1393eb825e4517334656c3d52026aa566"
+        },
+        {
+          "package": "karyo-software",
+          "version": "0.1.0-1",
+          "file": "karyo-software_0.1.0-1_amd64.deb",
+          "bytes": 30732,
+          "sha256": "a4b1cbed14e5f61ad58d9611b887e8542f8db4456a51d2e3be258a82bc8fce49",
+          "manifest_sha256": "14e48fd374e97b51b9c10db5f91ad836c419460134b8c5b4cc3258d56c85c712"
+        },
+        {
+          "package": "karyo-style-dev",
+          "version": "0.1.0-1",
+          "file": "karyo-style-dev_0.1.0-1_amd64.deb",
+          "bytes": 44612,
+          "sha256": "a53c34ab413947dd8e73d7676b23fdb644e1cb79d9815bce6183728d86e01813",
+          "manifest_sha256": "518fd679363fc241f9e2888390b6e5af5ae6b0dd7f0cb7d139a30d93bae2a899"
+        },
+        {
+          "package": "karyo-style",
+          "version": "0.1.0-1",
+          "file": "karyo-style_0.1.0-1_amd64.deb",
+          "bytes": 113828,
+          "sha256": "a2b0b9cef8ba4049d429e51b28e71d737dd4ab14dc42478f77061eeee73445a7",
+          "manifest_sha256": "11c4be33d4782476bb13cf4538fb364dc9ebb08fe528f2400def570b4543029d"
+        },
+        {
+          "package": "karyo-terminal",
+          "version": "0.1.0-1",
+          "file": "karyo-terminal_0.1.0-1_amd64.deb",
+          "bytes": 141780,
+          "sha256": "2a6fd2860833af8b37e23745e2e416f7ab1c37afa76ef0224d9003dbae4c7dc4",
+          "manifest_sha256": "48faed5157b2d9091143d26fa32ee20ecba2e47ae47164845fc1b6252e3557b1"
+        },
+        {
+          "package": "karyo-ui-foundation-dev",
+          "version": "0.1.0-1",
+          "file": "karyo-ui-foundation-dev_0.1.0-1_amd64.deb",
+          "bytes": 59896,
+          "sha256": "dea24ac033398b87364e456b4258de8b56c47855fafa0d3419f9893d4f6f544a",
+          "manifest_sha256": "408438504140ec1e3c4d40c86dd1288bf258a38d02a9eef40d978db4a34fd37a"
+        },
+        {
+          "package": "karyo-vmware-session",
+          "version": "0.1.1-1",
+          "file": "karyo-vmware-session_0.1.1-1_amd64.deb",
+          "bytes": 21296,
+          "sha256": "c437ad5c244d5dd8571a2a7ba36e65224d859c186a362f15335df298b7274eda",
+          "manifest_sha256": "512a5be46e9603ff4ae8c88bb1fa7ea9ad8928daef98de2d67bfd6ea69bc04eb"
+        },
+        {
+          "package": "karyo-vmware-shared-folders",
+          "version": "0.1.0-1",
+          "file": "karyo-vmware-shared-folders_0.1.0-1_amd64.deb",
+          "bytes": 16916,
+          "sha256": "746f61ac292ba1355ab2a59568e4893a04967eef32a6b6a23ee0c884b1f592d2",
+          "manifest_sha256": "620285a3ca2dd43a4bf575baa938d10d216285f9546b0936ebdb4c6359271e18"
+        },
+        {
+          "package": "karyo-vmware-shutdown",
+          "version": "0.1.0-1",
+          "file": "karyo-vmware-shutdown_0.1.0-1_amd64.deb",
+          "bytes": 14640,
+          "sha256": "d2d998a2480cdb803b4868290bebf61bc8719bee105c8c0b61571526c128708f",
+          "manifest_sha256": "e70df32044fef5a24c51ae4dce0cbe8199d73f76bb70b2553ac642b7e25937c4"
+        },
+        {
+          "package": "karyo-widgets-dev",
+          "version": "0.1.0-1",
+          "file": "karyo-widgets-dev_0.1.0-1_amd64.deb",
+          "bytes": 63588,
+          "sha256": "638731cf6c3f065411ba8986ef22cd357627ed8a93357415490cc837e1ac32b3",
+          "manifest_sha256": "ada92b4c7f9c89710effb7f18c7c1f45c8b684f8fdafa2cf1bd045f0fb3a9a00"
+        },
+        {
+          "package": "karyo-xclipboard",
+          "version": "0.1.0-1",
+          "file": "karyo-xclipboard_0.1.0-1_amd64.deb",
+          "bytes": 19740,
+          "sha256": "43ef31d9c65430c268b3f60237481a3b1ec2c4e7c3e87e28713debf7671e9050",
+          "manifest_sha256": "1f6771c19ac78eeee1857bcc29037d6f44c679169b4e7216545201eb1ac7feeb"
+        }
+      ]
+    },
+    "ubuntu": {
+      "distribution": {
+        "ID": "ubuntu",
+        "VERSION_ID": "26.04",
+        "VERSION_CODENAME": "resolute"
+      },
+      "sdk_image_id": "sha256:2df63f4f80df19ae62ef964e27343b5903050d2c9f22eba8d88fc202f4d2a10d",
+      "sdk_package_inventory_sha256": "258db62224ae00664b9ad1631b1aeb7294d11a97fc2321f5969dc9f84511d5be",
+      "set_manifest_sha256": "65416b215f4169d92b10335e1da5ba9c21869c391923a7a9ed6c99272f32918d",
+      "build_log_sha256": "ca1b68dc4e9f564a32f21a0ebbdf9e25024a5372403220532bbba045f6309aae",
+      "passed_ctest_groups": [
+        "tray-context-menu",
+        "start-search-filters",
+        "profile-live-dns",
+        "profile-network-budget",
+        "profile-carrier-refresh",
+        "profile-network-info",
+        "vmware-wait-diagnostics",
+        "camera-no-devices",
+        "calculator-expression-units",
+        "calculator-keyboard-history",
+        "snip-capture-save-clipboard",
+        "snip-canvas",
+        "files-inline-rename",
+        "files-folder-size-cache",
+        "files-keyboard-context-menu",
+        "settings-window-navigation",
+        "settings-network-observation",
+        "profile-login-module-abi"
+      ],
+      "additional_ctest_group": "desktop-entry-icons",
+      "additional_qt_reported_cases": 29,
+      "additional_test_log_sha256": "653df35ec7c68cd21048bddcd0abeafdc0e153e3ac7fc75fbc83f50235ceed7e",
+      "packages": [
+        {
+          "package": "karyo-appcenter-catalog",
+          "version": "0.1.0-1",
+          "file": "karyo-appcenter-catalog_0.1.0-1_amd64.deb",
+          "bytes": 34810,
+          "sha256": "265bff084b23453b381c59b1f3e971bb6b25be84297e4ab68fbe794f7b6e5838",
+          "manifest_sha256": "48a35286ecefbd42f9fa8a6b3c50a2ef1a224e3edd563a731fdb3c53e286b86f"
+        },
+        {
+          "package": "karyo-appcenter",
+          "version": "0.1.0-1",
+          "file": "karyo-appcenter_0.1.0-1_amd64.deb",
+          "bytes": 318728,
+          "sha256": "f1233d592c69347364fef5381bc816198cddd94826ee7a2d6d310388090e58f6",
+          "manifest_sha256": "41a47b28ebc43087b4864912bf8eb037de490c48bf5a282fecf27390fe1e52fe"
+        },
+        {
+          "package": "karyo-archive-rar",
+          "version": "0.1.0-1",
+          "file": "karyo-archive-rar_0.1.0-1_amd64.deb",
+          "bytes": 12548,
+          "sha256": "c190ddf95fd22bda6247c7edb70e2aa9dc922e3892466f8515e893108c6c259a",
+          "manifest_sha256": "81dc4f2a90e0aea0606b8eeddc908b3ef16ee69fc3a26ec64cbfe64087ad073f"
+        },
+        {
+          "package": "karyo-archive",
+          "version": "0.1.0-1",
+          "file": "karyo-archive_0.1.0-1_amd64.deb",
+          "bytes": 242958,
+          "sha256": "972424f4060333c426fe4bc3e0975d9513307dc508a1ccc50cae31bf2abb1a7b",
+          "manifest_sha256": "dcd509f5b20bd6a1da5a1a0672f147636fb04e7994cd8b127abc5fcc5c91f317"
+        },
+        {
+          "package": "karyo-calculator",
+          "version": "0.1.0-1",
+          "file": "karyo-calculator_0.1.0-1_amd64.deb",
+          "bytes": 206644,
+          "sha256": "5631da805b511f5b71999ea58dd77202205a63287992b63aa00523d3b26a540c",
+          "manifest_sha256": "8bc4a1a4f63598bbadf2b8e9665e3c7360d3dd7828905973f72bee652bc3e483"
+        },
+        {
+          "package": "karyo-camera",
+          "version": "0.1.0-1",
+          "file": "karyo-camera_0.1.0-1_amd64.deb",
+          "bytes": 148514,
+          "sha256": "027600d78f3ce4b799af5afc07987974a7300f4e8a1181647fd4a449ddaafb80",
+          "manifest_sha256": "8cb05209ca9d39fc89d5fc7dc1da3c65638d79975ec305578d7a6c2575770b5d"
+        },
+        {
+          "package": "karyo-clock",
+          "version": "0.1.0-1",
+          "file": "karyo-clock_0.1.0-1_amd64.deb",
+          "bytes": 196778,
+          "sha256": "070e67a04502ba5ef2e6a06e2838b14ff5472a4d2b0da85a7aebc2cf600b4f17",
+          "manifest_sha256": "80d9d6dd434bc0dfe2da725067e1b256db4745ef3bb5aa51c6599e3526d12eb2"
+        },
+        {
+          "package": "karyo-desktop-integration-dev",
+          "version": "0.1.0-1",
+          "file": "karyo-desktop-integration-dev_0.1.0-1_amd64.deb",
+          "bytes": 89256,
+          "sha256": "6637c3f9944abb007c2ba23c53b499126667483dd65a3a16a1b43ffb0e3806ae",
+          "manifest_sha256": "d35c6b304f7256d8a9987a0e591a6815e397be5bb97b99f5d2f6edafc9fe3ff8"
+        },
+        {
+          "package": "karyo-editor",
+          "version": "0.1.0-1",
+          "file": "karyo-editor_0.1.0-1_amd64.deb",
+          "bytes": 236412,
+          "sha256": "57d0d393da477a84988b8d74f823095e5e703110bce9f582982bedfc68d86699",
+          "manifest_sha256": "dff186e31b5fb49651bd797e66d912fcd9b30f10dc2e76d309d40ace5a500f2d"
+        },
+        {
+          "package": "karyo-files",
+          "version": "0.1.0-1",
+          "file": "karyo-files_0.1.0-1_amd64.deb",
+          "bytes": 418132,
+          "sha256": "69d1afe40243d757f44a18160efc007871cb02dc081239f86b23af0c6e640ae2",
+          "manifest_sha256": "007a460a61c9079dc43616e0691b51c9b3524d5961d91c0bc6dbe79f6a4da21b"
+        },
+        {
+          "package": "karyo-fonts",
+          "version": "0.1.0-1",
+          "file": "karyo-fonts_0.1.0-1_amd64.deb",
+          "bytes": 766444,
+          "sha256": "54335c3ceaac3f83ce21a8808dd16b4cf4363b2d7d78ceebe30a4c914ead37ca",
+          "manifest_sha256": "599b3fcc5830f69896a01887473e66fd1a4d48ce5096596090e8a299d969a953"
+        },
+        {
+          "package": "karyo-greeter",
+          "version": "0.1.0-1",
+          "file": "karyo-greeter_0.1.0-1_amd64.deb",
+          "bytes": 235662,
+          "sha256": "a9b62caccecf9864228660227060ed8e7e8f8f847bbcedb8abe68d4f7fdfbf05",
+          "manifest_sha256": "e416bc96038aea93a20390dfae3867a098396715206e9fa2314495af01eca8c3"
+        },
+        {
+          "package": "karyo-lock",
+          "version": "0.1.0-1",
+          "file": "karyo-lock_0.1.0-1_amd64.deb",
+          "bytes": 193756,
+          "sha256": "3d2eb2c1b6d976b03cb8c43b7f1d9edca77e3910a29e03aeb1cfa203cc000645",
+          "manifest_sha256": "a609b9336340d2dbdf89b017cf46baf6f7639e1c592c07b36b2b317ca735ae96"
+        },
+        {
+          "package": "karyo-monitor",
+          "version": "0.1.0-1",
+          "file": "karyo-monitor_0.1.0-1_amd64.deb",
+          "bytes": 326684,
+          "sha256": "a7c73af3112f2e443d0fa28182d5a1eef11360d8ffda460c00f82073bd4065aa",
+          "manifest_sha256": "0683290de0410c936dbcea65243f20f5777f138885c1b979048f294bbcc2dc96"
+        },
+        {
+          "package": "karyo-photos",
+          "version": "0.1.0-1",
+          "file": "karyo-photos_0.1.0-1_amd64.deb",
+          "bytes": 203472,
+          "sha256": "eff1fd7b14f2f78364a3b7ddce998b04b72f64228e35c6b4da2e18c36fccb053",
+          "manifest_sha256": "2e61283c4ac39c093311ba7656ba569f52b5333a5830aede11b4cdd423ca4227"
+        },
+        {
+          "package": "karyo-player",
+          "version": "0.1.0-1",
+          "file": "karyo-player_0.1.0-1_amd64.deb",
+          "bytes": 211246,
+          "sha256": "68b3b4e822e0fabefc17cedc13576480e3ef660a250184993cec11bb87cb2f6b",
+          "manifest_sha256": "93e541dcd59de948092862c4edded11a5ce33f3d7e2dd024293d7c336caff22b"
+        },
+        {
+          "package": "karyo-profile-accounts",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-accounts_0.1.3-1_amd64.deb",
+          "bytes": 162288,
+          "sha256": "c992ad06a9cf5376cce61efbaabba180b378dde953c20bd660c04890ce4d5ff4",
+          "manifest_sha256": "dd63b4cf51c4bf768f3ea99db66bd06740ef500194e71bf5a4b9ba6f1cbba570"
+        },
+        {
+          "package": "karyo-profile-clipboard",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-clipboard_0.1.3-1_amd64.deb",
+          "bytes": 51136,
+          "sha256": "8d782b932e53fae07ba279ca8856386a5b5bd944793339c0223b19661a90c91e",
+          "manifest_sha256": "9f0dbb070d3751fe00bb3cc44fc876d43e5500c4271345de7c611cffeab7db45"
+        },
+        {
+          "package": "karyo-profile-host",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-host_0.1.3-1_amd64.deb",
+          "bytes": 46050,
+          "sha256": "b547d93208ac222454bbca283f73300acecbe8ecfa4cf5a2588aba195231e4ce",
+          "manifest_sha256": "4cc3a2e38f8176b6a3b48cc758aee8de5d12aa7d40c25c0d2e6fc4b3418f6a2e"
+        },
+        {
+          "package": "karyo-profile-netbird-client",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-netbird-client_0.1.3-1_amd64.deb",
+          "bytes": 46210,
+          "sha256": "dfd458ef4b818e6dd7e594a9a5fae2de41e262e2690535d41dcf57e75a65d95d",
+          "manifest_sha256": "a9457ee2e1342ff6f2b0ae9cc1b0e11c4a9aa99cc45c7e2189381e440a0b4d87"
+        },
+        {
+          "package": "karyo-profile-password-sync",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-password-sync_0.1.3-1_amd64.deb",
+          "bytes": 46494,
+          "sha256": "0a25703b79d485c58551026a86a0df321a02382757b7ab41337a2e8cc2b61982",
+          "manifest_sha256": "480b24d733d70b6982b722769343cbbbd0e378be9ee7eae521e96d0b9d6b6ede"
+        },
+        {
+          "package": "karyo-profile-runtime",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-runtime_0.1.3-1_amd64.deb",
+          "bytes": 47300,
+          "sha256": "dda8864cbc8d19ca4e6be0140b29b453f943caaaff6fa751ebd3f823ea75a526",
+          "manifest_sha256": "4bf3d49a055e0d0cf6c0f09947aed96350d296879be2ccee74d2c4328a7c0707"
+        },
+        {
+          "package": "karyo-profile-session",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-session_0.1.3-1_amd64.deb",
+          "bytes": 46090,
+          "sha256": "b5407b848703730a06da5dda88d0ba9bef12bfc2a370cc45cdbae0499cc194cb",
+          "manifest_sha256": "dacf4c193b299f8969a1827f85d54f14d9a39f65d1e2184646c32ebf0d906a12"
+        },
+        {
+          "package": "karyo-profile-lightdm",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-lightdm_0.1.3-1_amd64.deb",
+          "bytes": 1078,
+          "sha256": "1350de1dc36223efe66e784ec3f1ae2aed37de3d9e92f9277c56e15b7d0cc768",
+          "manifest_sha256": "a58252f1923406c0fabed382bde862d1f45118400da88480370226b1d447d94e"
+        },
+        {
+          "package": "karyo-profile-login",
+          "version": "0.1.0-1",
+          "file": "karyo-profile-login_0.1.0-1_amd64.deb",
+          "bytes": 26836,
+          "sha256": "c67cb08e743b314770bbff32d5aaf29a63a534947a9739e4701d82fa20943b0c",
+          "manifest_sha256": "4844e165723a266af93785bbc2c33dfda41ca355d15aa529e6588765f81db1c7"
+        },
+        {
+          "package": "karyo-profile-networkd",
+          "version": "0.1.3-1",
+          "file": "karyo-profile-networkd_0.1.3-1_amd64.deb",
+          "bytes": 45952,
+          "sha256": "1c5b7158f67e85a37d149287d7300a846d15cab2027007f5bec219b5af8b5e1d",
+          "manifest_sha256": "a54dd4ad66d787c53c137bd151584ecbb409a9012859ee1de5b19f29a6177a54"
+        },
+        {
+          "package": "karyo-reader",
+          "version": "0.1.0-1",
+          "file": "karyo-reader_0.1.0-1_amd64.deb",
+          "bytes": 182438,
+          "sha256": "b1d0c25ae7e739ad3dae7352f9689826fd0c8656f6f8c0740bbd2d41702bc587",
+          "manifest_sha256": "fdbb4e0b3bb3e0ef87c93b856e9f6eab5eb63cb8472107033710ea3a9494f335"
+        },
+        {
+          "package": "karyo-session-entry",
+          "version": "0.1.0-1",
+          "file": "karyo-session-entry_0.1.0-1_amd64.deb",
+          "bytes": 25392,
+          "sha256": "93f7cbc76813fa9c2b6ca5f478bf061ae6007e86f04fdf7a305fb3721ef3d6ed",
+          "manifest_sha256": "3f57435d70042d31c95c39c13e991ed7c4bec97229cf626df2628edde08e207f"
+        },
+        {
+          "package": "karyo-session",
+          "version": "0.1.0-1",
+          "file": "karyo-session_0.1.0-1_amd64.deb",
+          "bytes": 20932,
+          "sha256": "c5d65112cabe5521f75134b3d15e7aa56350d6442e0352c3c9a9f3ad5ad5353c",
+          "manifest_sha256": "6b824290c1821bb63d27d1c62142010479c566f0011529af88b18c395088b341"
+        },
+        {
+          "package": "karyo-settings",
+          "version": "0.1.0-1",
+          "file": "karyo-settings_0.1.0-1_amd64.deb",
+          "bytes": 501882,
+          "sha256": "ede33c5be01e7fb1c5052fc17a2f8e5e4a79e88dbc910452c4433cdee3d8bfdc",
+          "manifest_sha256": "99b49e12a60cd0e71eb0d115ad48d6684c20d628fecde67f328970a80928bd9c"
+        },
+        {
+          "package": "karyo-shell",
+          "version": "0.1.0-1",
+          "file": "karyo-shell_0.1.0-1_amd64.deb",
+          "bytes": 659878,
+          "sha256": "496d958aae6292165460093f9b8c5b16bf4376ac24db08a77928b194f257439c",
+          "manifest_sha256": "877607e7e49609809251a5e7d32c0e9502f549cac46f564616f3c12564a6a960"
+        },
+        {
+          "package": "karyo-snip",
+          "version": "0.1.0-1",
+          "file": "karyo-snip_0.1.0-1_amd64.deb",
+          "bytes": 253510,
+          "sha256": "4a5d0692e8a755c832f1e12227fea8ecaef81ec6c863efff19036ae78560ef78",
+          "manifest_sha256": "557ec74a785d8ae422c49e05cb9f51eab9009ccc15e455bdbc1b4f8c742b3c25"
+        },
+        {
+          "package": "karyo-software",
+          "version": "0.1.0-1",
+          "file": "karyo-software_0.1.0-1_amd64.deb",
+          "bytes": 31414,
+          "sha256": "c8bd61ae291d4530e3b88477d6a3221c32f73ee7c0fc729c374f373ee39a0e32",
+          "manifest_sha256": "285c78eedff02afa90b5afd97f1e3ba5c457299ec94814aae7ba370525de73eb"
+        },
+        {
+          "package": "karyo-style-dev",
+          "version": "0.1.0-1",
+          "file": "karyo-style-dev_0.1.0-1_amd64.deb",
+          "bytes": 49546,
+          "sha256": "d907a6c46d87929ba14c1e5103420d1d7237714bf72ff8783606ead914c250cd",
+          "manifest_sha256": "e3d4d5e60bf34b498d6df14c476034473cdb5d6c7ecc0bedb565be7f68779e9d"
+        },
+        {
+          "package": "karyo-style",
+          "version": "0.1.0-1",
+          "file": "karyo-style_0.1.0-1_amd64.deb",
+          "bytes": 126454,
+          "sha256": "cf4c4636e9ecbd565d3bbd42d4951180e8d81492ca3b1772d136f53d4e789c5a",
+          "manifest_sha256": "6a875343874718b673d9fed6ab21792ec7ac11de85c8e7e72833f876aeebaac0"
+        },
+        {
+          "package": "karyo-terminal",
+          "version": "0.1.0-1",
+          "file": "karyo-terminal_0.1.0-1_amd64.deb",
+          "bytes": 156972,
+          "sha256": "3a0950b07c77688b4d04e9cb8c3f9a63d76f1a8791ad60b609f8377c251f19b2",
+          "manifest_sha256": "657edd6ec5ddee2be8e75c9985cdb9b419778d4e576962bb998a35b311d1387c"
+        },
+        {
+          "package": "karyo-ui-foundation-dev",
+          "version": "0.1.0-1",
+          "file": "karyo-ui-foundation-dev_0.1.0-1_amd64.deb",
+          "bytes": 65392,
+          "sha256": "48b59455a3ed3af666d2c97c2b24746118bd50febbdb6ecdf0a51fbdfc6a6cec",
+          "manifest_sha256": "5bb80d6cd4afb1cbb31fef041b917fdf68ecdf0420b4a92ebae61da2fe410188"
+        },
+        {
+          "package": "karyo-vmware-session",
+          "version": "0.1.1-1",
+          "file": "karyo-vmware-session_0.1.1-1_amd64.deb",
+          "bytes": 21654,
+          "sha256": "61d2b6578dbe1f6e821e51b1e3bfc1fe240010576ba8ea228cfe88b77a66dea1",
+          "manifest_sha256": "8d6184f331c73db766bbce86fbe10da64c47764382657045410a7e4a2a9b91a7"
+        },
+        {
+          "package": "karyo-vmware-shared-folders",
+          "version": "0.1.0-1",
+          "file": "karyo-vmware-shared-folders_0.1.0-1_amd64.deb",
+          "bytes": 17126,
+          "sha256": "804417d66ec89842ce2b02641093200f9619a51dca6fea6086fc7374a85fd099",
+          "manifest_sha256": "19dc5fe19786cc8f2de059a6ba4213bf4c64f6999422cbfcbb8336767dd911d0"
+        },
+        {
+          "package": "karyo-vmware-shutdown",
+          "version": "0.1.0-1",
+          "file": "karyo-vmware-shutdown_0.1.0-1_amd64.deb",
+          "bytes": 14798,
+          "sha256": "09247e8079f6f24925b02f6788942ef442349bb266643c7fe4158ae5b4a90912",
+          "manifest_sha256": "33fc9f9db553b7437989010fa74d3f55f977d50c024bdb049d4c094a6f5a9c2f"
+        },
+        {
+          "package": "karyo-widgets-dev",
+          "version": "0.1.0-1",
+          "file": "karyo-widgets-dev_0.1.0-1_amd64.deb",
+          "bytes": 70654,
+          "sha256": "3fbe6cb235a869c18d1a38a787138e3ec69f91f63e8834a7ed4bebcb4c848cbf",
+          "manifest_sha256": "658e2c3beb1ac53e0214938d76cbe6dd0ad009d84b40d8f9c494e4a724a4b748"
+        },
+        {
+          "package": "karyo-xclipboard",
+          "version": "0.1.0-1",
+          "file": "karyo-xclipboard_0.1.0-1_amd64.deb",
+          "bytes": 20012,
+          "sha256": "717f1fba5ab5ab657e9b01fa2c25109146a58f748db4601888106730295d12db",
+          "manifest_sha256": "9fe87b1127232ac6e8483a5905c4ce91d398de24ed0c619557d608eec3e97e39"
+        }
+      ]
+    }
+  }
+}

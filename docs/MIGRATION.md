@@ -1,46 +1,42 @@
 # Migration inventory
 
-## Per-desktop networking implementation
+## Current DE and Builder status
 
-The new approved target is independent network/DNS/service contexts for Home,
-Work and other managed desktops, with unchanged upstream VPNs and owned launch
-adapters. A cooperative provider API is optional. The first
-[main-network checkpoint](VALIDATION_DESKTOP_NETWORKS.md) passes eight selected
-model cases per base and actual three-context DNS/TCP/UDP plus Home stop/recreate
-on independent Debian/Ubuntu copies. This is source-layer evidence, not installed
-graphical or VPN acceptance. Main login/user-manager entry, service views,
-upstream adapters and the complete simultaneous-tunnel matrix remain open.
+The current scope is the independent DE and its Builder mechanisms. The
+application families, standalone session, optional account/network services,
+shared clipboard and reviewed native compositor integrations are migrated.
+Distribution/browser/boot/installer policy and ISO assembly belong to the next
+Karyo Linux stage. Forge has separate ownership; compatibility engines retain
+their existing documented boundary.
 
-The [inactive main-login package](VALIDATION_MAIN_ENTRY.md) now has two native
-artifacts and installed-library acceptance on both bases: real temporary-account
-PAM entry before user-manager startup, direct/activated DNS and TCP/UDP,
-reinstallation/removal and unchanged existing PAM/LightDM configuration. The
-production main-session broker and actual login-manager entry remain open.
+The [installed IPv4 network matrix](https://github.com/OpenKaryon/karyo-de/blob/main/docs/VALIDATION_INSTALLED_FAMILY_NETWORKS.md)
+accepts all nine ordered Home/Work pairs of unchanged WireGuard, OpenVPN and
+NetBird on both native bases. Main-login entry, independent resolver/service
+views, stock browser authentication and native provider controls have their
+own later milestones. Earlier source-only and pending labels below are
+historical snapshots, not the current status of those completed scenarios.
 
-## Current resumed DE and Builder stage
+[Managed worker and general application launch](VALIDATION_DESKTOP_WORKERS.md)
+now accept actual menu dispatch, scoped native authorization and production
+packet-engine TCP/UDP while Work retains DNS and payloads. Cancellation,
+reacquisition, owner loss, explicit Repair and independent resource cleanup
+also pass. The final checkpoint additionally accepts actual account/enrollment
+and ordinary native GUI connect/disconnect/reconnect using a dedicated test
+input, without adding client-specific public code.
 
-The current stage is restricted to DE and Builder. Wine and Darling are accepted
-at their existing documented boundary; further compatibility polishing is not
-a completion gate. Distribution images and Forge are outside this work.
+The [final joined checkpoint](VALIDATION_FINAL_JOINED.md) accepts protected
+Experiments first/repeated entry and first entry after a populated real reboot,
+42 built packages per native base, 41-package clean install/purge, current core
+coexistence and runtime upgrade. [Actual VMware Windows-host channels](VALIDATION_VMWARE_NATIVE.md)
+remain unaccepted while Windows Computer Use cannot initialize. IPv6 is disabled;
+physical Wi-Fi, a different physical interface/gateway and untested monitor
+layouts are not implied by the IPv4 VMware evidence.
 
-[Current joined core acceptance](VALIDATION_CURRENT_JOINED.md) builds 39 components
-per native base, verifies all 78 artifacts, and accepts actual 22-package
-reinstallation, ordinary Karyo login, a real harmless authorization prompt,
-Files text Open With and GUI Sign out back to fresh Xfce. A native follow-up
-also accepts the actual foreign-editor and ZIP menu choices without changing
-defaults. Original account/PAM/display-manager/data state is preserved. This
-closes those named core scenarios; optional profile integration remains open.
-
-[Live physical DNS](VALIDATION_LIVE_DNS.md) now passes focused source checks,
-fourteen native profile package builds, consistent seven-package upgrades and
-actual installed-runtime DNS lifecycle on both bases. The
-[carrier replacement checkpoint](VALIDATION_CARRIER_REFRESH.md) now passes
-34 focused source cases and fourteen native 0.1.2 package builds; native packet
-delivery through the changed carrier is not yet accepted. That runtime gate,
-external provider integration, remaining real VMware channels
-and joined optional-profile acceptance remain open. The separate
-[VMware shutdown guard](VALIDATION_VMWARE_SHUTDOWN.md) is already ported and
-accepted within its documented isolated-kernel shutdown scope.
+The source-to-product inventory follows. Subsequent milestone sections retain
+chronological evidence and their original limitations. Current acceptance must
+be read from each component's latest report rather than accumulated old pending
+paragraphs. [Core desktop coexistence](VALIDATION_CURRENT_JOINED.md) remains
+separate from optional profile and host-channel acceptance.
 
 The reviewed donor is the Karyo prototype at revision
 `716d515b765319981b124fb1812a1e3edb9e0ffd`. Paths below are relative to
@@ -52,7 +48,7 @@ validation report for exact source/package/image revisions. A component pass is
 not proof of a joined current-HEAD desktop or completion of the whole migration.
 Later runtime patches also review donor26bad17, as recorded in DE PROVENANCE.
 
-## Latest ordinary native and joined checkpoint
+## Historical ordinary native and joined checkpoints
 
 [Candidate64 signal replay](VALIDATION_DARLING64_PROCESS_SIGNALS.md) corrects a
 process-group target in the default signal trampoline after an actual original
@@ -263,7 +259,7 @@ are now accepted separately by the linked frame and shell milestones.
 | `distro/desktop/shared/style-plugin` | karyo-de | Widget style and platform dialogs/fonts/icons have distinct responsibilities. | The donor is a QStylePlugin, not a platform-theme plugin. Independent native style loading is accepted; GTK/wlr portals stay external session dependencies. Karyo provider selection and actual VM FileChooser/ScreenCast checks are recorded in VALIDATION_SESSION.md and VALIDATION_UBUNTU_VM.md, with final joined-HEAD deployment still separate. |
 | `distro/desktop/shell` | karyo-de | Panel, launcher, notifications and polkit. Review optional power/network service behavior. | Shell migrated with independent libraries, tray/Start/service tests and real headless labwc startup. Real LightDM/Xfce coexistence is accepted on Debian; Ubuntu VM lifecycle acceptance also passes; later application checks remain. |
 | `distro/desktop/signin` | karyo-de and optional greeter | Keep lock/PAM/Wayland with the session, make greetd/cage optional. | PAM/Wayland lock migrated without greetd; real wrong/correct password scenario passes. Real display-manager and logind sleep/resume checks pass on the Debian VM; physical devices remain separate. |
-| `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | All fourteen application families, including Settings and App Center, are independently migrated with native Debian/Ubuntu regressions and installed QA acceptance; later common/runtime fixes retain their own package gates. See DE docs/MIGRATION-REVIEW.md. |
+| `distro/desktop/apps` | karyo-de | Review each application's dependencies and shared source. Preserve file-local features and freedesktop integration. | All fourteen application families, including Settings and App Center, are independently migrated with native Debian/Ubuntu regressions and installed QA acceptance; later common/runtime fixes retain their own package gates. See DE docs/MIGRATION_REVIEW.md. |
 | `distro/distro/packages/openkaryon-shell`, `openkaryon-apps` | karyo-de packaging | Remove mandatory OS defaults/browser policy/greetd from the basic selectable session. | Independent runtime components pass clean Debian VM install/upgrade/remove, actual Xfce coexistence and unchanged host identity/display manager. All fourteen application families now have their own package/installed-QA milestones; later joined HEAD remains a separate gate. |
 | `distro/distro/packages/openkaryon-defaults`, browser/boot/installer packages | karyo-linux | Own OS branding, Calamares, distribution/browser defaults and first-run selections. | Installed-system and image assertions. Pending. |
 | Desktop isolation, VMware and runtime packages | Optional system integrations | Preserve privileged helper checks and namespace/DNS isolation. Keep these outside the UI foundation. | Optional profile, Wine and VMware integrations now have separate native/installed milestones. Darling, enabled host channels, physical resize/multioutput, remaining VPN lifecycle and arbitrary older-engine/architecture compatibility still have open gates. Explicit prototype-prefix copy and existing-user package upgrade pass VALIDATION_WIN32_PREFIX_IMPORT.md. Windows styling and tested real-application operations have their linked native and actual-shell acceptance records. |
