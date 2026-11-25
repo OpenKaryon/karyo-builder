@@ -16,6 +16,12 @@
       "nftables",
       "systemd-resolved",
       "dbus",
+      "python3-dbus",
+      "python3-gi",
+      "network-manager",
+      "network-manager-gnome",
+      "network-manager-openvpn",
+      "wireguard-tools",
       "procps"
     ]
   },
